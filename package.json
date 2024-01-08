@@ -4,8 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db-push": "deno run -A npm:prisma@latest db push"
+    "db-push": "deno run -A npm:prisma@latest db push",
+    "client-generate": "deno run -A --unstable npm:prisma@latest generate --no-engine"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prisma": "5.7.1"
+  },
+  "dependencies": {
+    "@prisma/client": "5.7.1"
+  }
 }
