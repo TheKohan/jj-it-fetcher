@@ -1,0 +1,11 @@
+{
+  "name": "jj-it-fetcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db-push": "deno run -A npm:prisma@latest db push"
+  },
+  "author": "",
+  "license": "ISC"
+}
