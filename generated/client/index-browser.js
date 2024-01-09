@@ -107,10 +107,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.TestScalarFieldEnum = {
+exports.Prisma.B2BOfferScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  description: 'description'
+  createdAt: 'createdAt',
+  slug: 'slug',
+  title: 'title',
+  url: 'url',
+  city: 'city',
+  fromPln: 'fromPln',
+  toPln: 'toPln',
+  requiredSkills: 'requiredSkills',
+  companyName: 'companyName'
 };
 
 exports.Prisma.SortOrder = {
@@ -125,7 +132,7 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Test: 'Test'
+  B2BOffer: 'B2BOffer'
 };
 
 /**

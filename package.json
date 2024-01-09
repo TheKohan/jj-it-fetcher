@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "db-push": "deno run -A npm:prisma@latest db push",
-    "client-generate": "deno run -A --unstable npm:prisma@latest generate --no-engine"
+    "client-generate": "deno run -A --unstable npm:prisma@latest generate --no-engine",
+    "start": "deno run -A --unstable-cron main.ts",
+    "run-dev": "deno run -A --unstable-cron --watch main.ts"
   },
   "author": "",
   "license": "ISC",

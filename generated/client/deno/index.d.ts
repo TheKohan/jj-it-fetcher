@@ -14,10 +14,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Test
+ * Model B2BOffer
  * 
  */
-export type Test = $Result.DefaultSelection<Prisma.$TestPayload>
+export type B2BOffer = $Result.DefaultSelection<Prisma.$B2BOfferPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -26,8 +26,8 @@ export type Test = $Result.DefaultSelection<Prisma.$TestPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Tests
- * const tests = await prisma.test.findMany()
+ * // Fetch zero or more B2BOffers
+ * const b2BOffers = await prisma.b2BOffer.findMany()
  * ```
  *
  * 
@@ -47,8 +47,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Tests
-   * const tests = await prisma.test.findMany()
+   * // Fetch zero or more B2BOffers
+   * const b2BOffers = await prisma.b2BOffer.findMany()
    * ```
    *
    * 
@@ -142,14 +142,14 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
-   * `prisma.test`: Exposes CRUD operations for the **Test** model.
+   * `prisma.b2BOffer`: Exposes CRUD operations for the **B2BOffer** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Tests
-    * const tests = await prisma.test.findMany()
+    * // Fetch zero or more B2BOffers
+    * const b2BOffers = await prisma.b2BOffer.findMany()
     * ```
     */
-  get test(): Prisma.TestDelegate<ExtArgs>;
+  get b2BOffer(): Prisma.B2BOfferDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -620,7 +620,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Test: 'Test'
+    B2BOffer: 'B2BOffer'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -637,73 +637,73 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'test'
+      modelProps: 'b2BOffer'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
-      Test: {
-        payload: Prisma.$TestPayload<ExtArgs>
-        fields: Prisma.TestFieldRefs
+      B2BOffer: {
+        payload: Prisma.$B2BOfferPayload<ExtArgs>
+        fields: Prisma.B2BOfferFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.TestFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload> | null
+            args: Prisma.B2BOfferFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.TestFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
+            args: Prisma.B2BOfferFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload>
           }
           findFirst: {
-            args: Prisma.TestFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload> | null
+            args: Prisma.B2BOfferFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.TestFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
+            args: Prisma.B2BOfferFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload>
           }
           findMany: {
-            args: Prisma.TestFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>[]
+            args: Prisma.B2BOfferFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload>[]
           }
           create: {
-            args: Prisma.TestCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
+            args: Prisma.B2BOfferCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload>
           }
           createMany: {
-            args: Prisma.TestCreateManyArgs<ExtArgs>,
+            args: Prisma.B2BOfferCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.TestDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
+            args: Prisma.B2BOfferDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload>
           }
           update: {
-            args: Prisma.TestUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
+            args: Prisma.B2BOfferUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload>
           }
           deleteMany: {
-            args: Prisma.TestDeleteManyArgs<ExtArgs>,
+            args: Prisma.B2BOfferDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.TestUpdateManyArgs<ExtArgs>,
+            args: Prisma.B2BOfferUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.TestUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$TestPayload>
+            args: Prisma.B2BOfferUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$B2BOfferPayload>
           }
           aggregate: {
-            args: Prisma.TestAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateTest>
+            args: Prisma.B2BOfferAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateB2BOffer>
           }
           groupBy: {
-            args: Prisma.TestGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<TestGroupByOutputType>[]
+            args: Prisma.B2BOfferGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<B2BOfferGroupByOutputType>[]
           }
           count: {
-            args: Prisma.TestCountArgs<ExtArgs>,
-            result: $Utils.Optional<TestCountAggregateOutputType> | number
+            args: Prisma.B2BOfferCountArgs<ExtArgs>,
+            result: $Utils.Optional<B2BOfferCountAggregateOutputType> | number
           }
         }
       }
@@ -857,357 +857,435 @@ export namespace Prisma {
    */
 
   /**
-   * Model Test
+   * Model B2BOffer
    */
 
-  export type AggregateTest = {
-    _count: TestCountAggregateOutputType | null
-    _avg: TestAvgAggregateOutputType | null
-    _sum: TestSumAggregateOutputType | null
-    _min: TestMinAggregateOutputType | null
-    _max: TestMaxAggregateOutputType | null
+  export type AggregateB2BOffer = {
+    _count: B2BOfferCountAggregateOutputType | null
+    _avg: B2BOfferAvgAggregateOutputType | null
+    _sum: B2BOfferSumAggregateOutputType | null
+    _min: B2BOfferMinAggregateOutputType | null
+    _max: B2BOfferMaxAggregateOutputType | null
   }
 
-  export type TestAvgAggregateOutputType = {
+  export type B2BOfferAvgAggregateOutputType = {
     id: number | null
+    fromPln: number | null
+    toPln: number | null
   }
 
-  export type TestSumAggregateOutputType = {
+  export type B2BOfferSumAggregateOutputType = {
     id: number | null
+    fromPln: number | null
+    toPln: number | null
   }
 
-  export type TestMinAggregateOutputType = {
+  export type B2BOfferMinAggregateOutputType = {
     id: number | null
-    name: string | null
-    description: string | null
+    createdAt: Date | null
+    slug: string | null
+    title: string | null
+    url: string | null
+    city: string | null
+    fromPln: number | null
+    toPln: number | null
+    requiredSkills: string | null
+    companyName: string | null
   }
 
-  export type TestMaxAggregateOutputType = {
+  export type B2BOfferMaxAggregateOutputType = {
     id: number | null
-    name: string | null
-    description: string | null
+    createdAt: Date | null
+    slug: string | null
+    title: string | null
+    url: string | null
+    city: string | null
+    fromPln: number | null
+    toPln: number | null
+    requiredSkills: string | null
+    companyName: string | null
   }
 
-  export type TestCountAggregateOutputType = {
+  export type B2BOfferCountAggregateOutputType = {
     id: number
-    name: number
-    description: number
+    createdAt: number
+    slug: number
+    title: number
+    url: number
+    city: number
+    fromPln: number
+    toPln: number
+    requiredSkills: number
+    companyName: number
     _all: number
   }
 
 
-  export type TestAvgAggregateInputType = {
+  export type B2BOfferAvgAggregateInputType = {
     id?: true
+    fromPln?: true
+    toPln?: true
   }
 
-  export type TestSumAggregateInputType = {
+  export type B2BOfferSumAggregateInputType = {
     id?: true
+    fromPln?: true
+    toPln?: true
   }
 
-  export type TestMinAggregateInputType = {
+  export type B2BOfferMinAggregateInputType = {
     id?: true
-    name?: true
-    description?: true
+    createdAt?: true
+    slug?: true
+    title?: true
+    url?: true
+    city?: true
+    fromPln?: true
+    toPln?: true
+    requiredSkills?: true
+    companyName?: true
   }
 
-  export type TestMaxAggregateInputType = {
+  export type B2BOfferMaxAggregateInputType = {
     id?: true
-    name?: true
-    description?: true
+    createdAt?: true
+    slug?: true
+    title?: true
+    url?: true
+    city?: true
+    fromPln?: true
+    toPln?: true
+    requiredSkills?: true
+    companyName?: true
   }
 
-  export type TestCountAggregateInputType = {
+  export type B2BOfferCountAggregateInputType = {
     id?: true
-    name?: true
-    description?: true
+    createdAt?: true
+    slug?: true
+    title?: true
+    url?: true
+    city?: true
+    fromPln?: true
+    toPln?: true
+    requiredSkills?: true
+    companyName?: true
     _all?: true
   }
 
-  export type TestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Test to aggregate.
+     * Filter which B2BOffer to aggregate.
      */
-    where?: TestWhereInput
+    where?: B2BOfferWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tests to fetch.
+     * Determine the order of B2BOffers to fetch.
      */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
+    orderBy?: B2BOfferOrderByWithRelationInput | B2BOfferOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: TestWhereUniqueInput
+    cursor?: B2BOfferWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tests from the position of the cursor.
+     * Take `±n` B2BOffers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tests.
+     * Skip the first `n` B2BOffers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Tests
+     * Count returned B2BOffers
     **/
-    _count?: true | TestCountAggregateInputType
+    _count?: true | B2BOfferCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: TestAvgAggregateInputType
+    _avg?: B2BOfferAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: TestSumAggregateInputType
+    _sum?: B2BOfferSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: TestMinAggregateInputType
+    _min?: B2BOfferMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: TestMaxAggregateInputType
+    _max?: B2BOfferMaxAggregateInputType
   }
 
-  export type GetTestAggregateType<T extends TestAggregateArgs> = {
-        [P in keyof T & keyof AggregateTest]: P extends '_count' | 'count'
+  export type GetB2BOfferAggregateType<T extends B2BOfferAggregateArgs> = {
+        [P in keyof T & keyof AggregateB2BOffer]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateTest[P]>
-      : GetScalarType<T[P], AggregateTest[P]>
+        : GetScalarType<T[P], AggregateB2BOffer[P]>
+      : GetScalarType<T[P], AggregateB2BOffer[P]>
   }
 
 
 
 
-  export type TestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TestWhereInput
-    orderBy?: TestOrderByWithAggregationInput | TestOrderByWithAggregationInput[]
-    by: TestScalarFieldEnum[] | TestScalarFieldEnum
-    having?: TestScalarWhereWithAggregatesInput
+  export type B2BOfferGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: B2BOfferWhereInput
+    orderBy?: B2BOfferOrderByWithAggregationInput | B2BOfferOrderByWithAggregationInput[]
+    by: B2BOfferScalarFieldEnum[] | B2BOfferScalarFieldEnum
+    having?: B2BOfferScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: TestCountAggregateInputType | true
-    _avg?: TestAvgAggregateInputType
-    _sum?: TestSumAggregateInputType
-    _min?: TestMinAggregateInputType
-    _max?: TestMaxAggregateInputType
+    _count?: B2BOfferCountAggregateInputType | true
+    _avg?: B2BOfferAvgAggregateInputType
+    _sum?: B2BOfferSumAggregateInputType
+    _min?: B2BOfferMinAggregateInputType
+    _max?: B2BOfferMaxAggregateInputType
   }
 
-  export type TestGroupByOutputType = {
+  export type B2BOfferGroupByOutputType = {
     id: number
-    name: string
-    description: string
-    _count: TestCountAggregateOutputType | null
-    _avg: TestAvgAggregateOutputType | null
-    _sum: TestSumAggregateOutputType | null
-    _min: TestMinAggregateOutputType | null
-    _max: TestMaxAggregateOutputType | null
+    createdAt: Date
+    slug: string
+    title: string
+    url: string
+    city: string
+    fromPln: number
+    toPln: number
+    requiredSkills: string
+    companyName: string
+    _count: B2BOfferCountAggregateOutputType | null
+    _avg: B2BOfferAvgAggregateOutputType | null
+    _sum: B2BOfferSumAggregateOutputType | null
+    _min: B2BOfferMinAggregateOutputType | null
+    _max: B2BOfferMaxAggregateOutputType | null
   }
 
-  type GetTestGroupByPayload<T extends TestGroupByArgs> = Prisma.PrismaPromise<
+  type GetB2BOfferGroupByPayload<T extends B2BOfferGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<TestGroupByOutputType, T['by']> &
+      PickEnumerable<B2BOfferGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof TestGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof B2BOfferGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], TestGroupByOutputType[P]>
-            : GetScalarType<T[P], TestGroupByOutputType[P]>
+              : GetScalarType<T[P], B2BOfferGroupByOutputType[P]>
+            : GetScalarType<T[P], B2BOfferGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type TestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type B2BOfferSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    description?: boolean
-  }, ExtArgs["result"]["test"]>
+    createdAt?: boolean
+    slug?: boolean
+    title?: boolean
+    url?: boolean
+    city?: boolean
+    fromPln?: boolean
+    toPln?: boolean
+    requiredSkills?: boolean
+    companyName?: boolean
+  }, ExtArgs["result"]["b2BOffer"]>
 
-  export type TestSelectScalar = {
+  export type B2BOfferSelectScalar = {
     id?: boolean
-    name?: boolean
-    description?: boolean
+    createdAt?: boolean
+    slug?: boolean
+    title?: boolean
+    url?: boolean
+    city?: boolean
+    fromPln?: boolean
+    toPln?: boolean
+    requiredSkills?: boolean
+    companyName?: boolean
   }
 
 
-  export type $TestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Test"
+  export type $B2BOfferPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "B2BOffer"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      name: string
-      description: string
-    }, ExtArgs["result"]["test"]>
+      createdAt: Date
+      slug: string
+      title: string
+      url: string
+      city: string
+      fromPln: number
+      toPln: number
+      requiredSkills: string
+      companyName: string
+    }, ExtArgs["result"]["b2BOffer"]>
     composites: {}
   }
 
 
-  type TestGetPayload<S extends boolean | null | undefined | TestDefaultArgs> = $Result.GetResult<Prisma.$TestPayload, S>
+  type B2BOfferGetPayload<S extends boolean | null | undefined | B2BOfferDefaultArgs> = $Result.GetResult<Prisma.$B2BOfferPayload, S>
 
-  type TestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<TestFindManyArgs, 'select' | 'include' | 'distinct' > & {
-      select?: TestCountAggregateInputType | true
+  type B2BOfferCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<B2BOfferFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: B2BOfferCountAggregateInputType | true
     }
 
-  export interface TestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Test'], meta: { name: 'Test' } }
+  export interface B2BOfferDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['B2BOffer'], meta: { name: 'B2BOffer' } }
     /**
-     * Find zero or one Test that matches the filter.
-     * @param {TestFindUniqueArgs} args - Arguments to find a Test
+     * Find zero or one B2BOffer that matches the filter.
+     * @param {B2BOfferFindUniqueArgs} args - Arguments to find a B2BOffer
      * @example
-     * // Get one Test
-     * const test = await prisma.test.findUnique({
+     * // Get one B2BOffer
+     * const b2BOffer = await prisma.b2BOffer.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends TestFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, TestFindUniqueArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends B2BOfferFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, B2BOfferFindUniqueArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Test that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one B2BOffer that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {TestFindUniqueOrThrowArgs} args - Arguments to find a Test
+     * @param {B2BOfferFindUniqueOrThrowArgs} args - Arguments to find a B2BOffer
      * @example
-     * // Get one Test
-     * const test = await prisma.test.findUniqueOrThrow({
+     * // Get one B2BOffer
+     * const b2BOffer = await prisma.b2BOffer.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends TestFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, TestFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends B2BOfferFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, B2BOfferFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
-     * Find the first Test that matches the filter.
+     * Find the first B2BOffer that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestFindFirstArgs} args - Arguments to find a Test
+     * @param {B2BOfferFindFirstArgs} args - Arguments to find a B2BOffer
      * @example
-     * // Get one Test
-     * const test = await prisma.test.findFirst({
+     * // Get one B2BOffer
+     * const b2BOffer = await prisma.b2BOffer.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends TestFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, TestFindFirstArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends B2BOfferFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, B2BOfferFindFirstArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
-     * Find the first Test that matches the filter or
+     * Find the first B2BOffer that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestFindFirstOrThrowArgs} args - Arguments to find a Test
+     * @param {B2BOfferFindFirstOrThrowArgs} args - Arguments to find a B2BOffer
      * @example
-     * // Get one Test
-     * const test = await prisma.test.findFirstOrThrow({
+     * // Get one B2BOffer
+     * const b2BOffer = await prisma.b2BOffer.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends TestFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, TestFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends B2BOfferFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, B2BOfferFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
-     * Find zero or more Tests that matches the filter.
+     * Find zero or more B2BOffers that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {B2BOfferFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Tests
-     * const tests = await prisma.test.findMany()
+     * // Get all B2BOffers
+     * const b2BOffers = await prisma.b2BOffer.findMany()
      * 
-     * // Get first 10 Tests
-     * const tests = await prisma.test.findMany({ take: 10 })
+     * // Get first 10 B2BOffers
+     * const b2BOffers = await prisma.b2BOffer.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const testWithIdOnly = await prisma.test.findMany({ select: { id: true } })
+     * const b2BOfferWithIdOnly = await prisma.b2BOffer.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends TestFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, TestFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends B2BOfferFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, B2BOfferFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'findMany'>>
 
     /**
-     * Create a Test.
-     * @param {TestCreateArgs} args - Arguments to create a Test.
+     * Create a B2BOffer.
+     * @param {B2BOfferCreateArgs} args - Arguments to create a B2BOffer.
      * @example
-     * // Create one Test
-     * const Test = await prisma.test.create({
+     * // Create one B2BOffer
+     * const B2BOffer = await prisma.b2BOffer.create({
      *   data: {
-     *     // ... data to create a Test
+     *     // ... data to create a B2BOffer
      *   }
      * })
      * 
     **/
-    create<T extends TestCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, TestCreateArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends B2BOfferCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, B2BOfferCreateArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
-     * Create many Tests.
-     *     @param {TestCreateManyArgs} args - Arguments to create many Tests.
+     * Create many B2BOffers.
+     *     @param {B2BOfferCreateManyArgs} args - Arguments to create many B2BOffers.
      *     @example
-     *     // Create many Tests
-     *     const test = await prisma.test.createMany({
+     *     // Create many B2BOffers
+     *     const b2BOffer = await prisma.b2BOffer.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends TestCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, TestCreateManyArgs<ExtArgs>>
+    createMany<T extends B2BOfferCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, B2BOfferCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Test.
-     * @param {TestDeleteArgs} args - Arguments to delete one Test.
+     * Delete a B2BOffer.
+     * @param {B2BOfferDeleteArgs} args - Arguments to delete one B2BOffer.
      * @example
-     * // Delete one Test
-     * const Test = await prisma.test.delete({
+     * // Delete one B2BOffer
+     * const B2BOffer = await prisma.b2BOffer.delete({
      *   where: {
-     *     // ... filter to delete one Test
+     *     // ... filter to delete one B2BOffer
      *   }
      * })
      * 
     **/
-    delete<T extends TestDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, TestDeleteArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends B2BOfferDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, B2BOfferDeleteArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
-     * Update one Test.
-     * @param {TestUpdateArgs} args - Arguments to update one Test.
+     * Update one B2BOffer.
+     * @param {B2BOfferUpdateArgs} args - Arguments to update one B2BOffer.
      * @example
-     * // Update one Test
-     * const test = await prisma.test.update({
+     * // Update one B2BOffer
+     * const b2BOffer = await prisma.b2BOffer.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1217,34 +1295,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends TestUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, TestUpdateArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends B2BOfferUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, B2BOfferUpdateArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
-     * Delete zero or more Tests.
-     * @param {TestDeleteManyArgs} args - Arguments to filter Tests to delete.
+     * Delete zero or more B2BOffers.
+     * @param {B2BOfferDeleteManyArgs} args - Arguments to filter B2BOffers to delete.
      * @example
-     * // Delete a few Tests
-     * const { count } = await prisma.test.deleteMany({
+     * // Delete a few B2BOffers
+     * const { count } = await prisma.b2BOffer.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends TestDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, TestDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends B2BOfferDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, B2BOfferDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Tests.
+     * Update zero or more B2BOffers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {B2BOfferUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Tests
-     * const test = await prisma.test.updateMany({
+     * // Update many B2BOffers
+     * const b2BOffer = await prisma.b2BOffer.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1254,59 +1332,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends TestUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, TestUpdateManyArgs<ExtArgs>>
+    updateMany<T extends B2BOfferUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, B2BOfferUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Test.
-     * @param {TestUpsertArgs} args - Arguments to update or create a Test.
+     * Create or update one B2BOffer.
+     * @param {B2BOfferUpsertArgs} args - Arguments to update or create a B2BOffer.
      * @example
-     * // Update or create a Test
-     * const test = await prisma.test.upsert({
+     * // Update or create a B2BOffer
+     * const b2BOffer = await prisma.b2BOffer.upsert({
      *   create: {
-     *     // ... data to create a Test
+     *     // ... data to create a B2BOffer
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Test we want to update
+     *     // ... the filter for the B2BOffer we want to update
      *   }
      * })
     **/
-    upsert<T extends TestUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, TestUpsertArgs<ExtArgs>>
-    ): Prisma__TestClient<$Result.GetResult<Prisma.$TestPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends B2BOfferUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, B2BOfferUpsertArgs<ExtArgs>>
+    ): Prisma__B2BOfferClient<$Result.GetResult<Prisma.$B2BOfferPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
-     * Count the number of Tests.
+     * Count the number of B2BOffers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestCountArgs} args - Arguments to filter Tests to count.
+     * @param {B2BOfferCountArgs} args - Arguments to filter B2BOffers to count.
      * @example
-     * // Count the number of Tests
-     * const count = await prisma.test.count({
+     * // Count the number of B2BOffers
+     * const count = await prisma.b2BOffer.count({
      *   where: {
-     *     // ... the filter for the Tests we want to count
+     *     // ... the filter for the B2BOffers we want to count
      *   }
      * })
     **/
-    count<T extends TestCountArgs>(
-      args?: Subset<T, TestCountArgs>,
+    count<T extends B2BOfferCountArgs>(
+      args?: Subset<T, B2BOfferCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], TestCountAggregateOutputType>
+          : GetScalarType<T['select'], B2BOfferCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Test.
+     * Allows you to perform aggregations operations on a B2BOffer.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {B2BOfferAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1326,13 +1404,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends TestAggregateArgs>(args: Subset<T, TestAggregateArgs>): Prisma.PrismaPromise<GetTestAggregateType<T>>
+    aggregate<T extends B2BOfferAggregateArgs>(args: Subset<T, B2BOfferAggregateArgs>): Prisma.PrismaPromise<GetB2BOfferAggregateType<T>>
 
     /**
-     * Group by Test.
+     * Group by B2BOffer.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestGroupByArgs} args - Group by arguments.
+     * @param {B2BOfferGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1347,14 +1425,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends TestGroupByArgs,
+      T extends B2BOfferGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TestGroupByArgs['orderBy'] }
-        : { orderBy?: TestGroupByArgs['orderBy'] },
+        ? { orderBy: B2BOfferGroupByArgs['orderBy'] }
+        : { orderBy?: B2BOfferGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1403,20 +1481,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, TestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, B2BOfferGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetB2BOfferGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Test model
+   * Fields of the B2BOffer model
    */
-  readonly fields: TestFieldRefs;
+  readonly fields: B2BOfferFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Test.
+   * The delegate class that acts as a "Promise-like" for B2BOffer.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__B2BOfferClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
 
@@ -1445,295 +1523,302 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Test model
+   * Fields of the B2BOffer model
    */ 
-  interface TestFieldRefs {
-    readonly id: FieldRef<"Test", 'Int'>
-    readonly name: FieldRef<"Test", 'String'>
-    readonly description: FieldRef<"Test", 'String'>
+  interface B2BOfferFieldRefs {
+    readonly id: FieldRef<"B2BOffer", 'Int'>
+    readonly createdAt: FieldRef<"B2BOffer", 'DateTime'>
+    readonly slug: FieldRef<"B2BOffer", 'String'>
+    readonly title: FieldRef<"B2BOffer", 'String'>
+    readonly url: FieldRef<"B2BOffer", 'String'>
+    readonly city: FieldRef<"B2BOffer", 'String'>
+    readonly fromPln: FieldRef<"B2BOffer", 'Float'>
+    readonly toPln: FieldRef<"B2BOffer", 'Float'>
+    readonly requiredSkills: FieldRef<"B2BOffer", 'String'>
+    readonly companyName: FieldRef<"B2BOffer", 'String'>
   }
     
 
   // Custom InputTypes
 
   /**
-   * Test findUnique
+   * B2BOffer findUnique
    */
-  export type TestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * Filter, which Test to fetch.
+     * Filter, which B2BOffer to fetch.
      */
-    where: TestWhereUniqueInput
+    where: B2BOfferWhereUniqueInput
   }
 
 
   /**
-   * Test findUniqueOrThrow
+   * B2BOffer findUniqueOrThrow
    */
-  export type TestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * Filter, which Test to fetch.
+     * Filter, which B2BOffer to fetch.
      */
-    where: TestWhereUniqueInput
+    where: B2BOfferWhereUniqueInput
   }
 
 
   /**
-   * Test findFirst
+   * B2BOffer findFirst
    */
-  export type TestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * Filter, which Test to fetch.
+     * Filter, which B2BOffer to fetch.
      */
-    where?: TestWhereInput
+    where?: B2BOfferWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tests to fetch.
+     * Determine the order of B2BOffers to fetch.
      */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
+    orderBy?: B2BOfferOrderByWithRelationInput | B2BOfferOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Tests.
+     * Sets the position for searching for B2BOffers.
      */
-    cursor?: TestWhereUniqueInput
+    cursor?: B2BOfferWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tests from the position of the cursor.
+     * Take `±n` B2BOffers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tests.
+     * Skip the first `n` B2BOffers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Tests.
+     * Filter by unique combinations of B2BOffers.
      */
-    distinct?: TestScalarFieldEnum | TestScalarFieldEnum[]
+    distinct?: B2BOfferScalarFieldEnum | B2BOfferScalarFieldEnum[]
   }
 
 
   /**
-   * Test findFirstOrThrow
+   * B2BOffer findFirstOrThrow
    */
-  export type TestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * Filter, which Test to fetch.
+     * Filter, which B2BOffer to fetch.
      */
-    where?: TestWhereInput
+    where?: B2BOfferWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tests to fetch.
+     * Determine the order of B2BOffers to fetch.
      */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
+    orderBy?: B2BOfferOrderByWithRelationInput | B2BOfferOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Tests.
+     * Sets the position for searching for B2BOffers.
      */
-    cursor?: TestWhereUniqueInput
+    cursor?: B2BOfferWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tests from the position of the cursor.
+     * Take `±n` B2BOffers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tests.
+     * Skip the first `n` B2BOffers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Tests.
+     * Filter by unique combinations of B2BOffers.
      */
-    distinct?: TestScalarFieldEnum | TestScalarFieldEnum[]
+    distinct?: B2BOfferScalarFieldEnum | B2BOfferScalarFieldEnum[]
   }
 
 
   /**
-   * Test findMany
+   * B2BOffer findMany
    */
-  export type TestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * Filter, which Tests to fetch.
+     * Filter, which B2BOffers to fetch.
      */
-    where?: TestWhereInput
+    where?: B2BOfferWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Tests to fetch.
+     * Determine the order of B2BOffers to fetch.
      */
-    orderBy?: TestOrderByWithRelationInput | TestOrderByWithRelationInput[]
+    orderBy?: B2BOfferOrderByWithRelationInput | B2BOfferOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Tests.
+     * Sets the position for listing B2BOffers.
      */
-    cursor?: TestWhereUniqueInput
+    cursor?: B2BOfferWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Tests from the position of the cursor.
+     * Take `±n` B2BOffers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Tests.
+     * Skip the first `n` B2BOffers.
      */
     skip?: number
-    distinct?: TestScalarFieldEnum | TestScalarFieldEnum[]
+    distinct?: B2BOfferScalarFieldEnum | B2BOfferScalarFieldEnum[]
   }
 
 
   /**
-   * Test create
+   * B2BOffer create
    */
-  export type TestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * The data needed to create a Test.
+     * The data needed to create a B2BOffer.
      */
-    data: XOR<TestCreateInput, TestUncheckedCreateInput>
+    data: XOR<B2BOfferCreateInput, B2BOfferUncheckedCreateInput>
   }
 
 
   /**
-   * Test createMany
+   * B2BOffer createMany
    */
-  export type TestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Tests.
+     * The data used to create many B2BOffers.
      */
-    data: TestCreateManyInput | TestCreateManyInput[]
+    data: B2BOfferCreateManyInput | B2BOfferCreateManyInput[]
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Test update
+   * B2BOffer update
    */
-  export type TestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * The data needed to update a Test.
+     * The data needed to update a B2BOffer.
      */
-    data: XOR<TestUpdateInput, TestUncheckedUpdateInput>
+    data: XOR<B2BOfferUpdateInput, B2BOfferUncheckedUpdateInput>
     /**
-     * Choose, which Test to update.
+     * Choose, which B2BOffer to update.
      */
-    where: TestWhereUniqueInput
+    where: B2BOfferWhereUniqueInput
   }
 
 
   /**
-   * Test updateMany
+   * B2BOffer updateMany
    */
-  export type TestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Tests.
+     * The data used to update B2BOffers.
      */
-    data: XOR<TestUpdateManyMutationInput, TestUncheckedUpdateManyInput>
+    data: XOR<B2BOfferUpdateManyMutationInput, B2BOfferUncheckedUpdateManyInput>
     /**
-     * Filter which Tests to update
+     * Filter which B2BOffers to update
      */
-    where?: TestWhereInput
+    where?: B2BOfferWhereInput
   }
 
 
   /**
-   * Test upsert
+   * B2BOffer upsert
    */
-  export type TestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * The filter to search for the Test to update in case it exists.
+     * The filter to search for the B2BOffer to update in case it exists.
      */
-    where: TestWhereUniqueInput
+    where: B2BOfferWhereUniqueInput
     /**
-     * In case the Test found by the `where` argument doesn't exist, create a new Test with this data.
+     * In case the B2BOffer found by the `where` argument doesn't exist, create a new B2BOffer with this data.
      */
-    create: XOR<TestCreateInput, TestUncheckedCreateInput>
+    create: XOR<B2BOfferCreateInput, B2BOfferUncheckedCreateInput>
     /**
-     * In case the Test was found with the provided `where` argument, update it with this data.
+     * In case the B2BOffer was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<TestUpdateInput, TestUncheckedUpdateInput>
+    update: XOR<B2BOfferUpdateInput, B2BOfferUncheckedUpdateInput>
   }
 
 
   /**
-   * Test delete
+   * B2BOffer delete
    */
-  export type TestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
     /**
-     * Filter which Test to delete.
+     * Filter which B2BOffer to delete.
      */
-    where: TestWhereUniqueInput
+    where: B2BOfferWhereUniqueInput
   }
 
 
   /**
-   * Test deleteMany
+   * B2BOffer deleteMany
    */
-  export type TestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Tests to delete
+     * Filter which B2BOffers to delete
      */
-    where?: TestWhereInput
+    where?: B2BOfferWhereInput
   }
 
 
   /**
-   * Test without action
+   * B2BOffer without action
    */
-  export type TestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type B2BOfferDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Test
+     * Select specific fields to fetch from the B2BOffer
      */
-    select?: TestSelect<ExtArgs> | null
+    select?: B2BOfferSelect<ExtArgs> | null
   }
 
 
@@ -1752,13 +1837,20 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const TestScalarFieldEnum: {
+  export const B2BOfferScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    description: 'description'
+    createdAt: 'createdAt',
+    slug: 'slug',
+    title: 'title',
+    url: 'url',
+    city: 'city',
+    fromPln: 'fromPln',
+    toPln: 'toPln',
+    requiredSkills: 'requiredSkills',
+    companyName: 'companyName'
   };
 
-  export type TestScalarFieldEnum = (typeof TestScalarFieldEnum)[keyof typeof TestScalarFieldEnum]
+  export type B2BOfferScalarFieldEnum = (typeof B2BOfferScalarFieldEnum)[keyof typeof B2BOfferScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1797,6 +1889,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -1827,87 +1933,171 @@ export namespace Prisma {
    */
 
 
-  export type TestWhereInput = {
-    AND?: TestWhereInput | TestWhereInput[]
-    OR?: TestWhereInput[]
-    NOT?: TestWhereInput | TestWhereInput[]
-    id?: IntFilter<"Test"> | number
-    name?: StringFilter<"Test"> | string
-    description?: StringFilter<"Test"> | string
+  export type B2BOfferWhereInput = {
+    AND?: B2BOfferWhereInput | B2BOfferWhereInput[]
+    OR?: B2BOfferWhereInput[]
+    NOT?: B2BOfferWhereInput | B2BOfferWhereInput[]
+    id?: IntFilter<"B2BOffer"> | number
+    createdAt?: DateTimeFilter<"B2BOffer"> | Date | string
+    slug?: StringFilter<"B2BOffer"> | string
+    title?: StringFilter<"B2BOffer"> | string
+    url?: StringFilter<"B2BOffer"> | string
+    city?: StringFilter<"B2BOffer"> | string
+    fromPln?: FloatFilter<"B2BOffer"> | number
+    toPln?: FloatFilter<"B2BOffer"> | number
+    requiredSkills?: StringFilter<"B2BOffer"> | string
+    companyName?: StringFilter<"B2BOffer"> | string
   }
 
-  export type TestOrderByWithRelationInput = {
+  export type B2BOfferOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
+    createdAt?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    url?: SortOrder
+    city?: SortOrder
+    fromPln?: SortOrder
+    toPln?: SortOrder
+    requiredSkills?: SortOrder
+    companyName?: SortOrder
   }
 
-  export type TestWhereUniqueInput = Prisma.AtLeast<{
+  export type B2BOfferWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    name?: string
-    AND?: TestWhereInput | TestWhereInput[]
-    OR?: TestWhereInput[]
-    NOT?: TestWhereInput | TestWhereInput[]
-    description?: StringFilter<"Test"> | string
-  }, "id" | "name">
+    slug?: string
+    url?: string
+    AND?: B2BOfferWhereInput | B2BOfferWhereInput[]
+    OR?: B2BOfferWhereInput[]
+    NOT?: B2BOfferWhereInput | B2BOfferWhereInput[]
+    createdAt?: DateTimeFilter<"B2BOffer"> | Date | string
+    title?: StringFilter<"B2BOffer"> | string
+    city?: StringFilter<"B2BOffer"> | string
+    fromPln?: FloatFilter<"B2BOffer"> | number
+    toPln?: FloatFilter<"B2BOffer"> | number
+    requiredSkills?: StringFilter<"B2BOffer"> | string
+    companyName?: StringFilter<"B2BOffer"> | string
+  }, "id" | "slug" | "url">
 
-  export type TestOrderByWithAggregationInput = {
+  export type B2BOfferOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    _count?: TestCountOrderByAggregateInput
-    _avg?: TestAvgOrderByAggregateInput
-    _max?: TestMaxOrderByAggregateInput
-    _min?: TestMinOrderByAggregateInput
-    _sum?: TestSumOrderByAggregateInput
+    createdAt?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    url?: SortOrder
+    city?: SortOrder
+    fromPln?: SortOrder
+    toPln?: SortOrder
+    requiredSkills?: SortOrder
+    companyName?: SortOrder
+    _count?: B2BOfferCountOrderByAggregateInput
+    _avg?: B2BOfferAvgOrderByAggregateInput
+    _max?: B2BOfferMaxOrderByAggregateInput
+    _min?: B2BOfferMinOrderByAggregateInput
+    _sum?: B2BOfferSumOrderByAggregateInput
   }
 
-  export type TestScalarWhereWithAggregatesInput = {
-    AND?: TestScalarWhereWithAggregatesInput | TestScalarWhereWithAggregatesInput[]
-    OR?: TestScalarWhereWithAggregatesInput[]
-    NOT?: TestScalarWhereWithAggregatesInput | TestScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Test"> | number
-    name?: StringWithAggregatesFilter<"Test"> | string
-    description?: StringWithAggregatesFilter<"Test"> | string
+  export type B2BOfferScalarWhereWithAggregatesInput = {
+    AND?: B2BOfferScalarWhereWithAggregatesInput | B2BOfferScalarWhereWithAggregatesInput[]
+    OR?: B2BOfferScalarWhereWithAggregatesInput[]
+    NOT?: B2BOfferScalarWhereWithAggregatesInput | B2BOfferScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"B2BOffer"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"B2BOffer"> | Date | string
+    slug?: StringWithAggregatesFilter<"B2BOffer"> | string
+    title?: StringWithAggregatesFilter<"B2BOffer"> | string
+    url?: StringWithAggregatesFilter<"B2BOffer"> | string
+    city?: StringWithAggregatesFilter<"B2BOffer"> | string
+    fromPln?: FloatWithAggregatesFilter<"B2BOffer"> | number
+    toPln?: FloatWithAggregatesFilter<"B2BOffer"> | number
+    requiredSkills?: StringWithAggregatesFilter<"B2BOffer"> | string
+    companyName?: StringWithAggregatesFilter<"B2BOffer"> | string
   }
 
-  export type TestCreateInput = {
-    name: string
-    description: string
+  export type B2BOfferCreateInput = {
+    createdAt?: Date | string
+    slug: string
+    title: string
+    url: string
+    city: string
+    fromPln: number
+    toPln: number
+    requiredSkills: string
+    companyName: string
   }
 
-  export type TestUncheckedCreateInput = {
+  export type B2BOfferUncheckedCreateInput = {
     id?: number
-    name: string
-    description: string
+    createdAt?: Date | string
+    slug: string
+    title: string
+    url: string
+    city: string
+    fromPln: number
+    toPln: number
+    requiredSkills: string
+    companyName: string
   }
 
-  export type TestUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+  export type B2BOfferUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    fromPln?: FloatFieldUpdateOperationsInput | number
+    toPln?: FloatFieldUpdateOperationsInput | number
+    requiredSkills?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
   }
 
-  export type TestUncheckedUpdateInput = {
+  export type B2BOfferUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    fromPln?: FloatFieldUpdateOperationsInput | number
+    toPln?: FloatFieldUpdateOperationsInput | number
+    requiredSkills?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
   }
 
-  export type TestCreateManyInput = {
+  export type B2BOfferCreateManyInput = {
     id?: number
-    name: string
-    description: string
+    createdAt?: Date | string
+    slug: string
+    title: string
+    url: string
+    city: string
+    fromPln: number
+    toPln: number
+    requiredSkills: string
+    companyName: string
   }
 
-  export type TestUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+  export type B2BOfferUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    fromPln?: FloatFieldUpdateOperationsInput | number
+    toPln?: FloatFieldUpdateOperationsInput | number
+    requiredSkills?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
   }
 
-  export type TestUncheckedUpdateManyInput = {
+  export type B2BOfferUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    fromPln?: FloatFieldUpdateOperationsInput | number
+    toPln?: FloatFieldUpdateOperationsInput | number
+    requiredSkills?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -1919,6 +2109,17 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -1936,30 +2137,66 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type TestCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type TestAvgOrderByAggregateInput = {
+  export type B2BOfferCountOrderByAggregateInput = {
     id?: SortOrder
+    createdAt?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    url?: SortOrder
+    city?: SortOrder
+    fromPln?: SortOrder
+    toPln?: SortOrder
+    requiredSkills?: SortOrder
+    companyName?: SortOrder
   }
 
-  export type TestMaxOrderByAggregateInput = {
+  export type B2BOfferAvgOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
+    fromPln?: SortOrder
+    toPln?: SortOrder
   }
 
-  export type TestMinOrderByAggregateInput = {
+  export type B2BOfferMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
+    createdAt?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    url?: SortOrder
+    city?: SortOrder
+    fromPln?: SortOrder
+    toPln?: SortOrder
+    requiredSkills?: SortOrder
+    companyName?: SortOrder
   }
 
-  export type TestSumOrderByAggregateInput = {
+  export type B2BOfferMinOrderByAggregateInput = {
     id?: SortOrder
+    createdAt?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    url?: SortOrder
+    city?: SortOrder
+    fromPln?: SortOrder
+    toPln?: SortOrder
+    requiredSkills?: SortOrder
+    companyName?: SortOrder
+  }
+
+  export type B2BOfferSumOrderByAggregateInput = {
+    id?: SortOrder
+    fromPln?: SortOrder
+    toPln?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -1976,6 +2213,20 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -1996,8 +2247,36 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2019,6 +2298,17 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2031,6 +2321,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2049,15 +2350,18 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2077,15 +2381,31 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
 
 
   /**
    * Aliases for legacy arg types
    */
     /**
-     * @deprecated Use TestDefaultArgs instead
+     * @deprecated Use B2BOfferDefaultArgs instead
      */
-    export type TestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TestDefaultArgs<ExtArgs>
+    export type B2BOfferArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = B2BOfferDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

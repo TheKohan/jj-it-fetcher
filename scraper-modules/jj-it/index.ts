@@ -1,1 +1,1 @@
-export * from './jj-it-scraper';
+export * from './jj-it-scraper.ts';
