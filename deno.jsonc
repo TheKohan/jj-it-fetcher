@@ -6,6 +6,7 @@
     "db-migrate": "deno run -A --unstable npm:prisma@latest migrate dev",
     "start": "deno run -A --unstable-cron main.ts",
     "run-dev": "deno run -A --unstable-cron --watch main.ts",
+    "build-image": "docker build -t jj-it-fetcher .",
     "patch": "sed -i 's/.\\/runtime\\/library/.\\/runtime\\/library.d.ts/g' ./generated/client/index.d.ts & sed -i 's/.\\/index/.\\/index.d.ts/g' ./generated/client/runtime/library.d.ts"
   },
   "imports": {
