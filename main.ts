@@ -8,8 +8,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const Prisma = require('./generated/client/index.js');
 
-const port = 1993;
-const envVars = await load();
+const { PORT, DATABASE_URL } = await load();
 
 /**
  * Initialize.
@@ -18,7 +17,7 @@ const envVars = await load();
 const prisma: PrismaClient = new Prisma.PrismaClient({
   datasources: {
     db: {
-      url: envVars.DATABASE_URL,
+      url: DATABASE_URL,
     },
   },
 });
@@ -58,11 +57,11 @@ app.use(errorHandler);
 
 app.addEventListener('error', e => console.log(`Caught error: ${e.message}`));
 app.addEventListener('listen', () =>
-  console.log(`Server listening on ${port}`)
+  console.log(`Server listening on ${PORT}`)
 );
 
 /**
  * Start server.
  */
 
-await app.listen({ port });
+await app.listen({ port: +PORT });
