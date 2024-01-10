@@ -132,8 +132,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
-        "native": true
+        "value": "debian-openssl-1.1.x"
       }
     ],
     "previewFeatures": [
@@ -161,8 +160,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "Ly8gVGhpcyBpcyB5b3VyIFByaXNtYSBzY2hlbWEgZmlsZSwKLy8gbGVhcm4gbW9yZSBhYm91dCBpdCBpbiB0aGUgZG9jczogaHR0cHM6Ly9wcmlzLmx5L2QvcHJpc21hLXNjaGVtYQoKZ2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgICAgICAgID0gInByaXNtYS1jbGllbnQtanMiCiAgcHJldmlld0ZlYXR1cmVzID0gWyJkZW5vIl0KICBvdXRwdXQgICAgICAgICAgPSAiLi4vZ2VuZXJhdGVkL2NsaWVudCIKfQoKZGF0YXNvdXJjZSBkYiB7CiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCIKICB1cmwgICAgICA9IGVudigiREFUQUJBU0VfVVJMIikKfQoKbW9kZWwgQjJCT2ZmZXIgewogIGlkICAgICAgICAgICAgIEludCAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpCiAgY3JlYXRlZEF0ICAgICAgRGF0ZVRpbWUgQGRlZmF1bHQobm93KCkpCiAgc2x1ZyAgICAgICAgICAgU3RyaW5nCiAgdGl0bGUgICAgICAgICAgU3RyaW5nCiAgdXJsICAgICAgICAgICAgU3RyaW5nCiAgY2l0eSAgICAgICAgICAgU3RyaW5nCiAgZnJvbVBsbiAgICAgICAgRmxvYXQKICB0b1BsbiAgICAgICAgICBGbG9hdAogIHJlcXVpcmVkU2tpbGxzIFN0cmluZwogIGNvbXBhbnlOYW1lICAgIFN0cmluZwp9Cg==",
-  "inlineSchemaHash": "1a0e6d05e00ece1360f7e2772a00bbb322f46dfe39755aef58bfca6a0e98e37a",
+  "inlineSchema": "Ly8gVGhpcyBpcyB5b3VyIFByaXNtYSBzY2hlbWEgZmlsZSwKLy8gbGVhcm4gbW9yZSBhYm91dCBpdCBpbiB0aGUgZG9jczogaHR0cHM6Ly9wcmlzLmx5L2QvcHJpc21hLXNjaGVtYQoKZ2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgICAgICAgID0gInByaXNtYS1jbGllbnQtanMiCiAgcHJldmlld0ZlYXR1cmVzID0gWyJkZW5vIl0KICBiaW5hcnlUYXJnZXRzICAgPSBbImRlYmlhbi1vcGVuc3NsLTEuMS54Il0KICBvdXRwdXQgICAgICAgICAgPSAiLi4vZ2VuZXJhdGVkL2NsaWVudCIKfQoKZGF0YXNvdXJjZSBkYiB7CiAgcHJvdmlkZXIgPSAicG9zdGdyZXNxbCIKICB1cmwgICAgICA9IGVudigiREFUQUJBU0VfVVJMIikKfQoKbW9kZWwgQjJCT2ZmZXIgewogIGlkICAgICAgICAgICAgIEludCAgICAgIEBpZCBAZGVmYXVsdChhdXRvaW5jcmVtZW50KCkpCiAgY3JlYXRlZEF0ICAgICAgRGF0ZVRpbWUgQGRlZmF1bHQobm93KCkpCiAgc2x1ZyAgICAgICAgICAgU3RyaW5nCiAgdGl0bGUgICAgICAgICAgU3RyaW5nCiAgdXJsICAgICAgICAgICAgU3RyaW5nCiAgY2l0eSAgICAgICAgICAgU3RyaW5nCiAgZnJvbVBsbiAgICAgICAgRmxvYXQKICB0b1BsbiAgICAgICAgICBGbG9hdAogIHJlcXVpcmVkU2tpbGxzIFN0cmluZwogIGNvbXBhbnlOYW1lICAgIFN0cmluZwp9Cg==",
+  "inlineSchemaHash": "5640f3298abc8f0b30a4e946b931f0bfcb39da0d1d990c670a81469be8662174",
   "noEngine": false
 }
 config.dirname = '/'

@@ -8,7 +8,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const Prisma = require('./generated/client/index.js');
 
-const port = 8000;
+const port = 1993;
 const envVars = await load();
 
 /**
@@ -48,9 +48,9 @@ app.use(errorHandler);
  * Setup Cron Jobs.
  */
 
-Deno.cron('JJItCronJob', '* * * * *', () => {
-  console.log('CRONJOB FIRED');
-});
+// Deno.cron('JJItCronJob', '* * * * *', () => {
+//   console.log('CRONJOB FIRED');
+// });
 
 /**
  * Lifecycle Listeners.

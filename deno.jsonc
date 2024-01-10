@@ -4,10 +4,10 @@
     "db-push": "deno run -A npm:prisma@latest db push",
     "client-generate": "deno run -A --unstable npm:prisma@latest generate",
     "db-migrate": "deno run -A --unstable npm:prisma@latest migrate dev",
-    "start": "deno run -A --unstable-cron main.ts",
-    "run-dev": "deno run -A --unstable-cron --watch main.ts",
-    "build-image": "docker build -t jj-it-fetcher .",
-    "patch": "sed -i 's/.\\/runtime\\/library/.\\/runtime\\/library.d.ts/g' ./generated/client/index.d.ts & sed -i 's/.\\/index/.\\/index.d.ts/g' ./generated/client/runtime/library.d.ts"
+    "start": "deno run -A --unstable-cron --unstable-sloppy-imports main.ts",
+    "run-dev": "deno run -A --unstable-cron --unstable-sloppy-imports --watch main.ts",
+    "docker-build": "docker build -t jj-it-fetcher .",
+    "patch": "sed -i 's/.\\/runtime\\/library/.\\/runtime\\/library.d.ts/g'"
   },
   "imports": {
     "oak": "https://deno.land/x/oak@v12.4.0/mod.ts",
