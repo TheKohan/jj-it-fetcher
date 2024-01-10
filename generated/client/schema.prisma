@@ -15,9 +15,9 @@ datasource db {
 model B2BOffer {
   id             Int      @id @default(autoincrement())
   createdAt      DateTime @default(now())
-  slug           String   @unique
+  slug           String
   title          String
-  url            String   @unique
+  url            String
   city           String
   fromPln        Float
   toPln          Float

@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../generated/client/deno/edge.ts';
+import { type PrismaClient } from '../../generated/client/index.d.ts';
 import { JustJoinItDataModel, Offers } from './model/data-model.ts';
 import { Prisma } from '../../generated/client/index.d.ts';
 const getJJITPageLink = (page: number | undefined) =>
@@ -43,33 +43,41 @@ export const scrapeJJIt = async (client: PrismaClient) => {
       data?.map(o => ({
         city: o.city,
         companyName: o.companyName,
-        fromPln: o.employmentTypes[0]?.from_pln ?? 0,
+        fromPln: Number(o.employmentTypes[0]?.from_pln) ?? 0,
         requiredSkills: JSON.stringify(o.requiredSkills),
         slug: o.slug,
         title: o.title,
-        toPln: o.employmentTypes[0]?.to_pln ?? 0,
+        toPln: Number(o.employmentTypes[0]?.to_pln) ?? 0,
         url: 'https://justjoin.it/offers/' + o.slug,
       })) ?? [],
   };
 
-  client.b2BOffer.createMany(offers);
+  await client.b2BOffer.createMany(offers);
 
-  await Deno.writeTextFile('./scraped/jjit.json', JSON.stringify(offers));
+  // await Deno.writeTextFile('./scraped/jjit.json', JSON.stringify(offers), {
+  //   createNew: true,
+  //   append: true,
+  // });
 
-  return JSON.stringify(data);
+  return offers;
 };
 
-const scrapePaginatedDeep = async <T extends object, B extends object>(
+const scrapePaginatedDeep: <T extends object, B extends object>(
   scrapeUrl: string,
   resolveMetaNext: (dataPayload: T) => string | undefined,
   resolveData: (dataPayload: T) => B[],
   delayMs: number,
-  acc: B[] = []
+  acc?: B[]
+) => Promise<B[]> = async (
+  scrapeUrl,
+  resolveMetaNext,
+  resolveData,
+  delayMs,
+  acc = []
 ) => {
   console.log('Started Scraping url:', scrapeUrl);
   const request = await fetch(scrapeUrl, { headers });
-  const data = (await request.json()) as T;
-  console.log(data);
+  const data = await request.json();
   const resolvedBody = resolveData(data);
   const nextUrl = resolveMetaNext(data);
   acc.push(...resolvedBody);
@@ -77,7 +85,13 @@ const scrapePaginatedDeep = async <T extends object, B extends object>(
   await wait(delayMs);
 
   if (nextUrl) {
-    scrapePaginatedDeep(nextUrl, resolveMetaNext, resolveData, delayMs, acc);
+    return await scrapePaginatedDeep(
+      nextUrl,
+      resolveMetaNext,
+      resolveData,
+      delayMs,
+      acc
+    );
   } else {
     return acc;
   }

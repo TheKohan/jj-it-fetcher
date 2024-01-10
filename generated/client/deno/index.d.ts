@@ -1964,19 +1964,19 @@ export namespace Prisma {
 
   export type B2BOfferWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    slug?: string
-    url?: string
     AND?: B2BOfferWhereInput | B2BOfferWhereInput[]
     OR?: B2BOfferWhereInput[]
     NOT?: B2BOfferWhereInput | B2BOfferWhereInput[]
     createdAt?: DateTimeFilter<"B2BOffer"> | Date | string
+    slug?: StringFilter<"B2BOffer"> | string
     title?: StringFilter<"B2BOffer"> | string
+    url?: StringFilter<"B2BOffer"> | string
     city?: StringFilter<"B2BOffer"> | string
     fromPln?: FloatFilter<"B2BOffer"> | number
     toPln?: FloatFilter<"B2BOffer"> | number
     requiredSkills?: StringFilter<"B2BOffer"> | string
     companyName?: StringFilter<"B2BOffer"> | string
-  }, "id" | "slug" | "url">
+  }, "id">
 
   export type B2BOfferOrderByWithAggregationInput = {
     id?: SortOrder
