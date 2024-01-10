@@ -3,13 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "db-push": "deno run -A npm:prisma@latest db push",
-    "client-generate": "deno run -A --unstable npm:prisma@latest generate",
-    "db-migrate": "deno run -A --unstable npm:prisma@latest migrate dev",
-    "start": "deno run -A --unstable-cron --unstable-sloppy-imports main.ts",
-    "run-dev": "deno run -A --unstable-cron --unstable-sloppy-imports --watch main.ts"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "devDependencies": {
