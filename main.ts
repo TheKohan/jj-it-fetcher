@@ -34,7 +34,6 @@ router.get('/scrape-jj-it', async ({ response }) => {
   const data = await scrapeJJIt(prisma);
   response.body = data;
 });
-
 router.get('/scrape-no-fluff-jobs', async ({ response }) => {
   const data = await scrapeNoFluffJobs(prisma);
   response.body = data;
@@ -52,8 +51,12 @@ app.use(errorHandler);
  * Setup Cron Jobs.
  */
 
-Deno.cron('JJ-IT-CON-JOB', '0 1 * * *', async () => {
+Deno.cron('JJ-IT-CRON-JOB', '0 1 * * *', async () => {
   await scrapeJJIt(prisma);
+});
+
+Deno.cron('NO-FLUFF-JOBS-CRON-JOB', '05 1 * * *', async () => {
+  await scrapeNoFluffJobs(prisma);
 });
 
 /**

@@ -1,14 +1,16 @@
 FROM denoland/deno:ubuntu-1.39.2 as base
 
-ARG PORT=8000 
+ARG DATABASE_URL
 
 ENV TZ="Europe/Warsaw"
+ENV DATABASE_URL=${DATABASE_URL}
+ENV PORT=8000
 
 RUN date
  
 RUN apt-get update -y && apt-get install -y openssl
 # The port that your application listens to.
-EXPOSE ${PORT}
+
 
 WORKDIR /app
 
@@ -20,6 +22,8 @@ ADD . .
 
 # Compile the main app so that it doesn't need to be compiled each startup/entry.
 RUN deno cache main.ts
+
+EXPOSE 8000
 
 CMD ["deno", "task", "start"]
 

@@ -38,7 +38,7 @@ export const scrapePaginatedRange: <T extends object, B extends object>(
     .map(v => scrapeNextUrlResolver(v + 1))
     .filter(v => v) as string[];
 
-  pages.forEach(async page => {
+  for (const page of pages) {
     const request = await fetch(page, {
       method: scrapeMethod,
       headers,
@@ -46,9 +46,8 @@ export const scrapePaginatedRange: <T extends object, B extends object>(
     });
     const data = await request.json();
     acc.push(...resolveData(data));
-
     await wait(delayMs);
-  });
+  }
 
   return acc;
 };
