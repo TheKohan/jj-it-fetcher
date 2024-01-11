@@ -10,6 +10,15 @@ export interface NoFluffJobs {
   additionalSearch: any[];
 }
 
+export interface NoFluffJobsPayload {
+  pageSize: number;
+  /**
+   * For example:
+   * remote backend employment=b2b category=frontend,fullstack,mobile,embedded,testing,devops,architecture,security,game-dev,artificial-intelligence,data,sys-administrator,product-management,business-intelligence,business-analyst,erp
+   */
+  rawSearch: string;
+}
+
 export enum CriteriaSearch {
   B2B = 'b2b',
 }
@@ -52,24 +61,13 @@ export interface Location {
 
 export interface Place {
   country?: Country;
-  city?: City;
+  city?: string;
   street?: string;
   postalCode?: PostalCode;
   url: string;
   geoLocation?: GeoLocation;
   province?: Province;
   provinceOnly?: boolean;
-}
-
-export enum City {
-  Berlin = 'Berlin',
-  Gdańsk = 'Gdańsk',
-  Kraków = 'Kraków',
-  Kyiv = 'Kyiv',
-  Poznań = 'Poznań',
-  Remote = 'Remote',
-  Warsaw = 'Warsaw',
-  Warszawa = 'Warszawa',
 }
 
 export interface Country {

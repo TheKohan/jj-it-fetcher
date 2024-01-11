@@ -34,7 +34,7 @@ const headers: HeadersInit = {
 export const scrapeJJIt = async (client: PrismaClient) => {
   const data = await scrapePaginatedDeep<JustJoinItDataModel, Offers>({
     scrapeUrl: getJJITPageLink(1) as string,
-    resolveMetaNext: data => getJJITPageLink(data?.meta?.nextPage),
+    resolveNextLink: data => getJJITPageLink(data?.meta?.nextPage),
     resolveData: data => data?.data,
     delayMs: 500,
     headers,
