@@ -1,6 +1,7 @@
 import { type PrismaClient } from '../../generated/client/index.d.ts';
-import { JustJoinItDataModel, Offers } from './model/data-model.ts';
 import { Prisma } from '../../generated/client/index.d.ts';
+import { scrapePaginatedDeep } from '../../utils/index.ts';
+import { JustJoinItDataModel, Offers } from './model/index.ts';
 const getJJITPageLink = (page: number | undefined) =>
   page
     ? `
@@ -31,12 +32,13 @@ const headers: HeadersInit = {
 };
 
 export const scrapeJJIt = async (client: PrismaClient) => {
-  const data = await scrapePaginatedDeep<JustJoinItDataModel, Offers>(
-    getJJITPageLink(1) as string,
-    data => getJJITPageLink(data?.meta?.nextPage),
-    data => data?.data,
-    500
-  );
+  const data = await scrapePaginatedDeep<JustJoinItDataModel, Offers>({
+    scrapeUrl: getJJITPageLink(1) as string,
+    resolveMetaNext: data => getJJITPageLink(data?.meta?.nextPage),
+    resolveData: data => data?.data,
+    delayMs: 500,
+    headers,
+  });
 
   const offers: Prisma.B2BOfferCreateManyArgs = {
     data:
@@ -54,47 +56,5 @@ export const scrapeJJIt = async (client: PrismaClient) => {
 
   await client.b2BOffer.createMany(offers);
 
-  // await Deno.writeTextFile('./scraped/jjit.json', JSON.stringify(offers), {
-  //   createNew: true,
-  //   append: true,
-  // });
-
   return offers;
 };
-
-const scrapePaginatedDeep: <T extends object, B extends object>(
-  scrapeUrl: string,
-  resolveMetaNext: (dataPayload: T) => string | undefined,
-  resolveData: (dataPayload: T) => B[],
-  delayMs: number,
-  acc?: B[]
-) => Promise<B[]> = async (
-  scrapeUrl,
-  resolveMetaNext,
-  resolveData,
-  delayMs,
-  acc = []
-) => {
-  console.log('Started Scraping url:', scrapeUrl);
-  const request = await fetch(scrapeUrl, { headers });
-  const data = await request.json();
-  const resolvedBody = resolveData(data);
-  const nextUrl = resolveMetaNext(data);
-  acc.push(...resolvedBody);
-
-  await wait(delayMs);
-
-  if (nextUrl) {
-    return await scrapePaginatedDeep(
-      nextUrl,
-      resolveMetaNext,
-      resolveData,
-      delayMs,
-      acc
-    );
-  } else {
-    return acc;
-  }
-};
-
-const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

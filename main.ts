@@ -31,7 +31,6 @@ const router = new Router();
 
 router.get('/', async ({ response }) => {
   const data = await scrapeJJIt(prisma);
-  console.log(data);
   response.body = data;
 });
 
@@ -47,9 +46,9 @@ app.use(errorHandler);
  * Setup Cron Jobs.
  */
 
-// Deno.cron('JJItCronJob', '* * * * *', () => {
-//   console.log('CRONJOB FIRED');
-// });
+Deno.cron('JJ-IT-CON-JOB', '0 1 * * *', async () => {
+  await scrapeJJIt(prisma);
+});
 
 /**
  * Lifecycle Listeners.
