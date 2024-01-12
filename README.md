@@ -27,7 +27,7 @@ PORT=8000 #Port for the process
 brew install deno # for macOS
 ```
 
-- Create schemas in db with Prisma ([Installing Deno](https://docs.deno.com/runtime/manual/getting_started/installation))
+- Create schemas in db with Prisma ([Quick Prisma deep dive](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgresql))
 
 ```sh
 deno task db-push
