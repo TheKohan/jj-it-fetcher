@@ -12,6 +12,10 @@ type ScrapePaginatedRangeProps<T extends object, B extends object> = {
   resolveData: (dataPayload: T) => B[];
 };
 
+/**
+ *  Function that scrapes paginated api endpoints that
+ *  have explicit total amount of pages in their payload (or can be implicitly calculated)
+ */
 export const scrapePaginatedRange: <T extends object, B extends object>(
   props: ScrapePaginatedRangeProps<T, B>
 ) => Promise<B[]> = async ({
