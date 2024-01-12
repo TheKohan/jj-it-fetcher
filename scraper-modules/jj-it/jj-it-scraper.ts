@@ -1,12 +1,8 @@
 import { type PrismaClient } from '../../generated/client/index.d.ts';
 import { Prisma } from '../../generated/client/index.d.ts';
 import { scrapePaginatedDeep } from '../../utils/index.ts';
+import { getJJITPageLink } from './config/config.ts';
 import { JustJoinItDataModel, Offers } from './model/index.ts';
-const getJJITPageLink = (page: number | undefined) =>
-  page
-    ? `
-    https://api.justjoin.it/v2/user-panel/offers?employmentTypes[]=b2b&remote=true&withSalary=true&page=${page}&sortBy=published&orderBy=DESC&perPage=100&salaryCurrencies=PLN`
-    : undefined;
 
 const headers: HeadersInit = {
   Accept: 'application/json, text/plain, */*',

@@ -2,16 +2,11 @@ import { type PrismaClient } from '../../generated/client/index.d.ts';
 import { Prisma } from '../../generated/client/index.d.ts';
 import { scrapePaginatedRange } from '../../utils/index.ts';
 import {
-  NoFluffJobs,
-  NoFluffJobsPayload,
-  Posting,
-} from './model/data-model.ts';
+  getNoFluffJobPage,
+  noFluffJobsRequestPayload,
+} from './config/index.ts';
 
-const getNoFluffJobPage = (page: number | undefined) =>
-  page
-    ? `
-    https://nofluffjobs.com/api/search/posting?pageTo=${page}&pageSize=20&salaryCurrency=PLN&salaryPeriod=month&region=pl`
-    : undefined;
+import { NoFluffJobs, Posting } from './model/data-model.ts';
 
 const headers = {
   Accept: 'application/json, text/plain, */*',
@@ -40,12 +35,6 @@ const headers = {
   'X-Datadog-Parent-Id': '4818800802830297234',
   'X-Datadog-Sampling-Priority': '1',
   'X-Datadog-Trace-Id': '1966225189010830863',
-};
-
-const noFluffJobsRequestPayload: NoFluffJobsPayload = {
-  pageSize: 100,
-  rawSearch:
-    'remote backend employment=b2b category=frontend,fullstack,mobile,embedded,testing,devops,architecture,security,game-dev,artificial-intelligence,data,sys-administrator,product-management,business-intelligence,business-analyst,erp',
 };
 
 export const scrapeNoFluffJobs = async (client: PrismaClient) => {
