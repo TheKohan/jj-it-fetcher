@@ -11,7 +11,8 @@
   },
   "imports": {
     "oak": "https://deno.land/x/oak@v12.4.0/mod.ts",
-    "dotenv": "https://deno.land/std@0.211.0/dotenv/mod.ts"
+    "dotenv": "https://deno.land/std@0.211.0/dotenv/mod.ts",
+    "discord.js": "npm:discord.js"
   },
   "lint": {
     "rules": {

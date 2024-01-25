@@ -8,8 +8,10 @@ import { createRequire } from 'node:module';
 import { scrapeNoFluffJobs } from './scraper-modules/index.ts';
 const require = createRequire(import.meta.url);
 const Prisma = require('./generated/client/index.js');
+import { WebhookClient } from 'discord.js';
+import { DiscordLogger } from './discord-logger/index.ts';
 
-const { PORT, DATABASE_URL } = await load();
+const { PORT, DATABASE_URL, DISCORD_WEBHOOK_URL } = await load();
 
 /**
  * Initialize.
@@ -22,6 +24,9 @@ const prisma: PrismaClient = new Prisma.PrismaClient({
     },
   },
 });
+
+const webhookClient = new WebhookClient({ url: DISCORD_WEBHOOK_URL });
+const discordLogger = new DiscordLogger(webhookClient);
 
 const app = new Application();
 const router = new Router();
