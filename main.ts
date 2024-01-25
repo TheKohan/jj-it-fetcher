@@ -57,21 +57,68 @@ app.use(errorHandler);
  */
 
 Deno.cron('JJ-IT-CRON-JOB', '0 1 * * *', async () => {
-  await scrapeJJIt(prisma);
+  const offers = await scrapeJJIt(prisma);
+  if (offers.data.length) {
+    await discordLogger.sendInfoMessage({
+      message: embed =>
+        embed
+          .setDescription('Just Join IT Api has been scraped:')
+          .addFields([
+            { name: 'Offers Scraped', value: offers.data.length + '' },
+          ]),
+    });
+  } else {
+    await discordLogger.sendWarningMessage({
+      message: embed =>
+        embed.setDescription(
+          'Just Join IT Api has been scraped and no data has been returned'
+        ),
+    });
+  }
 });
 
 Deno.cron('NO-FLUFF-JOBS-CRON-JOB', '05 1 * * *', async () => {
-  await scrapeNoFluffJobs(prisma);
+  const offers = await scrapeNoFluffJobs(prisma);
+  if (offers.data.length) {
+    await discordLogger.sendInfoMessage({
+      message: embed =>
+        embed
+          .setDescription('Just Join IT Api has been scraped:')
+          .addFields([
+            { name: 'Offers Scraped', value: offers.data.length + '' },
+          ]),
+    });
+  } else {
+    await discordLogger.sendWarningMessage({
+      message: embed =>
+        embed.setDescription(
+          'Just Join IT Api has been scraped and no data has been returned'
+        ),
+    });
+  }
 });
 
 /**
  * Lifecycle Listeners.
  */
 
-app.addEventListener('error', e => console.log(`Caught error: ${e.message}`));
 app.addEventListener('listen', () =>
   console.log(`Server listening on ${PORT}`)
 );
+
+app.addEventListener('error', async e => {
+  console.log(`Caught error: ${e.message}`);
+  try {
+    await discordLogger.sendErrorMessage({
+      message: embed =>
+        embed.setDescription(
+          'JJ-IT-FETCHER has crashed unexpected: ' + e.message
+        ),
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
 
 /**
  * Start server.

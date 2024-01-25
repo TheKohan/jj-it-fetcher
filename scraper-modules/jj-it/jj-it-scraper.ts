@@ -36,7 +36,7 @@ export const scrapeJJIt = async (client: PrismaClient) => {
     headers,
   });
 
-  const offers: Prisma.B2BOfferCreateManyArgs = {
+  const offers = {
     data:
       data?.map(o => ({
         city: o.city,

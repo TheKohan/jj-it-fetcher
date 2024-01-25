@@ -49,7 +49,7 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
     headers,
   });
 
-  const offers: Prisma.B2BOfferCreateManyArgs = {
+  const offers = {
     data:
       data?.map(o => ({
         city: o.location.places[0].city ?? 'null',
