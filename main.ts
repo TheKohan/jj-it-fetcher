@@ -1,4 +1,4 @@
-import { Application, Router } from 'https://deno.land/x/oak@v11.1.0/mod.ts';
+import { Application, Router } from 'oak';
 import { load } from 'dotenv';
 import { errorHandler } from './middlewares/index.ts';
 import { scrapeJJIt } from './scraper-modules/jj-it/index.ts';
