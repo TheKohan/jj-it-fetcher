@@ -1,6 +1,8 @@
 {
   "name": "jj-it-fetcher",
   "version": "1.0.0",
+  "module": "main.ts",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {},
@@ -10,6 +12,11 @@
     "prisma": "5.7.1"
   },
   "dependencies": {
-    "@prisma/client": "5.7.1"
+    "hono": "^3.12.7",
+    "@prisma/client": "5.7.1",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
