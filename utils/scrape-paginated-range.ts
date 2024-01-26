@@ -5,7 +5,7 @@ type ScrapePaginatedRangeProps<T extends object, B extends object> = {
   scrapePayload?: any;
   scrapeMethod?: 'GET' | 'POST';
   delayMs: number;
-  headers: HeadersInit;
+  headers: Record<string, string>;
   acc?: B[];
   scrapeTotalRecordsResolver: (dataPayload: T) => number;
   scrapeNextUrlResolver: (pageNumber: number) => string | undefined;

@@ -1,5 +1,4 @@
-import { type PrismaClient } from '../../generated/client/index.d.ts';
-import { Prisma } from '../../generated/client/index.d.ts';
+import { PrismaClient } from '@prisma/client';
 import { scrapePaginatedRange } from '../../utils/index.ts';
 import {
   getNoFluffJobPage,

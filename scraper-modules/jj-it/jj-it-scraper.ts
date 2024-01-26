@@ -1,10 +1,9 @@
-import { type PrismaClient } from '../../generated/client/index.d.ts';
-import { Prisma } from '../../generated/client/index.d.ts';
+import { PrismaClient } from '@prisma/client';
 import { scrapePaginatedDeep } from '../../utils/index.ts';
 import { getJJITPageLink } from './config/config.ts';
 import { JustJoinItDataModel, Offers } from './model/index.ts';
 
-const headers: HeadersInit = {
+const headers = {
   Accept: 'application/json, text/plain, */*',
   'Accept-Encoding': 'gzip, deflate, br',
   'Accept-Language': 'en-US,en;q=0.9,pl;q=0.8,de;q=0.7',

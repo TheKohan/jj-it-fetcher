@@ -1,23 +1,21 @@
-import { Application, Router } from 'oak';
-import { load } from 'dotenv';
-import { errorHandler } from './middlewares/index.ts';
-import { scrapeJJIt } from './scraper-modules/jj-it/index.ts';
+import { scrapeJJIt } from './scraper-modules/jj-it';
+import { PrismaClient } from '@prisma/client';
 
-import { type PrismaClient } from './generated/client/index.d.ts';
-import { createRequire } from 'node:module';
-import { scrapeNoFluffJobs } from './scraper-modules/index.ts';
-const require = createRequire(import.meta.url);
-const Prisma = require('./generated/client/index.js');
+import { scrapeNoFluffJobs } from './scraper-modules';
 import { WebhookClient } from 'discord.js';
-import { DiscordLogger } from './discord-logger/index.ts';
+import { DiscordLogger } from './discord-logger';
+import { Hono } from 'hono';
+import { logger } from 'hono/logger';
+import cron from 'node-cron';
+import { HTTPException } from 'hono/http-exception';
 
-const { PORT, DATABASE_URL, DISCORD_WEBHOOK_URL } = await load();
+const { PORT, DATABASE_URL, DISCORD_WEBHOOK_URL } = process.env;
 
 /**
  * Initialize.
  */
 
-const prisma: PrismaClient = new Prisma.PrismaClient({
+const prisma = new PrismaClient({
   datasources: {
     db: {
       url: DATABASE_URL,
@@ -28,100 +26,111 @@ const prisma: PrismaClient = new Prisma.PrismaClient({
 const webhookClient = new WebhookClient({ url: DISCORD_WEBHOOK_URL });
 const discordLogger = new DiscordLogger(webhookClient);
 
-const app = new Application();
-const router = new Router();
+const app = new Hono();
+
+app.use('*', logger());
 
 /**
  * Setup routes.
  */
 
-router.get('/scrape-jj-it', async ({ response }) => {
+app.get('/scrape-jj-it', async c => {
   const data = await scrapeJJIt(prisma);
-  response.body = data;
+  c.text('Scraped JJIT Successfully');
 });
-router.get('/scrape-no-fluff-jobs', async ({ response }) => {
+app.get('/scrape-no-fluff-jobs', async c => {
   const data = await scrapeNoFluffJobs(prisma);
-  response.body = data;
+  c.text('Scraped No Fluff Job Successfully');
 });
 
 /**
  * Setup middleware.
  */
 
-app.use(router.routes());
-app.use(router.allowedMethods());
-app.use(errorHandler);
-
 /**
  * Setup Cron Jobs.
  */
 
-Deno.cron('JJ-IT-CRON-JOB', '0 1 * * *', async () => {
-  const offers = await scrapeJJIt(prisma);
-  if (offers.data.length) {
-    await discordLogger.sendInfoMessage({
-      message: embed =>
-        embed
-          .setDescription('Just Join IT Api has been scraped:')
-          .addFields([
-            { name: 'Offers Scraped', value: offers.data.length + '' },
-          ]),
-    });
-  } else {
-    await discordLogger.sendWarningMessage({
-      message: embed =>
-        embed.setDescription(
-          'Just Join IT Api has been scraped and no data has been returned'
-        ),
-    });
-  }
-});
+cron.schedule(
+  '0 1 * * *',
+  async () => {
+    const offers = await scrapeJJIt(prisma);
+    if (offers.data.length) {
+      await discordLogger.sendInfoMessage({
+        message: embed =>
+          embed
+            .setDescription('Just Join IT Api has been scraped:')
+            .addFields([
+              { name: 'Offers Scraped', value: offers.data.length + '' },
+            ]),
+      });
+    } else {
+      await discordLogger.sendWarningMessage({
+        message: embed =>
+          embed.setDescription(
+            'Just Join IT Api has been scraped and no data has been returned'
+          ),
+      });
+    }
+  },
+  { name: 'JJ-IT-CRON-JOB' }
+);
 
-Deno.cron('NO-FLUFF-JOBS-CRON-JOB', '05 1 * * *', async () => {
-  const offers = await scrapeNoFluffJobs(prisma);
-  if (offers.data.length) {
-    await discordLogger.sendInfoMessage({
-      message: embed =>
-        embed
-          .setDescription('Just Join IT Api has been scraped:')
-          .addFields([
-            { name: 'Offers Scraped', value: offers.data.length + '' },
-          ]),
-    });
-  } else {
-    await discordLogger.sendWarningMessage({
-      message: embed =>
-        embed.setDescription(
-          'Just Join IT Api has been scraped and no data has been returned'
-        ),
-    });
+cron.schedule(
+  '05 1 * * *',
+  async () => {
+    const offers = await scrapeNoFluffJobs(prisma);
+    if (offers.data.length) {
+      await discordLogger.sendInfoMessage({
+        message: embed =>
+          embed
+            .setDescription('Just Join IT Api has been scraped:')
+            .addFields([
+              { name: 'Offers Scraped', value: offers.data.length + '' },
+            ]),
+      });
+    } else {
+      await discordLogger.sendWarningMessage({
+        message: embed =>
+          embed.setDescription(
+            'Just Join IT Api has been scraped and no data has been returned'
+          ),
+      });
+    }
+  },
+  {
+    name: 'NO-FLUFF-JOBS-CRON-JOB',
   }
-});
+);
 
 /**
  * Lifecycle Listeners.
  */
 
-app.addEventListener('listen', () =>
-  console.log(`Server listening on ${PORT}`)
-);
-
-app.addEventListener('error', async e => {
-  console.log(`Caught error: ${e.message}`);
+app.onError(async (err, c) => {
+  if (err instanceof HTTPException) {
+    return err.getResponse();
+  }
   try {
     await discordLogger.sendErrorMessage({
       message: embed =>
         embed.setDescription(
-          'JJ-IT-FETCHER has crashed unexpected: ' + e.message
+          'JJ-IT-FETCHER has crashed unexpected: ' + err.message
         ),
     });
   } catch (e) {
     console.log(e);
   }
+  return c.text('Failed', 500);
 });
 
 /**
  * Start server.
  */
 
-await app.listen({ port: +PORT });
+console.log(`Server listening on ${PORT}`);
+
+export default {
+  port: 3000,
+  fetch: app.fetch,
+};

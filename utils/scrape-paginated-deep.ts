@@ -5,7 +5,7 @@ type ScrapePaginatedDeepProps<T extends object, B extends object> = {
   scrapePayload?: any;
   scrapeMethod?: 'GET' | 'POST';
   delayMs: number;
-  headers: HeadersInit;
+  headers: Record<string, string>;
   acc?: B[];
   resolveNextLink: (dataPayload: T) => string | undefined;
   resolveData: (dataPayload: T) => B[];

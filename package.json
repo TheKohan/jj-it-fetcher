@@ -3,20 +3,28 @@
   "version": "1.0.0",
   "module": "main.ts",
   "type": "module",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "db-push": "bunx prisma db push",
+    "client-generate": "bunx prisma generate",
+    "db-migrate": "bunx prisma migrate dev",
+    "start": "bun run main.ts",
+    "dev": "bun --watch run main.ts",
+    "docker-build": "./scripts/build-docker.sh"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "prisma": "5.7.1"
+    "@types/node-cron": "^3.0.11",
+    "prisma": "5.8.1"
   },
   "dependencies": {
+    "@prisma/client": "5.8.1",
+    "@types/bun": "latest",
+    "discord.js": "^14.14.1",
     "hono": "^3.12.7",
-    "@prisma/client": "5.7.1",
-    "@types/bun": "latest"
+    "node-cron": "^3.0.3"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.3.3"
   }
 }
