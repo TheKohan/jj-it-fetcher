@@ -128,9 +128,7 @@ app.onError(async (err, c) => {
  * Start server.
  */
 
-console.log(`Server listening on ${PORT}`);
-
 export default {
-  port: 3000,
+  port: +PORT,
   fetch: app.fetch,
 };
