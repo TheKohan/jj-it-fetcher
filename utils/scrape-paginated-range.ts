@@ -34,7 +34,7 @@ export const scrapePaginatedRange: <T extends object, B extends object>(
     headers,
     body: scrapePayload ? JSON.stringify(scrapePayload) : undefined,
   });
-  const initialData = await initialRequest.json();
+  const initialData = (await initialRequest.json()) as any;
 
   const totalPages = scrapeTotalRecordsResolver(initialData);
 
@@ -48,7 +48,7 @@ export const scrapePaginatedRange: <T extends object, B extends object>(
       headers,
       body: scrapePayload ? JSON.stringify(scrapePayload) : undefined,
     });
-    const data = await request.json();
+    const data = (await request.json()) as any;
     acc.push(...resolveData(data));
     await wait(delayMs);
   }

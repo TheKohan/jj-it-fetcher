@@ -34,7 +34,7 @@ export const scrapePaginatedDeep: <T extends object, B extends object>(
     headers,
     body: scrapePayload ? JSON.stringify(scrapePayload) : undefined,
   });
-  const data = await request.json();
+  const data = (await request.json()) as any;
   const resolvedBody = resolveData(data);
   const nextUrl = resolveNextLink(data);
   acc.push(...resolvedBody);
