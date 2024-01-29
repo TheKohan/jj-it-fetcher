@@ -4,13 +4,13 @@ Job board scraper.
 
 ## Description
 
-This project is an api scraper written with `Deno` and `Oak`. It let's you aggregate Job offers and save them to DB of your liking. Feel free to fork and adjust it to scrape offers fledged to your profile.
+This project is an api scraper written with `Bun` and `Hono`. It let's you aggregate Job offers and save them to DB of your liking. Feel free to fork and adjust it to scrape offers fledged to your profile.
 
 ## Getting Started
 
 ### Dependencies
 
-- deno 1.39.1
+- bun cli
 
 ### Installing
 
@@ -18,13 +18,14 @@ This project is an api scraper written with `Deno` and `Oak`. It let's you aggre
 
 ```sh
 DATABASE_URL=<databaseURL> #your database connection string
+DISCORD_WEBHOOK_URL=<webhookURL> #webhook url for your discord channel
 PORT=8000 #Port for the process
 ```
 
-- Install Deno ([Installing Deno](https://docs.deno.com/runtime/manual/getting_started/installation))
+- Install Bun ([Installing Deno](https://docs.deno.com/runtime/manual/getting_started/installation))
 
 ```sh
-brew install deno # for macOS
+curl -fsSL https://bun.sh/install | bash
 ```
 
 - Create schemas in db with Prisma ([Quick Prisma deep dive](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgresql))
@@ -40,13 +41,13 @@ deno task db-push
 - Start server locally
 
 ```sh
-deno task start
+bun start
 ```
 
 - With docker
 
 ```sh
-deno task docker-build
+bun docker-build
 
 docker run -it -p 8000:8000 jj-it-fetcher
 ```
