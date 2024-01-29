@@ -10,7 +10,6 @@ COPY package.json .
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
     && ln -s /usr/local/bin/docker-entrypoint.sh /
 
-
 COPY prisma ./prisma
 
 RUN bun install --frozen-lockfile
