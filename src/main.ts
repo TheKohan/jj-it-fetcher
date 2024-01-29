@@ -35,12 +35,12 @@ app.use('*', logger());
  */
 
 app.get('/scrape-jj-it', async c => {
-  const data = await scrapeJJIt(prisma);
-  c.text('Scraped JJIT Successfully');
+  await scrapeJJIt(prisma);
+  return c.text('Scraped JJIT Successfully');
 });
 app.get('/scrape-no-fluff-jobs', async c => {
-  const data = await scrapeNoFluffJobs(prisma);
-  c.text('Scraped No Fluff Job Successfully');
+  await scrapeNoFluffJobs(prisma);
+  return c.text('Scraped No Fluff Job Successfully');
 });
 
 /**
@@ -84,7 +84,7 @@ cron.schedule(
       await discordLogger.sendInfoMessage({
         message: embed =>
           embed
-            .setDescription('Just Join IT Api has been scraped:')
+            .setDescription('No Fluff jobs has been scraped:')
             .addFields([
               { name: 'Offers Scraped', value: offers.data.length + '' },
             ]),
@@ -93,7 +93,7 @@ cron.schedule(
       await discordLogger.sendWarningMessage({
         message: embed =>
           embed.setDescription(
-            'Just Join IT Api has been scraped and no data has been returned'
+            'No Fluff jobs has been scraped and no data has been returned'
           ),
       });
     }
