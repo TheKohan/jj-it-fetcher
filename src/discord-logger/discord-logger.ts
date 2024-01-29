@@ -1,4 +1,4 @@
-import { WebhookClient } from 'discord.js';
+import { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
 import { MessageBuilder, MessageType, getMessage } from './messages.ts';
 
 type MessageProps = { message: string | MessageBuilder };
@@ -27,5 +27,8 @@ export class DiscordLogger {
   }
   async sendInfoMessage({ message }: MessageProps) {
     await this.sendMessage({ type: 'info', message });
+  }
+  async sendCustomMessage(message: WebhookMessageCreateOptions) {
+    await this.webhookClient.send(message);
   }
 }

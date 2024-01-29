@@ -9,7 +9,7 @@
     "db-migrate": "bunx prisma migrate dev",
     "start": "bun run ./src/main.ts",
     "dev": "bun --watch run ./src/main.ts",
-    "docker-build": "./scripts/build-docker.sh"
+    "docker-build": "bun run ./src/scripts/build-docker.ts"
   },
   "author": "",
   "license": "ISC",

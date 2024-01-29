@@ -128,6 +128,8 @@ app.onError(async (err, c) => {
  * Start server.
  */
 
+console.log('Server starting on port: ', PORT);
+
 export default {
   port: +PORT,
   fetch: app.fetch,
