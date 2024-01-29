@@ -1,15 +1,30 @@
 {
   "name": "jj-it-fetcher",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
+  "module": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "db-push": "bunx prisma db push",
+    "client-generate": "bunx prisma generate",
+    "db-migrate": "bunx prisma migrate dev",
+    "start": "bun run ./src/main.ts",
+    "dev": "bun --watch run ./src/main.ts",
+    "docker-build": "bun run ./src/scripts/build-docker.ts"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "prisma": "5.7.1"
+    "@types/node-cron": "^3.0.11",
+    "prisma": "5.8.1"
   },
   "dependencies": {
-    "@prisma/client": "5.7.1"
+    "@prisma/client": "5.8.1",
+    "@types/bun": "latest",
+    "discord.js": "^14.14.1",
+    "hono": "^3.12.7",
+    "node-cron": "^3.0.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.3.3"
   }
 }

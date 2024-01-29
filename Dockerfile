@@ -1,4 +1,22 @@
-FROM denoland/deno:ubuntu-1.39.2 as base
+# use the official Bun image
+# see all versions at https://hub.docker.com/r/oven/bun/tags
+FROM imbios/bun-node as build
+
+WORKDIR /app
+
+COPY bun.lockb .
+COPY package.json .
+
+RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
+    && ln -s /usr/local/bin/docker-entrypoint.sh /
+
+
+COPY prisma ./prisma
+
+RUN bun install --frozen-lockfile
+RUN bun client-generate
+
+COPY src ./src
 
 ARG DATABASE_URL
 ARG DISCORD_WEBHOOK_URL
@@ -9,25 +27,10 @@ ENV DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}
 ENV PORT=8000
 
 RUN date
- 
-RUN apt-get update -y && apt-get install -y openssl
-# The port that your application listens to.
-
-
-WORKDIR /app
-
-# Prefer not to run as root.
-USER deno
-
-# These steps will be re-run upon each file change in your working directory:
-ADD . .
-
-# Compile the main app so that it doesn't need to be compiled each startup/entry.
-RUN deno cache main.ts
 
 EXPOSE 8000
 
-CMD ["deno", "task", "start"]
-
+# execute the binary
+CMD bun start
 
 # docker save <image> | bzip2 | ssh user@host docker load
