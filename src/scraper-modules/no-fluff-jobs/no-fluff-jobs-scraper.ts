@@ -64,5 +64,5 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
 
   await client.b2BOffer.createMany(offers);
 
-  return offers;
+  return offers.data;
 };

@@ -1,1 +1,1 @@
-export * from './no-fluff-jobs-scraper.ts';
+export * from './module.ts';
