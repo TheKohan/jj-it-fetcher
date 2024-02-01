@@ -10,7 +10,8 @@
     "db-migrate": "bunx prisma migrate dev",
     "start": "bun run ./src/main.ts",
     "dev": "bun --watch run ./src/main.ts",
-    "docker-build": "bun run ./src/scripts/build-docker.ts"
+    "docker-build:arm": "bun run ./src/scripts/build-docker.ts --platform arm",
+    "docker-build:amd": "bun run ./src/scripts/build-docker.ts --platform amd"
   },
   "author": "",
   "license": "ISC",
