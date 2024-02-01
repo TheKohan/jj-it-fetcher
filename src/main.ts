@@ -56,6 +56,7 @@ cron.schedule(
 
     for (const module of scraperModules) {
       const offers = await module.scrape(prisma);
+      console.log(`${module.name} scrapped with:  ${offers.length} offers`);
       if (module.withLogging) {
         infoEmbed.addFields([
           {
