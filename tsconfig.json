@@ -17,6 +17,9 @@
     "strict": true,
     "strictNullChecks": false,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@prisma-client": ["./generated/prisma-client"] // Workaround for having a smaller docker image
+    }
   }
 }

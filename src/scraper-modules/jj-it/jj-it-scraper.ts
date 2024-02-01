@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma-client';
 import { scrapePaginatedDeep } from '../../utils/index.ts';
 import { getJJITPageLink } from './config/config.ts';
 import { JustJoinItDataModel, Offers } from './model/index.ts';

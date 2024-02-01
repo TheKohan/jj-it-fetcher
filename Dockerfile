@@ -1,25 +1,23 @@
 # use the official Bun image
 # see all versions at https://hub.docker.com/r/oven/bun/tags
-FROM imbios/bun-node as build
+FROM oven/bun:1 as build
 
 WORKDIR /app
 
 COPY bun.lockb .
 COPY package.json .
-
-RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
-    && ln -s /usr/local/bin/docker-entrypoint.sh /
-
+COPY tsconfig.json .
 COPY prisma ./prisma
 
 RUN bun install --frozen-lockfile
-RUN bun client-generate
 
 COPY src ./src
+COPY generated ./generated
 
 ARG DATABASE_URL
 ARG DISCORD_WEBHOOK_URL
 
+ENV NODE_ENV production
 ENV TZ="Europe/Warsaw"
 ENV DATABASE_URL=${DATABASE_URL}
 ENV DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL}

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma-client';
 
 import { Embed, WebhookClient } from 'discord.js';
 import { DiscordLogger, getMessage, baseMessageEmbeds } from './discord-logger';

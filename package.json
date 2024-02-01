@@ -4,6 +4,7 @@
   "module": "src/main.ts",
   "type": "module",
   "scripts": {
+    "bootstrap": "bun install && bun client-generate",
     "db-push": "bunx prisma db push",
     "client-generate": "bunx prisma generate",
     "db-migrate": "bunx prisma migrate dev",
@@ -15,10 +16,10 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node-cron": "^3.0.11",
-    "prisma": "5.8.1"
+    "prisma": "5.9.0"
   },
   "dependencies": {
-    "@prisma/client": "5.8.1",
+    "@prisma/client": "5.9.0",
     "@types/bun": "latest",
     "discord.js": "^14.14.1",
     "hono": "^3.12.7",
