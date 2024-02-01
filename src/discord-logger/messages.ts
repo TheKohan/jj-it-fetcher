@@ -2,7 +2,7 @@ import { EmbedBuilder, WebhookMessageCreateOptions } from 'discord.js';
 
 export type MessageBuilder = (builder: EmbedBuilder) => EmbedBuilder;
 
-const messageEmbeds = {
+export const baseMessageEmbeds = {
   error: () =>
     new EmbedBuilder()
       .setTitle('API ERROR:')
@@ -25,7 +25,7 @@ const messageEmbeds = {
       .setTimestamp(Date.now()),
 } as const;
 
-export type MessageType = keyof typeof messageEmbeds;
+export type MessageType = keyof typeof baseMessageEmbeds;
 
 type MessageCreatorFun = (
   messageType: MessageType,
@@ -35,8 +35,8 @@ type MessageCreatorFun = (
 export const getMessage: MessageCreatorFun = (messageType, message) => {
   const embed =
     typeof message === 'string'
-      ? messageEmbeds[messageType]()
-      : message(messageEmbeds[messageType]());
+      ? baseMessageEmbeds[messageType]()
+      : message(baseMessageEmbeds[messageType]());
   const errorMessage: WebhookMessageCreateOptions = {
     embeds: [embed],
   };

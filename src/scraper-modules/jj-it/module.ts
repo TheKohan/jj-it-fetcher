@@ -1,7 +1,7 @@
 import { scrapeJJIt } from './jj-it-scraper';
-import { Module } from '../module.config';
+import { ScraperModuleModule } from '../module.config';
 
-export const justJoinItModule: Module = {
+export const justJoinItModule: ScraperModuleModule = {
   name: 'No Fluff Job',
   slug: 'no-fluff-job',
   scrape: async prisma => await scrapeJJIt(prisma),

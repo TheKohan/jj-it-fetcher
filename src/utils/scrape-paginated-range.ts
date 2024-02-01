@@ -43,6 +43,7 @@ export const scrapePaginatedRange: <T extends object, B extends object>(
     .filter(v => v) as string[];
 
   for (const page of pages) {
+    console.log('Started Scraping url:', page);
     const request = await fetch(page, {
       method: scrapeMethod,
       headers,

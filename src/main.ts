@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 
-import { WebhookClient } from 'discord.js';
-import { DiscordLogger } from './discord-logger';
+import { Embed, WebhookClient } from 'discord.js';
+import { DiscordLogger, getMessage, baseMessageEmbeds } from './discord-logger';
 import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 import cron from 'node-cron';
 import { HTTPException } from 'hono/http-exception';
 import { justJoinItModule, noFluffJobsModule } from './scraper-modules';
-import { modules } from './scraper-modules/module.config';
+import { scraperModules } from './scraper-modules/module.config';
 
 const { PORT, DATABASE_URL, DISCORD_WEBHOOK_URL } = process.env;
 
@@ -50,28 +50,23 @@ app.get('/scrape-no-fluff-jobs', async c => {
 cron.schedule(
   '0 1 * * *',
   async () => {
-    modules.forEach(async module => {
+    const infoEmbed = baseMessageEmbeds
+      .info()
+      .setDescription('Scrapped services: ');
+
+    for (const module of scraperModules) {
       const offers = await module.scrape(prisma);
       if (module.withLogging) {
-        if (offers.length) {
-          await discordLogger.sendInfoMessage({
-            message: embed =>
-              embed
-                .setDescription(`${module.name} has been scraped: `)
-                .addFields([
-                  { name: 'Offers Scraped', value: offers.length + '' },
-                ]),
-          });
-        } else {
-          await discordLogger.sendWarningMessage({
-            message: embed =>
-              embed.setDescription(
-                `${module.name} has been scraped and no data has been returned`
-              ),
-          });
-        }
+        infoEmbed.addFields([
+          {
+            name: `${module.name} scrapped offers:`,
+            value: offers.length + '',
+          },
+        ]);
       }
-    });
+    }
+
+    await discordLogger.sendInfoMessage({ message: () => infoEmbed });
   },
   { name: 'SCRAPE_CRON_JOB' }
 );
@@ -85,6 +80,7 @@ app.onError(async (err, c) => {
     return err.getResponse();
   }
   try {
+    console.log(err);
     await discordLogger.sendErrorMessage({
       message: embed =>
         embed.setDescription(
