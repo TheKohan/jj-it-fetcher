@@ -1,47 +1,19 @@
-import { PrismaClient } from '@prisma-client';
-
-import { Embed, WebhookClient } from 'discord.js';
-import { DiscordLogger, getMessage, baseMessageEmbeds } from './discord-logger';
+import { baseMessageEmbeds } from './discord-logger';
 import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 import cron from 'node-cron';
 import { HTTPException } from 'hono/http-exception';
-import { justJoinItModule, noFluffJobsModule } from './scraper-modules';
 import { scraperModules } from './scraper-modules/module.config';
+import prisma from './db-client';
+import { discordLogger } from './logger';
+import { apiRouter } from '@jjitfetcher/routes';
 
-const { PORT, DATABASE_URL, DISCORD_WEBHOOK_URL } = process.env;
-
-/**
- * Initialize.
- */
-
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: DATABASE_URL,
-    },
-  },
-});
-
-const webhookClient = new WebhookClient({ url: DISCORD_WEBHOOK_URL });
-const discordLogger = new DiscordLogger(webhookClient);
+const { PORT } = process.env;
 
 const app = new Hono();
 
 app.use('*', logger());
-
-/**
- * Setup routes.
- */
-
-app.get('/scrape-jj-it', async c => {
-  await justJoinItModule.scrape(prisma);
-  return c.text('Scraped JJIT Successfully');
-});
-app.get('/scrape-no-fluff-jobs', async c => {
-  await noFluffJobsModule.scrape(prisma);
-  return c.text('Scraped No Fluff Job Successfully');
-});
+app.route('/', apiRouter);
 
 /**
  * Setup Cron Jobs.

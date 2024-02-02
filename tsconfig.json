@@ -19,7 +19,12 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@prisma-client": ["./generated/prisma-client"] // Workaround for having a smaller docker image
+      "@prisma-client": ["./generated/prisma-client"], // Workaround for having a smaller docker image
+      "@jjitfetcher/discord-logger": ["./src/discord-logger"],
+      "@jjitfetcher/routes": ["./src/routes"],
+      "@jjitfetcher/modules": ["./src/scraper-modules"],
+      "@jjitfetcher/scripts": ["./src/scripts"],
+      "@jjitfetcher/controllers": ["./src/controllers"]
     }
   }
 }
