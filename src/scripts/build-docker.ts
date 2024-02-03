@@ -32,6 +32,9 @@ if (!DATABASE_URL) {
 if (!DISCORD_WEBHOOK_URL) {
   throw new Error('DISCORD_WEBHOOK_URL Missing');
 }
+if (!DISCORD_WEBHOOK_URL.startsWith('https://')) {
+  throw new Error('DISCORD_WEBHOOK_URL must start with https://');
+}
 if (!platforms.includes(platform as Platforms)) {
   throw new Error(
     `Unsupported platform, please use one of the following: ${platforms.join(

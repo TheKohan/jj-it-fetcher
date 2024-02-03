@@ -6,10 +6,13 @@
   "scripts": {
     "bootstrap": "bun install && bun client-generate",
     "db-push": "bunx prisma db push",
+    "db-push:dev": "bunx prisma db push",
     "client-generate": "bunx prisma generate",
     "db-migrate": "bunx prisma migrate dev",
     "start": "bun run ./src/main.ts",
-    "dev": "bun --watch run ./src/main.ts",
+    "dev": "NODE_ENV=dev bun --watch run ./src/main.ts",
+    "seed-db": "NODE_ENV=dev bun run ./src/seed_db.ts",
+    "setup-dev": "NODE_ENV=dev bun run ./src/scripts/setup-dev.ts",
     "docker-build:arm": "bun run ./src/scripts/build-docker.ts --platform arm",
     "docker-build:amd": "bun run ./src/scripts/build-docker.ts --platform amd"
   },
