@@ -2,5 +2,5 @@
   "deno.enable": true,
   "deno.lint": true,
   "deno.unstable": true,
-  "cSpell.words": ["jjitfetcher", "positionals"]
+  "cSpell.words": ["jjitfetcher", "luxon", "positionals"]
 }

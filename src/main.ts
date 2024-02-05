@@ -4,7 +4,7 @@ import cron from 'node-cron';
 import { HTTPException } from 'hono/http-exception';
 import { discordLogger } from './logger';
 import { apiRouter } from '@jjitfetcher/routes';
-import { scrapeAll } from './controllers';
+import { getTodayNewOffers, scrapeAll } from './controllers';
 
 const { PORT } = process.env;
 
@@ -18,6 +18,9 @@ app.route('/', apiRouter);
  */
 
 cron.schedule('0 1 * * *', scrapeAll, { name: 'SCRAPE_CRON_JOB' });
+cron.schedule('0 9 * * *', getTodayNewOffers, {
+  name: 'NEW_OFFER_NOTIFICATION_JOB',
+});
 
 /**
  * Lifecycle Listeners.
