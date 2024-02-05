@@ -4,8 +4,8 @@ import {
   noFluffJobsRequestPayload,
 } from './config/index.ts';
 
-import { NoFluffJobs, Posting } from './model/data-model.ts';
 import { scrapePaginatedRange } from '../utils/scrape-paginated-range.ts';
+import { NoFluffJobs, Posting } from './model/data-model.ts';
 
 const headers = {
   Accept: 'application/json, text/plain, */*',
@@ -58,7 +58,7 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
         slug: o.url,
         title: o.title,
         toPln: Number(o.salary.to) ?? 0,
-        url: 'https://nofluffjobs.com/pl/job/' + o.url,
+        url: `https://nofluffjobs.com/pl/job/${o.url}`,
       })) ?? [],
   };
 

@@ -1,5 +1,5 @@
-import { scrapeNoFluffJobs } from './no-fluff-jobs-scraper';
 import { ScraperModuleModule } from '../module.config';
+import { scrapeNoFluffJobs } from './no-fluff-jobs-scraper';
 
 export const noFluffJobsModule: ScraperModuleModule = {
   name: 'No Fluff Job',

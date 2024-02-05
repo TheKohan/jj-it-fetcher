@@ -50,7 +50,6 @@ export const scrapePaginatedDeep: <T extends object, B extends object>(
       headers,
       acc,
     });
-  } else {
-    return acc;
   }
+  return acc;
 };

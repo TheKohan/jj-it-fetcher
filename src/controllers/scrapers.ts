@@ -1,11 +1,11 @@
-import { Handler } from 'hono';
-import prisma from '../db-client';
 import { baseMessageEmbeds } from '@jjitfetcher/discord-logger';
 import {
   justJoinItModule,
   noFluffJobsModule,
   scraperModules,
 } from '@jjitfetcher/modules';
+import { Handler } from 'hono';
+import prisma from '../db-client';
 import { discordLogger } from '../logger';
 
 export const scrapeJustJoinItController: Handler = async c => {
@@ -34,7 +34,7 @@ export const scrapeAll = async () => {
       infoEmbed.addFields([
         {
           name: `${module.name} scrapped offers:`,
-          value: offers.length + '',
+          value: `${offers.length}`,
         },
       ]);
     }

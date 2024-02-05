@@ -1,10 +1,10 @@
+import { apiRouter } from '@jjitfetcher/routes';
 import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
 import { logger } from 'hono/logger';
 import cron from 'node-cron';
-import { HTTPException } from 'hono/http-exception';
-import { discordLogger } from './logger';
-import { apiRouter } from '@jjitfetcher/routes';
 import { getTodayNewOffers, scrapeAll } from './controllers';
+import { discordLogger } from './logger';
 
 const { PORT } = process.env;
 
@@ -35,7 +35,7 @@ app.onError(async (err, c) => {
     await discordLogger.sendErrorMessage({
       message: embed =>
         embed.setDescription(
-          'JJ-IT-FETCHER has crashed unexpected: ' + err.message
+          `JJ-IT-FETCHER has crashed unexpected: ${err.message}`
         ),
     });
   } catch (e) {

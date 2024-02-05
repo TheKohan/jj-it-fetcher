@@ -1,9 +1,8 @@
+import { EmbedBuilder } from 'discord.js';
 import { Handler } from 'hono';
-import prisma from '../db-client';
 import { DateTime } from 'luxon';
-import { baseMessageEmbeds } from '@jjitfetcher/discord-logger';
+import prisma from '../db-client';
 import { discordLogger } from '../logger';
-import { ActionRowBuilder, EmbedBuilder } from 'discord.js';
 
 const TECHNOLOGIES_TAGS = [
   'React Native',

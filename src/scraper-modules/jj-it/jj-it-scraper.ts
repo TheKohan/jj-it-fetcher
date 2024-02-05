@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma-client';
+import { scrapePaginatedDeep } from '../utils/scrape-paginated-deep.ts';
 import { getJJITPageLink } from './config/config.ts';
 import { JustJoinItDataModel, Offers } from './model/index.ts';
-import { scrapePaginatedDeep } from '../utils/scrape-paginated-deep.ts';
 
 const headers = {
   Accept: 'application/json, text/plain, */*',
@@ -45,7 +45,7 @@ export const scrapeJJIt = async (client: PrismaClient) => {
         slug: o.slug,
         title: o.title,
         toPln: Number(o.employmentTypes[0]?.to_pln) ?? 0,
-        url: 'https://justjoin.it/offers/' + o.slug,
+        url: `https://justjoin.it/offers/${o.slug}`,
       })) ?? [],
   };
 

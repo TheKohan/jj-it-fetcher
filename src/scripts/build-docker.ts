@@ -1,5 +1,5 @@
-import { $ } from 'bun';
 import { parseArgs } from 'util';
+import { $ } from 'bun';
 
 const platforms = ['amd', 'arm'] as const;
 

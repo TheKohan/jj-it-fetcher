@@ -1,6 +1,7 @@
 {
-  "deno.enable": true,
-  "deno.lint": true,
-  "deno.unstable": true,
-  "cSpell.words": ["jjitfetcher", "luxon", "positionals"]
+	"cSpell.words": ["jjitfetcher", "luxon", "positionals"],
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "explicit"
+	}
 }

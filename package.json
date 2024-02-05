@@ -8,6 +8,7 @@
     "db-push": "bunx prisma db push",
     "db-push:dev": "bunx prisma db push",
     "client-generate": "bunx prisma generate",
+    "lint": "bunx @biomejs/biome lint ./src",
     "db-migrate": "bunx prisma migrate dev",
     "db-migrate:dev": "NODE_ENV=dev bunx prisma migrate dev",
     "start": "bun run ./src/main.ts",
@@ -20,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
     "@types/luxon": "^3.4.2",
     "@types/node-cron": "^3.0.11",
     "prisma": "5.9.0"

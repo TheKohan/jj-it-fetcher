@@ -1,10 +1,10 @@
-import { Hono } from 'hono';
 import {
   getTodayNewOffersController,
   scrapeAllController,
   scrapeJustJoinItController,
   scrapeNoFluffJobsController,
 } from '@jjitfetcher/controllers';
+import { Hono } from 'hono';
 
 const api = new Hono().basePath('/api');
 
