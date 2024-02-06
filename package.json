@@ -9,6 +9,7 @@
     "db-push:dev": "bunx prisma db push",
     "client-generate": "bunx prisma generate",
     "lint": "bunx @biomejs/biome lint ./src",
+    "format": "bunx @biomejs/biome check --apply ./src",
     "db-migrate": "bunx prisma migrate dev",
     "db-migrate:dev": "NODE_ENV=dev bunx prisma migrate dev",
     "start": "bun run ./src/main.ts",
