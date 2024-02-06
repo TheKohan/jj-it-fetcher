@@ -74,7 +74,7 @@ export const getTodayNewOffers = async () => {
       content: `New offers today: ${newOffers.length}!`,
       avatarURL:
         'https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg',
-      embeds: getEmbeddedOffers(newOffers),
+      embeds: [getEmbed(newOffers)],
     });
   } else {
     discordLogger.sendInfoMessage({ message: 'No new offers today!' });
@@ -92,7 +92,7 @@ export const getTodayNewOffers = async () => {
   };
 };
 
-const getEmbeddedOffers: (
+const getEmbed: (
   offer: {
     createdAt: Date;
     title: string;
@@ -101,19 +101,13 @@ const getEmbeddedOffers: (
     toPln: number;
     requiredSkills: string;
   }[]
-) => EmbedBuilder[] = offers => {
-  return offers.map(offer =>
-    new EmbedBuilder()
-      .setTitle(`${offer.title}`)
-      .setColor('Orange')
-      .setFooter({ text: offer.requiredSkills })
-      .setTimestamp(Date.now())
-      .setURL(offer.url)
-      .addFields([
-        {
-          name: 'Salary: ',
-          value: `From: ${offer.fromPln} PLN, To: ${offer.toPln} PLN`,
-        },
-      ])
+) => EmbedBuilder = offers => {
+  const embed = new EmbedBuilder().setColor('Orange').addFields(
+    offers.map(offer => ({
+      name: offer.title,
+      value: `Skills: ${offer.requiredSkills}\nFrom: ${offer.fromPln} PLN, To: ${offer.toPln} PLN\n[Link](${offer.url})`,
+    }))
   );
+
+  return embed;
 };
