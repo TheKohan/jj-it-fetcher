@@ -4,6 +4,23 @@ import { DateTime } from 'luxon';
 import prisma from '../db-client';
 import { discordLogger } from '../logger';
 
+type Offer = {
+  createdAt: Date;
+  title: string;
+  url: string;
+  fromPln: number;
+  toPln: number;
+  requiredSkills: string;
+};
+
+const OFFERS_PER_MESSAGE = 10;
+
+const notificationMessageBase = {
+  username: 'Daily Offers',
+  avatarURL:
+    'https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg',
+};
+
 const TECHNOLOGIES_TAGS = [
   'React Native',
   'React',
@@ -68,13 +85,19 @@ export const getTodayNewOffers = async () => {
     offer => !pastFewDaysOffers.find(yOffer => yOffer.url === offer.url)
   );
 
-  if (newOffers.length > 0) {
+  const offerEmbeds = getEmbeds(newOffers);
+
+  if (offerEmbeds.length > 0) {
     discordLogger.sendCustomMessage({
-      username: 'Daily Offers',
-      content: `New offers today: ${newOffers.length}!`,
-      avatarURL:
-        'https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg',
-      embeds: [getEmbed(newOffers)],
+      ...notificationMessageBase,
+      content: `New offers today! (${DateTime.now().toISODate()})`,
+    });
+    offerEmbeds.forEach((embed, i) => {
+      discordLogger.sendCustomMessage({
+        ...notificationMessageBase,
+        content: `(Part ${i} of ${offerEmbeds.length})`,
+        embeds: [embed],
+      });
     });
   } else {
     discordLogger.sendInfoMessage({ message: 'No new offers today!' });
@@ -92,22 +115,27 @@ export const getTodayNewOffers = async () => {
   };
 };
 
-const getEmbed: (
-  offer: {
-    createdAt: Date;
-    title: string;
-    url: string;
-    fromPln: number;
-    toPln: number;
-    requiredSkills: string;
-  }[]
-) => EmbedBuilder = offers => {
-  const embed = new EmbedBuilder().setColor('Orange').addFields(
-    offers.map(offer => ({
-      name: offer.title,
-      value: `Skills: ${offer.requiredSkills}\nFrom: ${offer.fromPln} PLN, To: ${offer.toPln} PLN\n[Link](${offer.url})`,
-    }))
-  );
+const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {
+  //make each segment max 25 to satisfy embed max field rule
+  const embeds = offers.reduce((acc, next, index) => {
+    if (!acc.length || index % OFFERS_PER_MESSAGE === 0) {
+      acc.push(
+        new EmbedBuilder().setColor('Orange').addFields(getEmbedContent(next))
+      );
+    } else {
+      acc[acc.length - 1].addFields(getEmbedContent(next));
+    }
+    return acc;
+  }, [] as EmbedBuilder[]);
 
-  return embed;
+  for (const embed of embeds) {
+    console.log(embed.data.fields.length);
+  }
+
+  return embeds;
 };
+
+const getEmbedContent = (offer: Offer) => ({
+  name: offer.title,
+  value: `Skills: ${offer.requiredSkills}\nFrom: ${offer.fromPln} PLN, To: ${offer.toPln} PLN\n[Link](${offer.url})`,
+});
