@@ -35,7 +35,10 @@ type MessageCreatorFun = (
 export const getMessage: MessageCreatorFun = (messageType, message) => {
   const embed =
     typeof message === 'string'
-      ? baseMessageEmbeds[messageType]()
+      ? baseMessageEmbeds[messageType]().addFields({
+          name: 'Message:',
+          value: message,
+        })
       : message(baseMessageEmbeds[messageType]());
   const errorMessage: WebhookMessageCreateOptions = {
     embeds: [embed],

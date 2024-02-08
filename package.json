@@ -1,42 +1,42 @@
 {
-  "name": "jj-it-fetcher",
-  "version": "1.0.0",
-  "module": "src/main.ts",
-  "type": "module",
-  "scripts": {
-    "bootstrap": "bun install && bun client-generate",
-    "db-push": "bunx prisma db push",
-    "db-push:dev": "NODE_ENV=dev bunx prisma db push",
-    "client-generate": "bunx prisma generate",
-    "lint": "bunx @biomejs/biome lint ./src",
-    "format": "bunx @biomejs/biome check --apply ./src",
-    "db-migrate": "bunx prisma migrate dev",
-    "db-migrate:dev": "NODE_ENV=dev bunx prisma migrate dev",
-    "start": "bun run ./src/main.ts",
-    "dev": "NODE_ENV=dev bun --watch run ./src/main.ts",
-    "seed-db": "NODE_ENV=dev bun run ./src/seed_db.ts",
-    "setup-dev": "NODE_ENV=dev bun run ./src/scripts/setup-dev.ts",
-    "docker-build:arm": "bun run ./src/scripts/build-docker.ts --platform arm",
-    "docker-build:amd": "bun run ./src/scripts/build-docker.ts --platform amd"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@biomejs/biome": "^1.5.3",
-    "@types/luxon": "^3.4.2",
-    "@types/node-cron": "^3.0.11",
-    "prisma": "5.9.0"
-  },
-  "dependencies": {
-    "@prisma/client": "5.9.0",
-    "@types/bun": "latest",
-    "discord.js": "^14.14.1",
-    "hono": "^3.12.7",
-    "luxon": "^3.4.4",
-    "node-cron": "^3.0.3",
-    "zod": "^3.22.4"
-  },
-  "peerDependencies": {
-    "typescript": "^5.3.3"
-  }
+	"name": "jj-it-fetcher",
+	"version": "1.0.0",
+	"module": "src/main.ts",
+	"type": "module",
+	"scripts": {
+		"bootstrap": "bun install && bun client-generate",
+		"db-push": "NODE_ENV=production bunx prisma db push",
+		"db-push:dev": "NODE_ENV=dev bunx prisma db push",
+		"client-generate": "bunx prisma generate",
+		"lint": "bunx @biomejs/biome lint ./src",
+		"format": "bunx @biomejs/biome check --apply ./src",
+		"db-migrate": "NODE_ENV=production bunx prisma migrate dev",
+		"db-migrate:dev": "NODE_ENV=dev bunx prisma migrate dev",
+		"start": "NODE_ENV=production bun run ./src/main.ts",
+		"dev": "NODE_ENV=dev bun --watch run ./src/main.ts",
+		"seed-db": "NODE_ENV=dev bun run ./src/seed_db.ts",
+		"setup-dev": "NODE_ENV=dev bun run ./src/scripts/setup-dev.ts",
+		"docker-build:arm": "bun run ./src/scripts/build-docker.ts --platform arm",
+		"docker-build:amd": "bun run ./src/scripts/build-docker.ts --platform amd"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@biomejs/biome": "^1.5.3",
+		"@types/luxon": "^3.4.2",
+		"@types/node-cron": "^3.0.11",
+		"prisma": "5.9.0"
+	},
+	"dependencies": {
+		"@prisma/client": "5.9.0",
+		"@types/bun": "latest",
+		"discord.js": "^14.14.1",
+		"hono": "^3.12.7",
+		"luxon": "^3.4.4",
+		"node-cron": "^3.0.3",
+		"zod": "^3.22.4"
+	},
+	"peerDependencies": {
+		"typescript": "^5.3.3"
+	}
 }

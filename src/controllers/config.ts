@@ -8,6 +8,9 @@ import { z } from 'zod';
 
 export const getConfigController: Handler = async c => {
   const config = await getConfigFromDB();
+  if (!config) {
+    return c.text('No config found', 404);
+  }
   return c.json(config);
 };
 
@@ -16,7 +19,6 @@ export const createConfigController: Handler = async c => {
   if (!body) {
     return c.body('No body provided', 400);
   }
-  console.log(body);
   try {
     ConfigPayloadSchema.parse(body);
   } catch (err) {
@@ -39,5 +41,7 @@ export const getConfigFromDB = async () => {
       createdAt: 'desc',
     },
   });
-  return JSON.parse(rawConfig.value as string) as ConfigPayload;
+  return rawConfig?.value
+    ? (JSON.parse(rawConfig.value as string) as ConfigPayload)
+    : null;
 };
