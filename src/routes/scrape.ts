@@ -1,16 +1,14 @@
 import {
-  getTodayNewOffersController,
   scrapeAllController,
   scrapeJustJoinItController,
   scrapeNoFluffJobsController,
 } from '@jjitfetcher/controllers';
 import { Hono } from 'hono';
 
-const api = new Hono().basePath('/api');
+const api = new Hono();
 
 api.get('/scrape-jj-it', scrapeJustJoinItController);
 api.get('/scrape-no-fluff-jobs', scrapeNoFluffJobsController);
 api.get('/scrape-all', scrapeAllController);
-api.get('/todays-offers', getTodayNewOffersController);
 
-export const apiRouter = api;
+export const scrapeRouter = api;

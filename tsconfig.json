@@ -24,7 +24,8 @@
       "@jjitfetcher/routes": ["./src/routes"],
       "@jjitfetcher/modules": ["./src/scraper-modules"],
       "@jjitfetcher/scripts": ["./src/scripts"],
-      "@jjitfetcher/controllers": ["./src/controllers"]
+      "@jjitfetcher/controllers": ["./src/controllers"],
+      "@jjitfetcher/validators": ["./src/validators"]
     }
   }
 }

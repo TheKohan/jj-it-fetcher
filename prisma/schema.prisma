@@ -24,3 +24,9 @@ model B2BOffer {
   requiredSkills String
   companyName    String
 }
+
+model Config {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  value     Json
+}

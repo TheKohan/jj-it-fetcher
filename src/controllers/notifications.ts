@@ -3,6 +3,7 @@ import { Handler } from 'hono';
 import { DateTime } from 'luxon';
 import prisma from '../db-client';
 import { discordLogger } from '../logger';
+import { getConfigFromDB } from '.';
 
 type Offer = {
   createdAt: Date;
@@ -21,20 +22,13 @@ const notificationMessageBase = {
     'https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg',
 };
 
-const TECHNOLOGIES_TAGS = [
-  'React Native',
-  'React',
-  'Javascript',
-  'TypeScript',
-  'Fullstack',
-];
-
 export const getTodayNewOffersController: Handler = async c => {
-  const offers = await getTodayNewOffers();
+  const config = await getConfigFromDB();
+  const offers = await getTodayNewOffers(config.notificationQuerySkills);
   return c.json(offers);
 };
 
-export const getTodayNewOffers = async () => {
+export const getTodayNewOffers = async (techs: string[]) => {
   const today = DateTime.now().minus({ day: 0 }).set({
     hour: 0,
     minute: 0,
@@ -58,7 +52,7 @@ export const getTodayNewOffers = async () => {
         lt: today.toJSDate(),
       },
       AND: {
-        OR: TECHNOLOGIES_TAGS.map(tech => ({
+        OR: techs.map(tech => ({
           requiredSkills: { contains: tech },
         })),
       },
@@ -73,7 +67,7 @@ export const getTodayNewOffers = async () => {
         lt: today.plus({ day: 1 }).toJSDate(),
       },
       AND: {
-        OR: TECHNOLOGIES_TAGS.map(tech => ({
+        OR: techs.map(tech => ({
           requiredSkills: { contains: tech },
         })),
       },

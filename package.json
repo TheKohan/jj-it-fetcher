@@ -6,7 +6,7 @@
   "scripts": {
     "bootstrap": "bun install && bun client-generate",
     "db-push": "bunx prisma db push",
-    "db-push:dev": "bunx prisma db push",
+    "db-push:dev": "NODE_ENV=dev bunx prisma db push",
     "client-generate": "bunx prisma generate",
     "lint": "bunx @biomejs/biome lint ./src",
     "format": "bunx @biomejs/biome check --apply ./src",
@@ -33,7 +33,8 @@
     "discord.js": "^14.14.1",
     "hono": "^3.12.7",
     "luxon": "^3.4.4",
-    "node-cron": "^3.0.3"
+    "node-cron": "^3.0.3",
+    "zod": "^3.22.4"
   },
   "peerDependencies": {
     "typescript": "^5.3.3"

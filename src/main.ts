@@ -3,7 +3,7 @@ import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import { logger } from 'hono/logger';
 import cron from 'node-cron';
-import { getTodayNewOffers, scrapeAll } from './controllers';
+import { getConfigFromDB, getTodayNewOffers, scrapeAll } from './controllers';
 import { discordLogger } from './logger';
 
 const { PORT } = process.env;
@@ -18,9 +18,16 @@ app.route('/', apiRouter);
  */
 
 cron.schedule('0 1 * * *', scrapeAll, { name: 'SCRAPE_CRON_JOB' });
-cron.schedule('0 9 * * *', getTodayNewOffers, {
-  name: 'NEW_OFFER_NOTIFICATION_JOB',
-});
+cron.schedule(
+  '0 9 * * *',
+  async () => {
+    const config = await getConfigFromDB();
+    await getTodayNewOffers(config.notificationQuerySkills);
+  },
+  {
+    name: 'NEW_OFFER_NOTIFICATION_JOB',
+  }
+);
 
 /**
  * Lifecycle Listeners.
