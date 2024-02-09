@@ -17,7 +17,7 @@
 		"seed-db": "NODE_ENV=dev bun run ./src/seed_db.ts",
 		"setup-dev": "NODE_ENV=dev bun run ./src/scripts/setup-dev.ts",
 		"docker-build:arm": "bun run ./src/scripts/build-docker.ts --platform arm",
-		"docker-build:amd": "bun run ./src/scripts/build-docker.ts --platform amd"
+		"docker-build:amd": "NODE_ENV=production bun run ./src/scripts/build-docker.ts --platform amd"
 	},
 	"author": "",
 	"license": "ISC",
