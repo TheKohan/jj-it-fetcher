@@ -23,11 +23,14 @@ const { values } = parseArgs({
   allowPositionals: true,
 });
 
-const { DATABASE_URL, DISCORD_WEBHOOK_URL } = process.env;
+const { DIRECT_URL, DATABASE_URL, DISCORD_WEBHOOK_URL } = process.env;
 const { platform } = values;
 
 if (!DATABASE_URL) {
   throw new Error('DATABASE_URL Missing');
+}
+if (!DIRECT_URL) {
+  throw new Error('DIRECT_URL Missing');
 }
 if (!DISCORD_WEBHOOK_URL) {
   throw new Error('DISCORD_WEBHOOK_URL Missing');
@@ -46,6 +49,7 @@ if (!platforms.includes(platform as Platforms)) {
 await $`docker build \
         --tag "jj-it-fetcher" \
         --build-arg DATABASE_URL=${DATABASE_URL} \
+        --build-arg DIRECT_URL=${DIRECT_URL} \
         --build-arg DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL} \
         --platform ${platformConfig[platform as Platforms]} \
         -f "./Dockerfile" \
