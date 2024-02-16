@@ -23,11 +23,23 @@ const { values } = parseArgs({
   allowPositionals: true,
 });
 
-const { DIRECT_URL, DATABASE_URL, DISCORD_WEBHOOK_URL } = process.env;
+const {
+  DIRECT_URL,
+  DATABASE_URL,
+  DISCORD_WEBHOOK_URL,
+  SUPABASE_URL,
+  SUPABASE_API_KEY,
+} = process.env;
 const { platform } = values;
 
 if (!DATABASE_URL) {
   throw new Error('DATABASE_URL Missing');
+}
+if (!SUPABASE_API_KEY) {
+  throw new Error('SUPABASE_API_KEY Missing');
+}
+if (!SUPABASE_URL) {
+  throw new Error('SUPABASE_URL Missing');
 }
 if (!DIRECT_URL) {
   throw new Error('DIRECT_URL Missing');
@@ -51,6 +63,8 @@ await $`docker build \
         --build-arg DATABASE_URL=${DATABASE_URL} \
         --build-arg DIRECT_URL=${DIRECT_URL} \
         --build-arg DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL} \
+        --build-arg SUPABASE_URL=${SUPABASE_URL} \
+        --build-arg SUPABASE_API_KEY=${SUPABASE_API_KEY} \
         --platform ${platformConfig[platform as Platforms]} \
         -f "./Dockerfile" \
         .`;
