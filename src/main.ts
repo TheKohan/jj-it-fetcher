@@ -1,10 +1,18 @@
+import { scrapingController } from '@jjitfetcher/controllers';
 import { apiRouter } from '@jjitfetcher/routes';
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import { logger } from 'hono/logger';
 import cron from 'node-cron';
-import { getConfigFromDB, getTodayNewOffers, scrapeAll } from './controllers';
+import { z } from 'zod';
 import { discordLogger } from './logger';
+import { configModel } from './models';
+import {
+  configService,
+  notificationService,
+  offersService,
+  scrapingService,
+} from './services';
 
 const { PORT } = process.env;
 
@@ -17,12 +25,17 @@ app.route('/', apiRouter);
  * Setup Cron Jobs.
  */
 
-cron.schedule('0 1 * * *', scrapeAll, { name: 'SCRAPE_CRON_JOB' });
+cron.schedule('0 1 * * *', scrapingService.scrapeAll, {
+  name: 'SCRAPE_CRON_JOB',
+});
 cron.schedule(
   '0 9 * * *',
   async () => {
-    const config = await getConfigFromDB();
-    await getTodayNewOffers(config.notificationQuerySkills);
+    const config = await configService.getConfig();
+    const newOffers = await offersService.getTodayNewOffers(
+      config.notificationQuerySkills
+    );
+    await notificationService.sendTodayNewOffers(newOffers);
   },
   {
     name: 'NEW_OFFER_NOTIFICATION_JOB',
@@ -37,6 +50,11 @@ app.onError(async (err, c) => {
   if (err instanceof HTTPException) {
     return err.getResponse();
   }
+
+  if (err instanceof z.ZodError) {
+    return c.json({ error: err.message }, 400);
+  }
+
   try {
     console.log(err);
     await discordLogger.sendErrorMessage({

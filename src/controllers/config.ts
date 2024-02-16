@@ -1,47 +1,30 @@
+import { assertConfigPayload } from '@jjitfetcher/validators';
 import { Handler } from 'hono';
-import prisma from '../db-client';
-import {
-  ConfigPayload,
-  ConfigPayloadSchema,
-} from '../validators/config-validator';
-import { z } from 'zod';
+import { configService } from '../services/config';
 
-export const getConfigController: Handler = async c => {
-  const config = await getConfigFromDB();
+const { createConfig, getConfig } = configService;
+
+const getConfigController: Handler = async c => {
+  const config = await getConfig();
   if (!config) {
     return c.text('No config found', 404);
   }
   return c.json(config);
 };
 
-export const createConfigController: Handler = async c => {
+const createConfigController: Handler = async c => {
   const body = await c.req.json();
   if (!body) {
     return c.body('No body provided', 400);
   }
-  try {
-    ConfigPayloadSchema.parse(body);
-  } catch (err) {
-    if (err instanceof z.ZodError) {
-      return c.body(err.message, 400);
-    }
-  }
 
-  const config = await prisma.config.create({
-    data: {
-      value: JSON.stringify(body),
-    },
-  });
+  assertConfigPayload(body);
+
+  const config = await createConfig(body);
   return c.json(config.value);
 };
 
-export const getConfigFromDB = async () => {
-  const rawConfig = await prisma.config.findFirst({
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
-  return rawConfig?.value
-    ? (JSON.parse(rawConfig.value as string) as ConfigPayload)
-    : null;
+export const configController = {
+  getConfigController,
+  createConfigController,
 };

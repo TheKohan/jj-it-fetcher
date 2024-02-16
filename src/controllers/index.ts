@@ -1,3 +1,3 @@
-export * from './scrapers';
-export * from './notifications';
+export * from './scraping';
+export * from './notification';
 export * from './config';

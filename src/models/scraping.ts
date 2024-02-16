@@ -1,28 +1,15 @@
-import { baseMessageEmbeds } from '@jjitfetcher/discord-logger';
 import {
   justJoinItModule,
   noFluffJobsModule,
   scraperModules,
 } from '@jjitfetcher/modules';
-import { Handler } from 'hono';
+import { baseMessageEmbeds } from '@jjitfetcher/utils';
 import prisma from '../db-client';
 import { discordLogger } from '../logger';
 
-export const scrapeJustJoinItController: Handler = async c => {
-  await justJoinItModule.scrape(prisma);
-  return c.text('Scraped JJIT Successfully');
-};
-
-export const scrapeNoFluffJobsController: Handler = async c => {
-  await noFluffJobsModule.scrape(prisma);
-  return c.text('Scraped No fluff Jobs Successfully');
-};
-export const scrapeAllController: Handler = async c => {
-  await scrapeAll();
-  return c.text('Scraped all modules successfully');
-};
-
-export const scrapeAll = async () => {
+const scrapeJJitToDB = () => justJoinItModule.scrape(prisma);
+const scrapeNoFluffJobsToDB = () => noFluffJobsModule.scrape(prisma);
+const scrapeAllToDB = async () => {
   const infoEmbed = baseMessageEmbeds
     .info()
     .setDescription('Scrapped services: ');
@@ -41,4 +28,10 @@ export const scrapeAll = async () => {
   }
 
   await discordLogger.sendInfoMessage({ message: () => infoEmbed });
+};
+
+export const scrapingModel = {
+  scrapeJJitToDB,
+  scrapeNoFluffJobsToDB,
+  scrapeAllToDB,
 };

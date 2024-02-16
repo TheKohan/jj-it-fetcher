@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
+import { configRouter } from './config';
 import { notificationsRouter } from './notifications';
 import { scrapeRouter } from './scrape';
-import { configRouter } from './config';
 
 const api = new Hono().basePath('/api');
 

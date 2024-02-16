@@ -1,10 +1,10 @@
+import { MessageBuilder, MessageType, getMessage } from '@jjitfetcher/utils';
 import { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
-import { MessageBuilder, MessageType, getMessage } from './messages.ts';
 
 type MessageProps = { message: string | MessageBuilder };
 type _MessageProps = MessageProps & { type: MessageType };
 
-export class DiscordLogger {
+export class DiscordLoggerService {
   webhookClient: WebhookClient;
 
   constructor(webhookClient: WebhookClient) {

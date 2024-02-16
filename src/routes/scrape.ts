@@ -1,11 +1,13 @@
-import {
-  scrapeAllController,
-  scrapeJustJoinItController,
-  scrapeNoFluffJobsController,
-} from '@jjitfetcher/controllers';
+import { scrapingController } from '@jjitfetcher/controllers';
 import { Hono } from 'hono';
 
 const api = new Hono();
+
+const {
+  scrapeAllController,
+  scrapeJustJoinItController,
+  scrapeNoFluffJobsController,
+} = scrapingController;
 
 api.get('/scrape-jj-it', scrapeJustJoinItController);
 api.get('/scrape-no-fluff-jobs', scrapeNoFluffJobsController);

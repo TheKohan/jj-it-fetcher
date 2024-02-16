@@ -1,10 +1,9 @@
+import { configController } from '@jjitfetcher/controllers';
 import { Hono } from 'hono';
-import {
-  createConfigController,
-  getConfigController,
-} from '../controllers/config';
 
 const api = new Hono();
+
+const { getConfigController, createConfigController } = configController;
 
 api
   .get('/get-config', getConfigController)
