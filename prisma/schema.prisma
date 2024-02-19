@@ -35,26 +35,28 @@ model User {
 }
 
 model Notification {
-  id                   Int                   @id @default(autoincrement())
-  createdAt            DateTime              @default(now())
-  user                 User?                 @relation(fields: [userId], references: [id])
-  emailNotifications   EmailNotification[]
-  discordNotifications DiscordNotification[]
-  userId               Int?
+  id                    Int                  @id @default(autoincrement())
+  createdAt             DateTime             @default(now())
+  user                  User?                @relation(fields: [userId], references: [id])
+  emailNotification     EmailNotification?
+  discordNotification   DiscordNotification?
+  userId                Int?
+  emailNotificationId   Int
+  discordNotificationId Int
 }
 
 model EmailNotification {
-  id             Int           @id @default(autoincrement())
-  createdAt      DateTime      @default(now())
+  id             Int          @id @default(autoincrement())
+  createdAt      DateTime     @default(now())
   email          String
-  notification   Notification? @relation(fields: [notificationId], references: [id])
-  notificationId Int?
+  Notification   Notification @relation(fields: [notificationId], references: [id])
+  notificationId Int          @unique
 }
 
 model DiscordNotification {
-  id             Int           @id @default(autoincrement())
-  createdAt      DateTime      @default(now())
+  id             Int          @id @default(autoincrement())
+  createdAt      DateTime     @default(now())
   webhookId      String
-  notification   Notification? @relation(fields: [notificationId], references: [id])
-  notificationId Int?
+  Notification   Notification @relation(fields: [notificationId], references: [id])
+  notificationId Int          @unique
 }
