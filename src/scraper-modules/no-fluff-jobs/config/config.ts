@@ -1,4 +1,4 @@
-import { NoFluffJobsPayload } from '../model/data-model.ts';
+import type { NoFluffJobsPayload } from '../model/data-model.ts';
 /**
  * Modules fetching link, adjust it to narrow or widen
  * the amount of offers that are going to be scraped

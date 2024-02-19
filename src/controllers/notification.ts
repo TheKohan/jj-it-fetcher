@@ -3,7 +3,7 @@ import {
   notificationService,
   offersService,
 } from '@jjitfetcher/services';
-import { Handler } from 'hono';
+import type { Handler } from 'hono';
 
 const getTodayNewOffersController: Handler = async c => {
   const config = await configService.getConfig();

@@ -1,5 +1,5 @@
-import { User } from '@supabase/supabase-js';
-import { Context } from 'hono';
+import type { User } from '@supabase/supabase-js';
+import type { Context } from 'hono';
 import { InternalError } from '../error';
 
 export const getUserCtx = (ctx: Context) => {

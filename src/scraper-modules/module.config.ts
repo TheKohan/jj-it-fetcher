@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from '@prisma-client';
+import type { Prisma, PrismaClient } from '@prisma-client';
 import { justJoinItModule } from '.';
 import { noFluffJobsModule } from './no-fluff-jobs/module';
 

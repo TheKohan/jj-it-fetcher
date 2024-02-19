@@ -1,4 +1,4 @@
-import { EmbedBuilder, WebhookMessageCreateOptions } from 'discord.js';
+import { EmbedBuilder, type WebhookMessageCreateOptions } from 'discord.js';
 
 export type MessageBuilder = (builder: EmbedBuilder) => EmbedBuilder;
 

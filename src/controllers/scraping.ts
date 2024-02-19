@@ -1,4 +1,4 @@
-import { Handler } from 'hono';
+import type { Handler } from 'hono';
 import { scrapingService } from '../services/scraping';
 
 const { scrapeAll, scrapeJJit, scrapeNoFluffJobs } = scrapingService;

@@ -1,4 +1,4 @@
-import { MiddlewareHandler } from 'hono';
+import type { MiddlewareHandler } from 'hono';
 import { supabase } from '../supabase-client';
 
 export const authMiddleware: MiddlewareHandler = async (ctx, next) => {

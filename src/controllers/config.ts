@@ -1,5 +1,5 @@
 import { assertConfigPayload } from '@jjitfetcher/validators';
-import { Handler } from 'hono';
+import type { Handler } from 'hono';
 import { configService } from '../services/config';
 
 const { createConfig, getConfig } = configService;

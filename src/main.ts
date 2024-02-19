@@ -1,4 +1,3 @@
-import { scrapingController } from '@jjitfetcher/controllers';
 import { apiRouter } from '@jjitfetcher/routes';
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
@@ -6,15 +5,14 @@ import { logger } from 'hono/logger';
 import cron from 'node-cron';
 import { z } from 'zod';
 import { discordLogger } from './logger';
-import { configModel } from './models';
+import { authMiddleware } from './middlewares';
+import { authRouter } from './routes/auth';
 import {
   configService,
   notificationService,
   offersService,
   scrapingService,
 } from './services';
-import { authMiddleware } from './middlewares';
-import { authRouter } from './routes/auth';
 
 const { PORT } = process.env;
 
@@ -74,7 +72,7 @@ app.onError(async (err, c) => {
   return c.text('Failed', 500);
 });
 
-app.notFound(async c => {
+app.notFound(c => {
   return c.text('Page not found', 404);
 });
 

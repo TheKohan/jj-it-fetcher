@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma-client';
+import type { PrismaClient } from '@prisma-client';
 import {
   getNoFluffJobPage,
   noFluffJobsRequestPayload,
 } from './config/index.ts';
 
 import { scrapePaginatedRange } from '../utils/scrape-paginated-range.ts';
-import { NoFluffJobs, Posting } from './model/data-model.ts';
+import type { NoFluffJobs, Posting } from './model/data-model.ts';
 
 const headers = {
   Accept: 'application/json, text/plain, */*',

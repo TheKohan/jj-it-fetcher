@@ -1,7 +1,7 @@
-import { PrismaClient } from '@prisma-client';
+import type { PrismaClient } from '@prisma-client';
 import { scrapePaginatedDeep } from '../utils/scrape-paginated-deep.ts';
 import { getJJITPageLink } from './config/config.ts';
-import { JustJoinItDataModel, Offers } from './model/index.ts';
+import type { JustJoinItDataModel, Offers } from './model/index.ts';
 
 const headers = {
   Accept: 'application/json, text/plain, */*',

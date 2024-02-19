@@ -1,5 +1,9 @@
-import { MessageBuilder, MessageType, getMessage } from '@jjitfetcher/utils';
-import { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
+import {
+  type MessageBuilder,
+  type MessageType,
+  getMessage,
+} from '@jjitfetcher/utils';
+import type { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
 
 type MessageProps = { message: string | MessageBuilder };
 type _MessageProps = MessageProps & { type: MessageType };

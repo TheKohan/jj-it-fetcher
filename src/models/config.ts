@@ -1,4 +1,4 @@
-import { ConfigPayload } from '@jjitfetcher/validators';
+import type { ConfigPayload } from '@jjitfetcher/validators';
 import prisma from '../db-client';
 
 const createConfigInDB = async (payload: ConfigPayload) => {
