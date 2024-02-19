@@ -4,25 +4,29 @@ Job board scraper.
 
 ## Description
 
-This project is an api scraper written with `Bun` and `Hono`. It let's you aggregate Job offers and save them to DB of your liking. Feel free to fork and adjust it to scrape offers fledged to your profile.
+This project is an api scraper written with `Bun` and `Hono` and `Supabase`. It let's you aggregate Job offers and save them to DB of your liking. Feel free to fork and adjust it to scrape offers fledged to your profile.
 
 ## Getting Started
 
 ### Dependencies
 
 - bun cli
+- supabase project set-up
 
 ### Installing
 
-- Set environment variables in `.env` file (create it in root of the project). Get your Database connection string. [Getting database String for Prisma](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/connect-your-database-node-mysql)
+- Set environment variables in `.env` file (create it in root of the project). Follow [this](https://supabase.com/partners/integrations/prisma) guide to connect your prisma client to Supabase.
 
 ```sh
+SUPABASE_URL=<supabaseUrl> #url for your supabase project
+SUPABASE_API_KEY=<supabaseApiKey> #api key for your supabase project
+DIRECT_URL=<directURL> # db direct url
 DATABASE_URL=<databaseURL> #your database connection string
 DISCORD_WEBHOOK_URL=<webhookURL> #webhook url for your discord channel
 PORT=8000 #Port for the process
 ```
 
-- Install Bun ([Installing Deno](https://docs.deno.com/runtime/manual/getting_started/installation))
+- Install [Bun](https://bun.sh/)
 
 ```sh
 curl -fsSL https://bun.sh/install | bash
@@ -31,7 +35,7 @@ curl -fsSL https://bun.sh/install | bash
 - Create schemas in db with Prisma ([Quick Prisma deep dive](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-typescript-postgresql))
 
 ```sh
-deno task db-push
+bun db-push
 ```
 
 > Check the Modding section on how to adjust the scraper
