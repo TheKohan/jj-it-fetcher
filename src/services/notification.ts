@@ -1,7 +1,6 @@
 import { EmbedBuilder } from 'discord.js';
 import { DateTime } from 'luxon';
 import { discordLogger } from '../logger';
-import { offersService } from './offers';
 
 type Offer = {
   createdAt: Date;

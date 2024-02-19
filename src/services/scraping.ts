@@ -1,8 +1,3 @@
-import {
-  justJoinItModule,
-  noFluffJobsModule,
-  scraperModules,
-} from '@jjitfetcher/modules';
 import { scrapingModel } from '../models/scraping';
 
 const { scrapeAllToDB, scrapeJJitToDB, scrapeNoFluffJobsToDB } = scrapingModel;
