@@ -26,8 +26,35 @@ model B2BOffer {
   companyName    String
 }
 
-model Config {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  value     Json
+model User {
+  id            Int            @id @default(autoincrement())
+  userId        String         @unique
+  createdAt     DateTime       @default(now())
+  email         String         @unique
+  notifications Notification[]
+}
+
+model Notification {
+  id                   Int                   @id @default(autoincrement())
+  createdAt            DateTime              @default(now())
+  user                 User?                 @relation(fields: [userId], references: [id])
+  emailNotifications   EmailNotification[]
+  discordNotifications DiscordNotification[]
+  userId               Int?
+}
+
+model EmailNotification {
+  id             Int           @id @default(autoincrement())
+  createdAt      DateTime      @default(now())
+  email          String
+  notification   Notification? @relation(fields: [notificationId], references: [id])
+  notificationId Int?
+}
+
+model DiscordNotification {
+  id             Int           @id @default(autoincrement())
+  createdAt      DateTime      @default(now())
+  webhookId      String
+  notification   Notification? @relation(fields: [notificationId], references: [id])
+  notificationId Int?
 }
