@@ -13,13 +13,18 @@ import {
   offersService,
   scrapingService,
 } from './services';
+import { authMiddleware } from './middlewares';
+import { authRouter } from './routes/auth';
 
 const { PORT } = process.env;
 
 const app = new Hono();
 
 app.use('*', logger());
-app.route('/', apiRouter);
+app.route('/auth/', authRouter);
+
+app.use('/api/*', authMiddleware);
+app.route('/api/', apiRouter);
 
 /**
  * Setup Cron Jobs.
@@ -56,7 +61,6 @@ app.onError(async (err, c) => {
   }
 
   try {
-    console.log(err);
     await discordLogger.sendErrorMessage({
       message: embed =>
         embed.setDescription(
@@ -66,6 +70,7 @@ app.onError(async (err, c) => {
   } catch (e) {
     console.log(e);
   }
+
   return c.text('Failed', 500);
 });
 

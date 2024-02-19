@@ -27,6 +27,7 @@
       "@jjitfetcher/controllers": ["./src/controllers"],
       "@jjitfetcher/models": ["./src/models"],
       "@jjitfetcher/utils": ["./src/utils"],
+      "@jjitfetcher/middlewares": ["./src/middlewares"],
       "@jjitfetcher/validators": ["./src/validators"]
     }
   }
