@@ -1,5 +1,11 @@
 {
-	"cSpell.words": ["biomejs", "jjitfetcher", "luxon", "positionals"],
+	"cSpell.words": [
+		"biomejs",
+		"jjitfetcher",
+		"luxon",
+		"positionals",
+		"SUPABASE"
+	],
 	"editor.defaultFormatter": "biomejs.biome",
 	"editor.codeActionsOnSave": {
 		"quickfix.biome": "explicit"
