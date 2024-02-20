@@ -4,15 +4,10 @@ import { HTTPException } from 'hono/http-exception';
 import { logger } from 'hono/logger';
 import cron from 'node-cron';
 import { z } from 'zod';
-import { discordLogger } from './logger';
+import { serviceLogger } from './logger';
 import { authMiddleware } from './middlewares';
 import { authRouter } from './routes/auth';
-import {
-  configService,
-  notificationService,
-  offersService,
-  scrapingService,
-} from './services';
+import { notificationService, scrapingService } from './services';
 
 const { PORT } = process.env;
 
@@ -31,14 +26,11 @@ app.route('/api/', apiRouter);
 cron.schedule('0 1 * * *', scrapingService.scrapeAll, {
   name: 'SCRAPE_CRON_JOB',
 });
+
 cron.schedule(
   '0 9 * * *',
   async () => {
-    const config = await configService.getConfig();
-    const newOffers = await offersService.getTodayNewOffers(
-      config.notificationQuerySkills
-    );
-    await notificationService.sendTodayNewOffers(newOffers);
+    await notificationService.sendAllDiscordNotifications();
   },
   {
     name: 'NEW_OFFER_NOTIFICATION_JOB',
@@ -58,18 +50,22 @@ app.onError(async (err, c) => {
     return c.json({ error: err.message }, 400);
   }
 
-  try {
-    await discordLogger.sendErrorMessage({
-      message: embed =>
-        embed.setDescription(
-          `JJ-IT-FETCHER has crashed unexpected: ${err.message}`
-        ),
-    });
-  } catch (e) {
-    console.log(e);
+  if (process.env.NODE_ENV === 'production') {
+    try {
+      await serviceLogger.sendErrorMessage({
+        message: embed =>
+          embed.setDescription(
+            `JJ-IT-FETCHER has crashed unexpected: ${err.message}`
+          ),
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  return c.text('Failed', 500);
+  console.log(err.message);
+
+  return c.json(err.message, 500);
 });
 
 app.notFound(c => {

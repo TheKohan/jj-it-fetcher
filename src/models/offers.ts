@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import prisma from '../db-client';
 
-const getTodayNewOffersFromDB = async (techs: string[]) => {
+const getTodayNewOffersFromDB = async (tags: string[]) => {
   const today = DateTime.now().minus({ day: 0 }).set({
     hour: 0,
     minute: 0,
@@ -25,7 +25,7 @@ const getTodayNewOffersFromDB = async (techs: string[]) => {
         lt: today.toJSDate(),
       },
       AND: {
-        OR: techs.map(tech => ({
+        OR: tags.map(tech => ({
           requiredSkills: { contains: tech },
         })),
       },
@@ -40,7 +40,7 @@ const getTodayNewOffersFromDB = async (techs: string[]) => {
         lt: today.plus({ day: 1 }).toJSDate(),
       },
       AND: {
-        OR: techs.map(tech => ({
+        OR: tags.map(tech => ({
           requiredSkills: { contains: tech },
         })),
       },

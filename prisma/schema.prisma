@@ -27,50 +27,40 @@ model B2BOffer {
 }
 
 model User {
-  id            String         @id @unique
-  createdAt     DateTime       @default(now())
-  email         String         @unique
-  notifications Notification[]
+  id           String        @id @unique
+  createdAt    DateTime      @default(now())
+  email        String        @unique
+  notification Notification?
 }
 
 model Notification {
-  id                        Int                         @id @default(autoincrement())
-  createdAt                 DateTime                    @default(now())
-  user                      User                        @relation(fields: [userId], references: [id])
-  emailNotification         EmailNotification?
-  discordNotification       DiscordNotification?
-  userId                    String
-  serachTagsOnNotifications SearchTagsOnNotifications[]
-  emailNotificationId       Int
-  discordNotificationId     Int
+  createdAt           DateTime              @default(now())
+  user                User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId              String                @unique
+  emailNotification   EmailNotification[]
+  discordNotification DiscordNotification[]
 }
 
 model EmailNotification {
-  id             Int          @id @default(autoincrement())
-  createdAt      DateTime     @default(now())
-  email          String
-  Notification   Notification @relation(fields: [notificationId], references: [id])
-  notificationId Int          @unique
+  id           Int          @id @default(autoincrement())
+  createdAt    DateTime     @default(now())
+  email        String       @unique
+  Notification Notification @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId       String
+  tags         SearchTag[]
 }
 
 model DiscordNotification {
-  id             Int          @id @default(autoincrement())
-  createdAt      DateTime     @default(now())
-  webhookId      String
-  Notification   Notification @relation(fields: [notificationId], references: [id])
-  notificationId Int          @unique
+  id           Int          @id @default(autoincrement())
+  createdAt    DateTime     @default(now())
+  webhookId    String       @unique
+  Notification Notification @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId       String
+  tags         SearchTag[]
 }
 
 model SearchTag {
-  id                        Int                         @id @default(autoincrement())
-  name                      String                      @unique
-  SearchTagsOnNotifications SearchTagsOnNotifications[]
-}
-
-model SearchTagsOnNotifications {
-  id             Int          @id @default(autoincrement())
-  searchTag      SearchTag    @relation(fields: [searchTagId], references: [id])
-  notification   Notification @relation(fields: [notificationId], references: [id])
-  searchTagId    Int
-  notificationId Int
+  name                 String                @id @unique
+  emailNotifications   EmailNotification[]
+  discordNotifications DiscordNotification[]
 }

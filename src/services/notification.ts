@@ -1,6 +1,16 @@
 import { EmbedBuilder } from 'discord.js';
 import { DateTime } from 'luxon';
-import { discordLogger } from '../logger';
+import { serviceLogger } from '../logger';
+import { notificationModel } from '../models/notification';
+import { offersModel } from '../models/offers';
+
+const OFFERS_PER_MESSAGE = 10;
+
+const notificationMessageBase = {
+  username: 'Daily Offers',
+  avatarURL:
+    'https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg',
+};
 
 type Offer = {
   createdAt: Date;
@@ -11,35 +21,59 @@ type Offer = {
   requiredSkills: string;
 };
 
-const OFFERS_PER_MESSAGE = 10;
+const {
+  getAllUserNotificationsFromDB,
+  setUserDiscordNotificationToDB,
+  setUserEmailNotificationToDB,
+  getUserDiscordNotificationsFromDB,
+  getUserEmailNotificationsFromDB,
+  deleteAllNotificationsFromDB,
+  getAllDiscordNotificationsFromDB,
+  getAllEmailNotificationsFromDB,
+} = notificationModel;
 
-const notificationMessageBase = {
-  username: 'Daily Offers',
-  avatarURL:
-    'https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg',
-};
+const { getTodayNewOffersFromDB } = offersModel;
 
-const sendTodayNewOffers = async (offers: Offer[]) => {
-  const offerEmbeds = getEmbeds(offers);
-  if (offerEmbeds.length > 0) {
-    discordLogger.sendCustomMessage({
-      ...notificationMessageBase,
-      content: `New offers today! (${DateTime.now().toISODate()})`,
-    });
-    offerEmbeds.forEach((embed, i) => {
-      discordLogger.sendCustomMessage({
-        ...notificationMessageBase,
-        content: `(Part ${i + 1} of ${offerEmbeds.length})`,
-        embeds: [embed],
-      });
-    });
-  } else {
-    discordLogger.sendInfoMessage({ message: 'No new offers today!' });
+const getAllUserNotifications = getAllUserNotificationsFromDB;
+const getAllDiscordNotifications = getAllDiscordNotificationsFromDB;
+const getAllEmailNotifications = getAllEmailNotificationsFromDB;
+const setUserDiscordNotification = setUserDiscordNotificationToDB;
+const setUserEmailNotification = setUserEmailNotificationToDB;
+
+const sendAllDiscordNotifications = async () => {
+  const notifications = await getAllDiscordNotificationsFromDB();
+
+  for (const notification of notifications) {
+    await _sendDiscordNotification(notification);
   }
 };
 
+const sendUserDiscordNotification = async ({ userId }: { userId: string }) => {
+  const notifications = await getUserDiscordNotificationsFromDB(userId);
+
+  for (const notification of notifications) {
+    await _sendDiscordNotification(notification);
+  }
+};
+
+const sendUserEmailNotification = async ({ userId }: { userId: string }) => {
+  /** TODO */
+  const notifications = await getUserEmailNotificationsFromDB(userId);
+  return notifications;
+};
+
+const deleteAllNotifications = deleteAllNotificationsFromDB;
+
 export const notificationService = {
-  sendTodayNewOffers,
+  getAllDiscordNotifications,
+  getAllEmailNotifications,
+  getAllUserNotifications,
+  setUserDiscordNotification,
+  setUserEmailNotification,
+  sendUserDiscordNotification,
+  deleteAllNotifications,
+  sendUserEmailNotification,
+  sendAllDiscordNotifications,
 };
 
 const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {
@@ -66,3 +100,39 @@ const getEmbedContent = (offer: Offer) => ({
   name: offer.title,
   value: `Skills: ${offer.requiredSkills}\nFrom: ${offer.fromPln} PLN, To: ${offer.toPln} PLN\n[Link](${offer.url})`,
 });
+
+const _sendDiscordNotification = async (
+  notification: {
+    tags: {
+      name: string;
+    }[];
+  } & {
+    id: number;
+    createdAt: Date;
+    webhookId: string;
+    userId: string;
+  }
+) => {
+  const tags = notification.tags.map(({ name }) => name);
+  const offers = await getTodayNewOffersFromDB(tags);
+  const offerEmbeds = getEmbeds(offers);
+
+  if (offerEmbeds.length > 0) {
+    serviceLogger.sendCustomMessage({
+      ...notificationMessageBase,
+      content: `New offers today! (${DateTime.now().toISODate()})`,
+    });
+    offerEmbeds.forEach((embed, i) => {
+      serviceLogger.sendCustomMessage({
+        ...notificationMessageBase,
+        content: `(Part ${i + 1} of ${offerEmbeds.length})`,
+        embeds: [embed],
+      });
+    });
+  } else {
+    serviceLogger.sendCustomMessage({
+      ...notificationMessageBase,
+      content: `There's no new offers today :( !`,
+    });
+  }
+};

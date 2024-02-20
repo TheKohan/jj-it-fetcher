@@ -1,23 +1,84 @@
-import {
-  configService,
-  notificationService,
-  offersService,
-} from '@jjitfetcher/services';
+import { notificationService } from '@jjitfetcher/services';
 import type { Handler } from 'hono';
+import { getUserCtx } from '@jjitfetcher/utils';
+import {
+  assertSetDiscordNotificationPayload,
+  assertSetEmailNotificationPayload,
+} from '@jjitfetcher/validators';
 
-const getTodayNewOffersController: Handler = async c => {
-  const config = await configService.getConfig();
-  const todayNewOffers = await offersService.getTodayNewOffers(
-    config.notificationQuerySkills
-  );
-  await notificationService.sendTodayNewOffers(todayNewOffers);
+const {
+  getAllUserNotifications,
+  sendUserDiscordNotification,
+  sendUserEmailNotification,
+  setUserDiscordNotification,
+  setUserEmailNotification,
+  deleteAllNotifications,
+} = notificationService;
 
-  return c.json({
-    data: todayNewOffers,
-    todayCount: todayNewOffers.length,
+const sendUserDiscordNotificationController: Handler = async c => {
+  const user = getUserCtx(c);
+
+  await sendUserDiscordNotification({ userId: user.id });
+
+  return c.json({ message: 'Notification sent to discord!' });
+};
+
+const sendUserEmailNotificationController: Handler = async c => {
+  const user = getUserCtx(c);
+
+  await sendUserEmailNotification({ userId: user.id });
+
+  return c.json({ message: 'Notification sent to email!' });
+};
+
+const setUserDiscordNotificationController: Handler = async c => {
+  const user = getUserCtx(c);
+  const body = await c.req.json();
+
+  assertSetDiscordNotificationPayload(body);
+
+  await setUserDiscordNotification({
+    userId: user.id,
+    webhookId: body.webhookId,
+    tags: body.tags,
   });
+
+  return c.json({ message: 'Discord notification set!' });
+};
+
+const setUserEmailNotificationController: Handler = async c => {
+  const user = getUserCtx(c);
+  const body = await c.req.json();
+
+  assertSetEmailNotificationPayload(body);
+
+  await setUserEmailNotification({
+    userId: user.id,
+    email: body.email,
+    tags: body.tags,
+  });
+  return c.json({ message: 'Email notification set!' });
+};
+
+const getAllUserNotificationsController: Handler = async c => {
+  const user = getUserCtx(c);
+  const notifications = await getAllUserNotifications(user.id);
+
+  return c.json(notifications);
+};
+
+const deleteAllNotificationsController: Handler = async c => {
+  const user = getUserCtx(c);
+  await deleteAllNotifications(user.id);
+
+  return c.json({ message: 'All notifications deleted!' });
 };
 
 export const notificationController = {
-  getTodayNewOffersController,
+  sendUserDiscordNotificationController,
+  sendUserEmailNotificationController,
+  setUserDiscordNotificationController,
+  setUserEmailNotificationController,
+  getAllUserNotificationsController,
+  deleteAllNotificationsController,
 };

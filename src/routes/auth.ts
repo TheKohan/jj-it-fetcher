@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { supabase } from '../supabase-client';
+import prisma from '../db-client';
 
 const api = new Hono();
 
@@ -25,6 +26,13 @@ api.post('/register', async ctx => {
   if (error) {
     return ctx.json(error, error.status);
   }
+
+  await prisma.user.create({
+    data: {
+      id: data.user.id,
+      email: data.user.email,
+    },
+  });
 
   return ctx.text('Registered');
 });

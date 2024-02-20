@@ -5,7 +5,7 @@ import {
 } from '@jjitfetcher/modules';
 import { baseMessageEmbeds } from '@jjitfetcher/utils';
 import prisma from '../db-client';
-import { discordLogger } from '../logger';
+import { serviceLogger } from '../logger';
 
 const scrapeJJitToDB = () => justJoinItModule.scrape(prisma);
 const scrapeNoFluffJobsToDB = () => noFluffJobsModule.scrape(prisma);
@@ -27,7 +27,7 @@ const scrapeAllToDB = async () => {
     }
   }
 
-  await discordLogger.sendInfoMessage({ message: () => infoEmbed });
+  await serviceLogger.sendInfoMessage({ message: () => infoEmbed });
 };
 
 export const scrapingModel = {
