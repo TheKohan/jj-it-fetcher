@@ -4,7 +4,7 @@ Job board scraper.
 
 ## Description
 
-This project is an api scraper written with `Bun` and `Hono` and `Supabase`. It let's you aggregate Job offers and save them to DB of your liking. Feel free to fork and adjust it to scrape offers fledged to your profile.
+This project is an api scraper written with `Bun`, `Hono` and `Supabase`. It let's you aggregate Job offers and save them to DB of your liking. Feel free to fork and adjust it to scrape offers fledged to your profile.
 
 ## Getting Started
 
