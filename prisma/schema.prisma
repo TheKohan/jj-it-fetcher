@@ -27,21 +27,22 @@ model B2BOffer {
 }
 
 model User {
-  id            String         @unique
+  id            String         @id @unique
   createdAt     DateTime       @default(now())
   email         String         @unique
   notifications Notification[]
 }
 
 model Notification {
-  id                    Int                  @id @default(autoincrement())
-  createdAt             DateTime             @default(now())
-  user                  User?                @relation(fields: [userId], references: [id])
-  emailNotification     EmailNotification?
-  discordNotification   DiscordNotification?
-  userId                String?
-  emailNotificationId   Int
-  discordNotificationId Int
+  id                        Int                         @id @default(autoincrement())
+  createdAt                 DateTime                    @default(now())
+  user                      User                        @relation(fields: [userId], references: [id])
+  emailNotification         EmailNotification?
+  discordNotification       DiscordNotification?
+  userId                    String
+  serachTagsOnNotifications SearchTagsOnNotifications[]
+  emailNotificationId       Int
+  discordNotificationId     Int
 }
 
 model EmailNotification {
@@ -58,4 +59,18 @@ model DiscordNotification {
   webhookId      String
   Notification   Notification @relation(fields: [notificationId], references: [id])
   notificationId Int          @unique
+}
+
+model SearchTag {
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @unique
+  SearchTagsOnNotifications SearchTagsOnNotifications[]
+}
+
+model SearchTagsOnNotifications {
+  id             Int          @id @default(autoincrement())
+  searchTag      SearchTag    @relation(fields: [searchTagId], references: [id])
+  notification   Notification @relation(fields: [notificationId], references: [id])
+  searchTagId    Int
+  notificationId Int
 }
