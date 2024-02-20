@@ -1,8 +1,8 @@
 import { EmbedBuilder } from 'discord.js';
 import { DateTime } from 'luxon';
-import { serviceLogger } from '../logger';
 import { notificationModel } from '../models/notification';
 import { offersModel } from '../models/offers';
+import { sendDiscordWebhookMessage } from '@jjitfetcher/utils';
 
 const OFFERS_PER_MESSAGE = 10;
 
@@ -118,21 +118,30 @@ const _sendDiscordNotification = async (
   const offerEmbeds = getEmbeds(offers);
 
   if (offerEmbeds.length > 0) {
-    serviceLogger.sendCustomMessage({
-      ...notificationMessageBase,
-      content: `New offers today! (${DateTime.now().toISODate()})`,
+    sendDiscordWebhookMessage({
+      message: {
+        ...notificationMessageBase,
+        content: `New offers today! (${DateTime.now().toISODate()})`,
+      },
+      webhookUrl: notification.webhookId,
     });
     offerEmbeds.forEach((embed, i) => {
-      serviceLogger.sendCustomMessage({
-        ...notificationMessageBase,
-        content: `(Part ${i + 1} of ${offerEmbeds.length})`,
-        embeds: [embed],
+      sendDiscordWebhookMessage({
+        message: {
+          ...notificationMessageBase,
+          content: `(Part ${i + 1} of ${offerEmbeds.length})`,
+          embeds: [embed],
+        },
+        webhookUrl: notification.webhookId,
       });
     });
   } else {
-    serviceLogger.sendCustomMessage({
-      ...notificationMessageBase,
-      content: `There's no new offers today :( !`,
+    sendDiscordWebhookMessage({
+      message: {
+        ...notificationMessageBase,
+        content: `There's no new offers today :( !`,
+      },
+      webhookUrl: notification.webhookId,
     });
   }
 };
