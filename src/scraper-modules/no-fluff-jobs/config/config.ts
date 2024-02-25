@@ -16,5 +16,5 @@ export const getNoFluffJobPage = (page: number | undefined) =>
 export const noFluffJobsRequestPayload: NoFluffJobsPayload = {
   pageSize: 100,
   rawSearch:
-    'remote backend employment=b2b category=frontend,fullstack,mobile,embedded,testing,devops,architecture,security,game-dev,artificial-intelligence,data,sys-administrator,product-management,business-intelligence,business-analyst,erp',
+    'remote backend category=frontend,fullstack,mobile,embedded,testing,devops,architecture,security,game-dev,artificial-intelligence,data,sys-administrator,product-management,business-intelligence,business-analyst,erp',
 };

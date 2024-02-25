@@ -18,7 +18,7 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
     toPln: true,
   };
 
-  const pastFewDaysOffers = await prisma.b2BOffer.findMany({
+  const past7DaysOffers = await prisma.b2BOffer.findMany({
     where: {
       createdAt: {
         gte: today.minus({ days: 7 }).toJSDate(),
@@ -49,12 +49,30 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
   });
 
   const newOffers = todayOffers.filter(
-    offer => !pastFewDaysOffers.find(yOffer => yOffer.url === offer.url)
+    offer => !past7DaysOffers.find(yOffer => yOffer.url === offer.url)
   );
 
   return newOffers;
 };
 
+const clearMoreThan7DaysOldOffersFromDB = async () => {
+  const today = DateTime.now().minus({ day: 0 }).set({
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+  });
+
+  await prisma.b2BOffer.deleteMany({
+    where: {
+      createdAt: {
+        lt: today.minus({ days: 7 }).toJSDate(),
+      },
+    },
+  });
+};
+
 export const offersModel = {
   getTodayNewOffersFromDB,
+  clearMoreThan7DaysOldOffersFromDB,
 };

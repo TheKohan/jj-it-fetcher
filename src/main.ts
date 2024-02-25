@@ -7,7 +7,11 @@ import { z } from 'zod';
 import { serviceLogger } from './logger';
 import { authMiddleware } from './middlewares';
 import { authRouter } from './routes/auth';
-import { notificationService, scrapingService } from './services';
+import {
+  notificationService,
+  offersService,
+  scrapingService,
+} from './services';
 
 const { PORT } = process.env;
 
@@ -23,14 +27,43 @@ app.route('/api/', apiRouter);
  * Setup Cron Jobs.
  */
 
-cron.schedule('0 1 * * *', scrapingService.scrapeAll, {
-  name: 'SCRAPE_CRON_JOB',
-});
+cron.schedule(
+  '0 1 * * *',
+  async () => {
+    try {
+      await scrapingService.scrapeAll();
+      await offersService.clearMoreThan7DaysOldOffers();
+    } catch (e) {
+      if (e instanceof Error) {
+        await serviceLogger.sendErrorMessage({
+          message: embed =>
+            embed.setDescription(
+              `JJ-IT-FETCHER has crashed unexpected: ${e.message}`
+            ),
+        });
+      }
+    }
+  },
+  {
+    name: 'SCRAPE_CRON_JOB',
+  }
+);
 
 cron.schedule(
   '0 9 * * *',
   async () => {
-    await notificationService.sendAllDiscordNotifications();
+    try {
+      await notificationService.sendAllDiscordNotifications();
+    } catch (e) {
+      if (e instanceof Error) {
+        await serviceLogger.sendErrorMessage({
+          message: embed =>
+            embed.setDescription(
+              `JJ-IT-FETCHER has crashed unexpected: ${e.message}`
+            ),
+        });
+      }
+    }
   },
   {
     name: 'NEW_OFFER_NOTIFICATION_JOB',

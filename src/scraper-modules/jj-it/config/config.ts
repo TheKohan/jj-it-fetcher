@@ -5,5 +5,5 @@
 export const getJJITPageLink = (page: number | undefined) =>
   page
     ? `
-    https://api.justjoin.it/v2/user-panel/offers?employmentTypes[]=b2b&remote=true&withSalary=true&page=${page}&sortBy=published&orderBy=DESC&perPage=100&salaryCurrencies=PLN`
+    https://api.justjoin.it/v2/user-panel/offers?remote=true&page=${page}&sortBy=published&orderBy=DESC&perPage=100&salaryCurrencies=PLN`
     : undefined;
