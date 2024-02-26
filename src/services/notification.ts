@@ -118,15 +118,16 @@ const _sendDiscordNotification = async (
   const offerEmbeds = getEmbeds(offers);
 
   if (offerEmbeds.length > 0) {
-    sendDiscordWebhookMessage({
+    await sendDiscordWebhookMessage({
       message: {
         ...notificationMessageBase,
         content: `New offers today! (${DateTime.now().toISODate()})`,
       },
       webhookUrl: notification.webhookId,
     });
-    offerEmbeds.forEach((embed, i) => {
-      sendDiscordWebhookMessage({
+    let i = 0;
+    for (const embed of offerEmbeds) {
+      await sendDiscordWebhookMessage({
         message: {
           ...notificationMessageBase,
           content: `(Part ${i + 1} of ${offerEmbeds.length})`,
@@ -134,7 +135,8 @@ const _sendDiscordNotification = async (
         },
         webhookUrl: notification.webhookId,
       });
-    });
+      i++;
+    }
   } else {
     sendDiscordWebhookMessage({
       message: {
