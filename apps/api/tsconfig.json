@@ -1,4 +1,5 @@
 {
+  "extends": "../../base-tsconfig.json",
   "compilerOptions": {
     "lib": ["ESNext"],
     "target": "ESNext",
@@ -20,15 +21,15 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@prisma-client": ["./generated/prisma-client"], // Workaround for having a smaller docker image
-      "@jjitfetcher/services": ["./src/services"],
-      "@jjitfetcher/routes": ["./src/routes"],
-      "@jjitfetcher/modules": ["./src/scraper-modules"],
-      "@jjitfetcher/scripts": ["./src/scripts"],
-      "@jjitfetcher/controllers": ["./src/controllers"],
-      "@jjitfetcher/models": ["./src/models"],
-      "@jjitfetcher/utils": ["./src/utils"],
-      "@jjitfetcher/middlewares": ["./src/middlewares"],
-      "@jjitfetcher/validators": ["./src/validators"]
+      "@fetcher-api/services": ["./src/services"],
+      "@fetcher-api/routes": ["./src/routes"],
+      "@fetcher-api/modules": ["./src/scraper-modules"],
+      "@fetcher-api/scripts": ["./src/scripts"],
+      "@fetcher-api/controllers": ["./src/controllers"],
+      "@fetcher-api/models": ["./src/models"],
+      "@fetcher-api/utils": ["./src/utils"],
+      "@fetcher-api/middlewares": ["./src/middlewares"],
+      "@fetcher-api/validators": ["./src/validators"]
     }
   }
 }

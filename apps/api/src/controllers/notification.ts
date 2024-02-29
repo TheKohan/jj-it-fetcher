@@ -1,10 +1,10 @@
-import { notificationService } from '@jjitfetcher/services';
+import { notificationService } from '@fetcher-api/services';
 import type { Handler } from 'hono';
-import { getUserCtx } from '@jjitfetcher/utils';
+import { getUserCtx } from '@fetcher-api/utils';
 import {
   assertSetDiscordNotificationPayload,
   assertSetEmailNotificationPayload,
-} from '@jjitfetcher/validators';
+} from '@fetcher-api/validators';
 
 const {
   getAllUserNotifications,

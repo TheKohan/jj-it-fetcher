@@ -1,4 +1,4 @@
-import { scrapingController } from '@jjitfetcher/controllers';
+import { scrapingController } from '@fetcher-api/controllers';
 import { Hono } from 'hono';
 
 const api = new Hono();
