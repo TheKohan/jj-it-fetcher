@@ -1,4 +1,4 @@
-import { apiRouter } from '@jjitfetcher/routes';
+import { apiRouter } from '@fetcher-api/routes';
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import { logger } from 'hono/logger';

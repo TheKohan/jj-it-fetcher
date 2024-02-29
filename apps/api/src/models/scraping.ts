@@ -2,8 +2,8 @@ import {
   justJoinItModule,
   noFluffJobsModule,
   scraperModules,
-} from '@jjitfetcher/modules';
-import { baseMessageEmbeds } from '@jjitfetcher/utils';
+} from '@fetcher-api/modules';
+import { baseMessageEmbeds } from '@fetcher-api/utils';
 import prisma from '../db-client';
 import { serviceLogger } from '../logger';
 

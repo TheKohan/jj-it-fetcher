@@ -1,4 +1,4 @@
-import { notificationController } from '@jjitfetcher/controllers';
+import { notificationController } from '@fetcher-api/controllers';
 import { Hono } from 'hono';
 
 const api = new Hono();

@@ -2,7 +2,7 @@ import { EmbedBuilder } from 'discord.js';
 import { DateTime } from 'luxon';
 import { notificationModel } from '../models/notification';
 import { offersModel } from '../models/offers';
-import { sendDiscordWebhookMessage } from '@jjitfetcher/utils';
+import { sendDiscordWebhookMessage } from '@fetcher-api/utils';
 
 const OFFERS_PER_MESSAGE = 10;
 
