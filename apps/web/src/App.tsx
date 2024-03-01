@@ -1,11 +1,21 @@
-import "./App.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { HomePage, LoginPage } from "@fetcher-web/routes";
 
-function App() {
+const router = createBrowserRouter([
+	{
+		element: <HomePage />,
+		path: "/",
+	},
+	{
+		element: <LoginPage />,
+		path: "/login",
+	},
+]);
+
+export const App = () => {
 	return (
-		<>
-			<div>123</div>
-		</>
+		<div>
+			<RouterProvider router={router} />
+		</div>
 	);
-}
-
-export default App;
+};
