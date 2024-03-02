@@ -21,18 +21,22 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 	formType,
 	...props
 }) => {
-	const loginMutation = useLogin();
+	const { mutate: loginMutation, error, isPending } = useLogin();
 	const submitText = formType === "login" ? "Login" : "Sign Up";
 
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isLoading },
+		formState: { errors },
 	} = useForm<Inputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = async (data) =>
-		await loginMutation.mutate(data);
-
+	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+		if (formType === "login") {
+			await loginMutation(data);
+		} else {
+			// sign up
+		}
+	};
 	return (
 		<div className={cn("grid gap-6", className)} {...props}>
 			<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -42,12 +46,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 							<Label htmlFor="email">Email</Label>
 							<Input
 								id="email"
-								placeholder="name@example.com"
 								type="email"
 								autoCapitalize="none"
 								autoComplete="email"
 								autoCorrect="off"
-								disabled={isLoading}
+								disabled={isPending}
 								{...register("email", {
 									required: true,
 									pattern:
@@ -67,7 +70,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 								id="password"
 								type="password"
 								autoCorrect="off"
-								disabled={isLoading}
+								disabled={isPending}
 								{...register("password", {
 									required: true,
 									minLength:
@@ -83,9 +86,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 						<p className="text-destructive text-xs">
 							{errors.password?.message}
 						</p>
+						<p className="text-destructive text-xs">{error?.error}</p>
 					</div>
-					<Button disabled={isLoading}>
-						{isLoading && (
+					<Button disabled={isPending}>
+						{isPending && (
 							<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
 						)}
 						{submitText}

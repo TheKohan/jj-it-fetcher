@@ -12,12 +12,21 @@ import {
   offersService,
   scrapingService,
 } from './services';
+import { cors } from 'hono/cors';
 
 const { PORT } = process.env;
 
 const app = new Hono();
 
 app.use('*', logger());
+app.use(
+  '*',
+  cors({
+    origin: '*', //todo change to production url
+    allowMethods: ['POST', 'GET'],
+    credentials: true,
+  })
+);
 app.route('/auth/', authRouter);
 
 app.use('/api/*', authMiddleware);
@@ -76,7 +85,7 @@ cron.schedule(
 
 app.onError(async (err, c) => {
   if (err instanceof HTTPException) {
-    return err.getResponse();
+    return c.json({ error: err.message, status: err.status }, err.status);
   }
 
   if (err instanceof z.ZodError) {

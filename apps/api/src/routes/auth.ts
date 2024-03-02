@@ -1,16 +1,23 @@
 import { Hono } from 'hono';
 import { supabase } from '../supabase-client';
 import prisma from '../db-client';
+import { HTTPException } from 'hono/http-exception';
 
 const api = new Hono();
 
 api.post('/login', async ctx => {
   const { email, password } = await ctx.req.json();
 
-  await supabase.auth.signInWithPassword({
+  const response = await supabase.auth.signInWithPassword({
     email,
     password,
   });
+
+  if (response.error) {
+    throw new HTTPException(response.error.status, {
+      message: response.error.message,
+    });
+  }
 
   return ctx.text('Logged in');
 });
@@ -24,7 +31,7 @@ api.post('/register', async ctx => {
   });
 
   if (error) {
-    return ctx.json(error, error.status);
+    throw new HTTPException(error.status, { message: error.message });
   }
 
   await prisma.user.create({
@@ -41,7 +48,7 @@ api.get('/logout', async ctx => {
   const { error } = await supabase.auth.signOut();
 
   if (error) {
-    return ctx.json(error, error.status);
+    throw new HTTPException(error.status, { message: error.message });
   }
 
   return ctx.text('Logged out');

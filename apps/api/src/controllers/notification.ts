@@ -50,7 +50,7 @@ const setUserEmailNotificationController: Handler = async c => {
   const user = getUserCtx(c);
   const body = await c.req.json();
 
-  assertSetEmailNotificationPayload(body);
+  assertSetEmailNotificationPayload(body); //TODO: solve this with zValidator fn from HONO, search for every assert occurence
 
   await setUserEmailNotification({
     userId: user.id,
