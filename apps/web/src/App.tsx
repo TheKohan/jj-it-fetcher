@@ -1,5 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { HomePage, LoginPage } from "@fetcher-web/routes";
+import { HomePage, LoginPage, SignUpPage } from "@fetcher-web/routes";
+
+import "./globals.css";
 
 const router = createBrowserRouter([
 	{
@@ -10,12 +12,16 @@ const router = createBrowserRouter([
 		element: <LoginPage />,
 		path: "/login",
 	},
+	{
+		element: <SignUpPage />,
+		path: "/register",
+	},
 ]);
 
 export const App = () => {
 	return (
-		<div>
+		<>
 			<RouterProvider router={router} />
-		</div>
+		</>
 	);
 };
