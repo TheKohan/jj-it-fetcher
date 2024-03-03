@@ -44,21 +44,21 @@ export interface EmploymentType {
 }
 
 export enum Currency {
-  Pln = 'pln',
+  Pln = "pln",
 }
 
 export enum Type {
-  Any = 'any',
-  B2B = 'b2b',
-  MandateContract = 'mandate_contract',
-  Permanent = 'permanent',
+  Any = "any",
+  B2B = "b2b",
+  MandateContract = "mandate_contract",
+  Permanent = "permanent",
 }
 
 export enum ExperienceLevel {
-  CLevel = 'c_level',
-  Junior = 'junior',
-  Mid = 'mid',
-  Senior = 'senior',
+  CLevel = "c_level",
+  Junior = "junior",
+  Mid = "mid",
+  Senior = "senior",
 }
 
 export interface Multilocation {
@@ -70,13 +70,13 @@ export interface Multilocation {
 }
 
 export enum WorkingTime {
-  FullTime = 'full_time',
+  FullTime = "full_time",
 }
 
 export enum WorkplaceType {
-  Hybrid = 'hybrid',
-  Office = 'office',
-  Remote = 'remote',
+  Hybrid = "hybrid",
+  Office = "office",
+  Remote = "remote",
 }
 
 export interface Meta {

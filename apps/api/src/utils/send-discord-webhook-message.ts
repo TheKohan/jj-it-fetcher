@@ -1,4 +1,4 @@
-import { WebhookClient, type WebhookMessageCreateOptions } from 'discord.js';
+import { WebhookClient, type WebhookMessageCreateOptions } from "discord.js";
 
 type ISetUserDiscordNotificationProps = {
   webhookUrl: string;

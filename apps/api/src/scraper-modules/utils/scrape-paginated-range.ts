@@ -1,9 +1,9 @@
-import { wait } from './common.ts';
+import { wait } from "./common.ts";
 
 type ScrapePaginatedRangeProps<T extends object, B extends object> = {
   scrapeFirstUrl: string;
   scrapePayload?: any;
-  scrapeMethod?: 'GET' | 'POST';
+  scrapeMethod?: "GET" | "POST";
   delayMs: number;
   headers: Record<string, string>;
   acc?: B[];
@@ -20,7 +20,7 @@ export const scrapePaginatedRange: <T extends object, B extends object>(
   props: ScrapePaginatedRangeProps<T, B>
 ) => Promise<B[]> = async ({
   scrapeFirstUrl,
-  scrapeMethod = 'GET',
+  scrapeMethod = "GET",
   scrapePayload,
   delayMs,
   headers,
@@ -43,7 +43,7 @@ export const scrapePaginatedRange: <T extends object, B extends object>(
     .filter(v => v) as string[];
 
   for (const page of pages) {
-    console.log('Started Scraping url:', page);
+    console.log("Started Scraping url:", page);
     const request = await fetch(page, {
       method: scrapeMethod,
       headers,

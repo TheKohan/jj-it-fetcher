@@ -1,6 +1,6 @@
-import type { Prisma, PrismaClient } from '@prisma-client';
-import { justJoinItModule } from '.';
-import { noFluffJobsModule } from './no-fluff-jobs/module';
+import type { Prisma, PrismaClient } from "@prisma-client";
+import { justJoinItModule } from ".";
+import { noFluffJobsModule } from "./no-fluff-jobs/module";
 
 export type ScraperModuleModule = {
   name: string;

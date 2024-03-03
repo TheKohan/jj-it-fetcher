@@ -20,7 +20,7 @@ export interface NoFluffJobsPayload {
 }
 
 export enum CriteriaSearch {
-  B2B = 'b2b',
+  B2B = "b2b",
 }
 
 export interface Posting {
@@ -49,8 +49,8 @@ export interface Posting {
 }
 
 export enum Flavor {
-  Business = 'business',
-  It = 'it',
+  Business = "business",
+  It = "it",
 }
 
 export interface Location {
@@ -76,17 +76,17 @@ export interface Country {
 }
 
 export enum Region {
-  Deu = 'DEU',
-  Pl = 'pl',
-  Pol = 'POL',
-  Ua = 'ua',
+  Deu = "DEU",
+  Pl = "pl",
+  Pol = "POL",
+  Ua = "ua",
 }
 
 export enum Name {
-  Germany = 'Germany',
-  Poland = 'Poland',
-  Polish = 'Polish',
-  Ukrainian = 'Ukrainian',
+  Germany = "Germany",
+  Poland = "Poland",
+  Polish = "Polish",
+  Ukrainian = "Ukrainian",
 }
 
 export interface GeoLocation {
@@ -95,32 +95,32 @@ export interface GeoLocation {
 }
 
 export enum PostalCode {
-  Empty = '',
-  The00121 = '00-121',
-  The00805 = '00-805',
-  The00838 = '00-838',
-  The01020 = '01-020',
-  The31401Kraków = '31-401 Kraków',
-  The60363 = '60-363',
+  Empty = "",
+  The00121 = "00-121",
+  The00805 = "00-805",
+  The00838 = "00-838",
+  The01020 = "01-020",
+  The31401Kraków = "31-401 Kraków",
+  The60363 = "60-363",
 }
 
 export enum Province {
-  GreaterPoland = 'greater-poland',
-  HolyCross = 'holy-cross',
-  KuyavianPomeranian = 'kuyavian-pomeranian',
-  LesserPoland = 'lesser-poland',
-  Lodz = 'lodz',
-  LowerSilesian = 'lower-silesian',
-  Lublin = 'lublin',
-  Lubusz = 'lubusz',
-  Masovian = 'masovian',
-  Opole = 'opole',
-  Podlaskie = 'podlaskie',
-  Pomeranian = 'pomeranian',
-  Silesian = 'silesian',
-  Subcarpathian = 'subcarpathian',
-  WarmianMasurian = 'warmian-masurian',
-  WestPomeranian = 'west-pomeranian',
+  GreaterPoland = "greater-poland",
+  HolyCross = "holy-cross",
+  KuyavianPomeranian = "kuyavian-pomeranian",
+  LesserPoland = "lesser-poland",
+  Lodz = "lodz",
+  LowerSilesian = "lower-silesian",
+  Lublin = "lublin",
+  Lubusz = "lubusz",
+  Masovian = "masovian",
+  Opole = "opole",
+  Podlaskie = "podlaskie",
+  Pomeranian = "pomeranian",
+  Silesian = "silesian",
+  Subcarpathian = "subcarpathian",
+  WarmianMasurian = "warmian-masurian",
+  WestPomeranian = "west-pomeranian",
 }
 
 export interface Salary {
@@ -131,14 +131,14 @@ export interface Salary {
 }
 
 export enum Currency {
-  Pln = 'PLN',
+  Pln = "PLN",
 }
 
 export enum Seniority {
-  Expert = 'Expert',
-  Junior = 'Junior',
-  Mid = 'Mid',
-  Senior = 'Senior',
+  Expert = "Expert",
+  Junior = "Junior",
+  Mid = "Mid",
+  Senior = "Senior",
 }
 
 export interface Tiles {
@@ -151,7 +151,7 @@ export interface Value {
 }
 
 export enum Type {
-  Category = 'category',
-  JobLanguage = 'jobLanguage',
-  Requirement = 'requirement',
+  Category = "category",
+  JobLanguage = "jobLanguage",
+  Requirement = "requirement",
 }

@@ -1,15 +1,15 @@
-import { EmbedBuilder } from 'discord.js';
-import { DateTime } from 'luxon';
-import { notificationModel } from '../models/notification';
-import { offersModel } from '../models/offers';
-import { sendDiscordWebhookMessage } from '@fetcher-api/utils';
+import { sendDiscordWebhookMessage } from "@fetcher-api/utils";
+import { EmbedBuilder } from "discord.js";
+import { DateTime } from "luxon";
+import { notificationModel } from "../models/notification";
+import { offersModel } from "../models/offers";
 
 const OFFERS_PER_MESSAGE = 10;
 
 const notificationMessageBase = {
-  username: 'Daily Offers',
+  username: "Daily Offers",
   avatarURL:
-    'https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg',
+    "https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg",
 };
 
 type Offer = {
@@ -81,7 +81,7 @@ const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {
   const embeds = offers.reduce((acc, next, index) => {
     if (!acc.length || index % OFFERS_PER_MESSAGE === 0) {
       acc.push(
-        new EmbedBuilder().setColor('Orange').addFields(getEmbedContent(next))
+        new EmbedBuilder().setColor("Orange").addFields(getEmbedContent(next))
       );
     } else {
       acc[acc.length - 1].addFields(getEmbedContent(next));

@@ -1,1 +1,1 @@
-export * from './notification-validators';
+export * from "./notification-validators";

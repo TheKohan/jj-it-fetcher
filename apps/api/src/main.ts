@@ -1,43 +1,43 @@
-import { apiRouter } from '@fetcher-api/routes';
-import { Hono } from 'hono';
-import { HTTPException } from 'hono/http-exception';
-import { logger } from 'hono/logger';
-import cron from 'node-cron';
-import { z } from 'zod';
-import { serviceLogger } from './logger';
-import { authMiddleware } from './middlewares';
-import { authRouter } from './routes/auth';
+import { apiRouter } from "@fetcher-api/routes";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { HTTPException } from "hono/http-exception";
+import { logger } from "hono/logger";
+import cron from "node-cron";
+import { z } from "zod";
+import { serviceLogger } from "./logger";
+import { authMiddleware } from "./middlewares";
+import { authRouter } from "./routes/auth";
 import {
   notificationService,
   offersService,
   scrapingService,
-} from './services';
-import { cors } from 'hono/cors';
+} from "./services";
 
 const { PORT } = process.env;
 
 const app = new Hono();
 
-app.use('*', logger());
+app.use("*", logger());
 app.use(
-  '*',
+  "*",
   cors({
-    origin: '*', //todo change to production url
-    allowMethods: ['POST', 'GET'],
+    origin: "*", //todo change to production url
+    allowMethods: ["POST", "GET"],
     credentials: true,
   })
 );
-app.route('/auth/', authRouter);
+app.route("/auth", authRouter);
 
-app.use('/api/*', authMiddleware);
-app.route('/api/', apiRouter);
+app.use("/api/*", authMiddleware);
+app.route("/api", apiRouter);
 
 /**
  * Setup Cron Jobs.
  */
 
 cron.schedule(
-  '0 1 * * *',
+  "0 1 * * *",
   async () => {
     try {
       await scrapingService.scrapeAll();
@@ -54,12 +54,12 @@ cron.schedule(
     }
   },
   {
-    name: 'SCRAPE_CRON_JOB',
+    name: "SCRAPE_CRON_JOB",
   }
 );
 
 cron.schedule(
-  '0 9 * * *',
+  "0 9 * * *",
   async () => {
     try {
       await notificationService.sendAllDiscordNotifications();
@@ -75,7 +75,7 @@ cron.schedule(
     }
   },
   {
-    name: 'NEW_OFFER_NOTIFICATION_JOB',
+    name: "NEW_OFFER_NOTIFICATION_JOB",
   }
 );
 
@@ -92,7 +92,7 @@ app.onError(async (err, c) => {
     return c.json({ error: err.message }, 400);
   }
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     try {
       await serviceLogger.sendErrorMessage({
         message: embed =>
@@ -111,14 +111,14 @@ app.onError(async (err, c) => {
 });
 
 app.notFound(c => {
-  return c.text('Page not found', 404);
+  return c.text("Page not found", 404);
 });
 
 /**
  * Start server.
  */
 
-console.log('Server starting on port: ', PORT);
+console.log("Server starting on port: ", PORT);
 
 export default {
   port: +PORT,

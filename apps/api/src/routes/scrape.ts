@@ -1,5 +1,5 @@
-import { scrapingController } from '@fetcher-api/controllers';
-import { Hono } from 'hono';
+import { scrapingController } from "@fetcher-api/controllers";
+import { Hono } from "hono";
 
 const api = new Hono();
 
@@ -9,8 +9,8 @@ const {
   scrapeNoFluffJobsController,
 } = scrapingController;
 
-api.get('/scrape-jj-it', scrapeJustJoinItController);
-api.get('/scrape-no-fluff-jobs', scrapeNoFluffJobsController);
-api.get('/scrape-all', scrapeAllController);
+api.get("/scrape-jj-it", scrapeJustJoinItController);
+api.get("/scrape-no-fluff-jobs", scrapeNoFluffJobsController);
+api.get("/scrape-all", scrapeAllController);
 
 export const scrapeRouter = api;

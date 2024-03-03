@@ -1,12 +1,16 @@
-import { Hono } from 'hono';
-import { supabase } from '../supabase-client';
-import prisma from '../db-client';
-import { HTTPException } from 'hono/http-exception';
+import { Hono } from "hono";
+import { HTTPException } from "hono/http-exception";
+import prisma from "../db-client";
+import { supabase } from "../supabase-client";
 
 const api = new Hono();
 
-api.post('/login', async ctx => {
+api.post("/login", async ctx => {
   const { email, password } = await ctx.req.json();
+
+  const { data, error: userAuthError } = await supabase.auth.getUser();
+
+  console.log(data);
 
   const response = await supabase.auth.signInWithPassword({
     email,
@@ -19,10 +23,10 @@ api.post('/login', async ctx => {
     });
   }
 
-  return ctx.text('Logged in');
+  return ctx.json({ data: response });
 });
 
-api.post('/register', async ctx => {
+api.post("/register", async ctx => {
   const { email, password } = await ctx.req.json();
 
   const { data, error } = await supabase.auth.signUp({
@@ -41,17 +45,17 @@ api.post('/register', async ctx => {
     },
   });
 
-  return ctx.text('Registered');
+  return ctx.text("Registered");
 });
 
-api.get('/logout', async ctx => {
+api.get("/logout", async ctx => {
   const { error } = await supabase.auth.signOut();
 
   if (error) {
     throw new HTTPException(error.status, { message: error.message });
   }
 
-  return ctx.text('Logged out');
+  return ctx.text("Logged out");
 });
 
 export const authRouter = api;

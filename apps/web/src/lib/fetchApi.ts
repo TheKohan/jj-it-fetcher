@@ -1,12 +1,10 @@
-const apiUrl = 'http://localhost:8000';
+const apiUrl = "http://localhost:8000";
 
 export type SuccessResponse<T> = {
   data: T;
-  error: null;
 };
 
 export type ErrorResponse = {
-  data: null;
   error: string;
   status: number;
 };
@@ -18,7 +16,7 @@ export const fetchApi: <T>(
   options: RequestInit
 ) => Promise<SuccessResponse<T>> = async (url, options: RequestInit) => {
   const baseBody = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
   const response = await fetch(`${apiUrl}${url}`, { ...baseBody, ...options });
   const data = await response.json();

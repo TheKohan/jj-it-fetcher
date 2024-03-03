@@ -1,5 +1,5 @@
-import { notificationController } from '@fetcher-api/controllers';
-import { Hono } from 'hono';
+import { notificationController } from "@fetcher-api/controllers";
+import { Hono } from "hono";
 
 const api = new Hono();
 
@@ -13,12 +13,12 @@ const {
 } = notificationController;
 
 api
-  .post('/')
+  .post("/")
   .get(getAllUserNotificationsController)
   .delete(deleteAllNotificationsController);
-api.post('/email', setUserEmailNotificationController);
-api.get('/email/send', sendUserEmailNotificationController);
-api.post('/discord', setUserDiscordNotificationController);
-api.get('/discord/send', sendUserDiscordNotificationController);
+api.post("/email", setUserEmailNotificationController);
+api.get("/email/send", sendUserEmailNotificationController);
+api.post("/discord", setUserDiscordNotificationController);
+api.get("/discord/send", sendUserDiscordNotificationController);
 
 export const notificationsRouter = api;

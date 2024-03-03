@@ -1,5 +1,5 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { HomePage, LoginPage, SignUpPage } from "@fetcher-web/routes";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { App } from './app.tsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { App } from "./app.tsx";
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 if (root) {
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
@@ -10,5 +10,5 @@ if (root) {
     </React.StrictMode>
   );
 } else {
-  throw new Error('No root element found');
+  throw new Error("No root element found");
 }

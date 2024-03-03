@@ -1,10 +1,10 @@
-import { notificationService } from '@fetcher-api/services';
-import type { Handler } from 'hono';
-import { getUserCtx } from '@fetcher-api/utils';
+import { notificationService } from "@fetcher-api/services";
+import { getUserCtx } from "@fetcher-api/utils";
 import {
   assertSetDiscordNotificationPayload,
   assertSetEmailNotificationPayload,
-} from '@fetcher-api/validators';
+} from "@fetcher-api/validators";
+import type { Handler } from "hono";
 
 const {
   getAllUserNotifications,
@@ -20,7 +20,7 @@ const sendUserDiscordNotificationController: Handler = async c => {
 
   await sendUserDiscordNotification({ userId: user.id });
 
-  return c.json({ message: 'Notification sent to discord!' });
+  return c.json({ message: "Notification sent to discord!" });
 };
 
 const sendUserEmailNotificationController: Handler = async c => {
@@ -28,7 +28,7 @@ const sendUserEmailNotificationController: Handler = async c => {
 
   await sendUserEmailNotification({ userId: user.id });
 
-  return c.json({ message: 'Notification sent to email!' });
+  return c.json({ message: "Notification sent to email!" });
 };
 
 const setUserDiscordNotificationController: Handler = async c => {
@@ -43,7 +43,7 @@ const setUserDiscordNotificationController: Handler = async c => {
     tags: body.tags,
   });
 
-  return c.json({ message: 'Discord notification set!' });
+  return c.json({ message: "Discord notification set!" });
 };
 
 const setUserEmailNotificationController: Handler = async c => {
@@ -57,7 +57,7 @@ const setUserEmailNotificationController: Handler = async c => {
     email: body.email,
     tags: body.tags,
   });
-  return c.json({ message: 'Email notification set!' });
+  return c.json({ message: "Email notification set!" });
 };
 
 const getAllUserNotificationsController: Handler = async c => {
@@ -71,7 +71,7 @@ const deleteAllNotificationsController: Handler = async c => {
   const user = getUserCtx(c);
   await deleteAllNotifications(user.id);
 
-  return c.json({ message: 'All notifications deleted!' });
+  return c.json({ message: "All notifications deleted!" });
 };
 
 export const notificationController = {

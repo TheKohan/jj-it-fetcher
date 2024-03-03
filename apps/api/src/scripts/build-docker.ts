@@ -1,22 +1,22 @@
-import { parseArgs } from 'util';
-import { $ } from 'bun';
+import { parseArgs } from "util";
+import { $ } from "bun";
 
-const platforms = ['amd', 'arm'] as const;
+const platforms = ["amd", "arm"] as const;
 
 type Platforms = (typeof platforms)[number];
 
 const platformConfig: Record<Platforms, string> = {
-  amd: 'linux/amd64',
-  arm: 'linux/arm64',
+  amd: "linux/amd64",
+  arm: "linux/arm64",
 };
 
 const { values } = parseArgs({
   args: Bun.argv,
   options: {
     platform: {
-      type: 'string',
-      short: 'p',
-      default: 'arm',
+      type: "string",
+      short: "p",
+      default: "arm",
     },
   },
   strict: true,
@@ -33,27 +33,27 @@ const {
 const { platform } = values;
 
 if (!DATABASE_URL) {
-  throw new Error('DATABASE_URL Missing');
+  throw new Error("DATABASE_URL Missing");
 }
 if (!SUPABASE_API_KEY) {
-  throw new Error('SUPABASE_API_KEY Missing');
+  throw new Error("SUPABASE_API_KEY Missing");
 }
 if (!SUPABASE_URL) {
-  throw new Error('SUPABASE_URL Missing');
+  throw new Error("SUPABASE_URL Missing");
 }
 if (!DIRECT_URL) {
-  throw new Error('DIRECT_URL Missing');
+  throw new Error("DIRECT_URL Missing");
 }
 if (!DISCORD_WEBHOOK_URL) {
-  throw new Error('DISCORD_WEBHOOK_URL Missing');
+  throw new Error("DISCORD_WEBHOOK_URL Missing");
 }
-if (!DISCORD_WEBHOOK_URL.startsWith('https://')) {
-  throw new Error('DISCORD_WEBHOOK_URL must start with https://');
+if (!DISCORD_WEBHOOK_URL.startsWith("https://")) {
+  throw new Error("DISCORD_WEBHOOK_URL must start with https://");
 }
 if (!platforms.includes(platform as Platforms)) {
   throw new Error(
     `Unsupported platform, please use one of the following: ${platforms.join(
-      ', '
+      ", "
     )}`
   );
 }

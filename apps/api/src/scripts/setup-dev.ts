@@ -1,4 +1,4 @@
-import { $ } from 'bun';
+import { $ } from "bun";
 
 /**
  * Start the docker compose environment with postgres.

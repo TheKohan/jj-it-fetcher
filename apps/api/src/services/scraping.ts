@@ -1,4 +1,4 @@
-import { scrapingModel } from '../models/scraping';
+import { scrapingModel } from "../models/scraping";
 
 const { scrapeAllToDB, scrapeJJitToDB, scrapeNoFluffJobsToDB } = scrapingModel;
 

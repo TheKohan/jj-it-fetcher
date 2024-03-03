@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon';
-import prisma from '../db-client';
+import { DateTime } from "luxon";
+import prisma from "../db-client";
 
 const getTodayNewOffersFromDB = async (tags: string[]) => {
   const today = DateTime.now().minus({ day: 0 }).set({

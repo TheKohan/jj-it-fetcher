@@ -1,27 +1,27 @@
-import { EmbedBuilder, type WebhookMessageCreateOptions } from 'discord.js';
+import { EmbedBuilder, type WebhookMessageCreateOptions } from "discord.js";
 
 export type MessageBuilder = (builder: EmbedBuilder) => EmbedBuilder;
 
 export const baseMessageEmbeds = {
   error: () =>
     new EmbedBuilder()
-      .setTitle('API ERROR:')
-      .setColor('Red')
+      .setTitle("API ERROR:")
+      .setColor("Red")
       .setTimestamp(Date.now()),
   info: () =>
     new EmbedBuilder()
-      .setTitle('API INFO:')
-      .setColor('Blue')
+      .setTitle("API INFO:")
+      .setColor("Blue")
       .setTimestamp(Date.now()),
   warning: () =>
     new EmbedBuilder()
-      .setTitle('API WARNING:')
-      .setColor('Orange')
+      .setTitle("API WARNING:")
+      .setColor("Orange")
       .setTimestamp(Date.now()),
   success: () =>
     new EmbedBuilder()
-      .setTitle('API SUCCESS:')
-      .setColor('Green')
+      .setTitle("API SUCCESS:")
+      .setColor("Green")
       .setTimestamp(Date.now()),
 } as const;
 
@@ -34,9 +34,9 @@ type MessageCreatorFun = (
 
 export const getMessage: MessageCreatorFun = (messageType, message) => {
   const embed =
-    typeof message === 'string'
+    typeof message === "string"
       ? baseMessageEmbeds[messageType]().addFields({
-          name: 'Message:',
+          name: "Message:",
           value: message,
         })
       : message(baseMessageEmbeds[messageType]());

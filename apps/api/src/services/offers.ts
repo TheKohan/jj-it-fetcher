@@ -1,4 +1,4 @@
-import { offersModel } from '@fetcher-api/models';
+import { offersModel } from "@fetcher-api/models";
 
 const { getTodayNewOffersFromDB, clearMoreThan7DaysOldOffersFromDB } =
   offersModel;

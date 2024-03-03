@@ -1,9 +1,9 @@
-import { wait } from './common.ts';
+import { wait } from "./common.ts";
 
 type ScrapePaginatedDeepProps<T extends object, B extends object> = {
   scrapeUrl: string;
   scrapePayload?: any;
-  scrapeMethod?: 'GET' | 'POST';
+  scrapeMethod?: "GET" | "POST";
   delayMs: number;
   headers: Record<string, string>;
   acc?: B[];
@@ -19,7 +19,7 @@ export const scrapePaginatedDeep: <T extends object, B extends object>(
   props: ScrapePaginatedDeepProps<T, B>
 ) => Promise<B[]> = async ({
   scrapeUrl,
-  scrapeMethod = 'GET',
+  scrapeMethod = "GET",
   scrapePayload,
   delayMs,
   headers,
@@ -27,7 +27,7 @@ export const scrapePaginatedDeep: <T extends object, B extends object>(
   resolveNextLink,
   resolveData,
 }) => {
-  console.log('Started Scraping url:', scrapeUrl);
+  console.log("Started Scraping url:", scrapeUrl);
 
   const request = await fetch(scrapeUrl, {
     method: scrapeMethod,

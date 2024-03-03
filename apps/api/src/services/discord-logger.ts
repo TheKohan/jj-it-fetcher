@@ -2,8 +2,8 @@ import {
   type MessageBuilder,
   type MessageType,
   getMessage,
-} from '@fetcher-api/utils';
-import type { WebhookClient, WebhookMessageCreateOptions } from 'discord.js';
+} from "@fetcher-api/utils";
+import type { WebhookClient, WebhookMessageCreateOptions } from "discord.js";
 
 type MessageProps = { message: string | MessageBuilder };
 type _MessageProps = MessageProps & { type: MessageType };
@@ -21,16 +21,16 @@ export class DiscordLoggerService {
   }
 
   async sendErrorMessage({ message }: MessageProps) {
-    await this.sendMessage({ type: 'error', message });
+    await this.sendMessage({ type: "error", message });
   }
   async sendSuccessMessage({ message }: MessageProps) {
-    await this.sendMessage({ type: 'success', message });
+    await this.sendMessage({ type: "success", message });
   }
   async sendWarningMessage({ message }: MessageProps) {
-    await this.sendMessage({ type: 'warning', message });
+    await this.sendMessage({ type: "warning", message });
   }
   async sendInfoMessage({ message }: MessageProps) {
-    await this.sendMessage({ type: 'info', message });
+    await this.sendMessage({ type: "info", message });
   }
   async sendCustomMessage(message: WebhookMessageCreateOptions) {
     await this.webhookClient.send(message);
