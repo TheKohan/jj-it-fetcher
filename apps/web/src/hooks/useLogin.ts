@@ -12,6 +12,9 @@ export const useLogin = () =>
   useMutation<AuthTokenResponsePassword, ErrorResponse, UseLoginProps>({
     mutationKey: ["login"],
     mutationFn: async ({ email, password }) => {
-      return await supabase.auth.signInWithPassword({ email, password });
+      return await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
     },
   });
