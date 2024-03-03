@@ -8,10 +8,6 @@ const api = new Hono();
 api.post("/login", async ctx => {
   const { email, password } = await ctx.req.json();
 
-  const { data, error: userAuthError } = await supabase.auth.getUser();
-
-  console.log(data);
-
   const response = await supabase.auth.signInWithPassword({
     email,
     password,
