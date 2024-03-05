@@ -7,7 +7,7 @@
 		"dev": "vite --port 3000",
 		"build": "tsc && vite build",
 		"lint": "bunx @biomejs/biome lint ./src",
-    "format": "bunx @biomejs/biome check --apply ./src",
+		"format": "bunx @biomejs/biome check --apply ./src",
 		"preview": "vite preview"
 	},
 	"dependencies": {

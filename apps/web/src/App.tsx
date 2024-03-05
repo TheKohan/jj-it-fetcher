@@ -1,24 +1,10 @@
-import { HomePage, LoginPage, SignUpPage } from "@fetcher-web/routes";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./globals.css";
-
-const router = createBrowserRouter([
-  {
-    element: <HomePage />,
-    path: "/",
-  },
-  {
-    element: <LoginPage />,
-    path: "/login",
-  },
-  {
-    element: <SignUpPage />,
-    path: "/register",
-  },
-]);
+import { AuthProvider } from "./context";
+import { router } from "./router";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +17,9 @@ const queryClient = new QueryClient({
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   );
 };

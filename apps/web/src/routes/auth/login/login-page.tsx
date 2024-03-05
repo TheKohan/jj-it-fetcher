@@ -1,18 +1,10 @@
-import { buttonVariants } from "@fetcher-web/components/ui/button";
-import { fetchApi } from "@fetcher-web/lib";
+import { buttonVariants } from "@fetcher-web/components";
 import { cn } from "@fetcher-web/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { AuthForm } from "../components";
+import type { FC } from "react";
 
 export const LoginPage: FC = () => {
-  const { data, refetch } = useQuery({
-    queryKey: ["login"],
-    queryFn: () => {
-      return fetchApi("/api/notifications", { method: "GET" });
-    },
-  });
   return (
     <>
       <div className="container relative h-screen flex items-center justify-center">
@@ -32,9 +24,6 @@ export const LoginPage: FC = () => {
             </h1>
           </div>
           <AuthForm formType={"login"} />
-          <button type="button" onClick={() => refetch()}>
-            1231231
-          </button>
         </div>
       </div>
     </>

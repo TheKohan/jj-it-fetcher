@@ -1,5 +1,5 @@
 import type { ErrorResponse } from "@fetcher-web/lib";
-import { supabase } from "@fetcher-web/lib/supabase";
+import { supabase } from "@fetcher-web/lib";
 import type { AuthTokenResponsePassword } from "@supabase/supabase-js";
 import { useMutation } from "@tanstack/react-query";
 

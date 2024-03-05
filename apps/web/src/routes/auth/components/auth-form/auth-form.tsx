@@ -1,8 +1,5 @@
-import { Button } from "@fetcher-web/components/ui/button";
-import { Icons } from "@fetcher-web/components/ui/icons";
-import { Input } from "@fetcher-web/components/ui/input";
-import { Label } from "@fetcher-web/components/ui/label";
-import { useLogin } from "@fetcher-web/hooks/useLogin";
+import { Button, Icons, Input, Label } from "@fetcher-web/components";
+import { useLogin } from "@fetcher-web/hooks";
 import { cn } from "@fetcher-web/lib/utils";
 import type * as React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";

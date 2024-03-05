@@ -1,3 +1,5 @@
+import { getSession } from "./utils";
+
 const apiUrl = "http://localhost:8000";
 
 export type SuccessResponse<T> = {
@@ -15,6 +17,8 @@ export const fetchApi: <T>(
   url: string,
   options: RequestInit
 ) => Promise<SuccessResponse<T>> = async (url, options: RequestInit) => {
+  const session = getSession();
+
   const baseBody = {
     "Content-Type": "application/json",
   };
