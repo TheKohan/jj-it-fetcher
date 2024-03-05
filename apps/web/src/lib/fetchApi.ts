@@ -19,13 +19,24 @@ export const fetchApi: <T>(
 ) => Promise<SuccessResponse<T>> = async (url, options: RequestInit) => {
   const session = getSession();
 
+  const baseHeaders = new Headers({});
+
+  if (session) {
+    baseHeaders.append("Authorization", `Bearer ${session.access_token}`);
+  }
+
   const baseBody = {
     "Content-Type": "application/json",
+    headers: baseHeaders,
   };
-  const response = await fetch(`${apiUrl}${url}`, { ...baseBody, ...options });
+
+  const response = await fetch(`${apiUrl}${url}`, {
+    ...baseBody,
+    ...options,
+  });
   const data = await response.json();
   if (!response.ok) {
     return Promise.reject(data);
   }
-  return await data;
+  return data;
 };

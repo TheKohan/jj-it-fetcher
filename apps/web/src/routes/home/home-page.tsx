@@ -1,17 +1,18 @@
+import { fetchApi } from "@fetcher-web/lib";
+import { useQuery } from "@tanstack/react-query";
 import type { FC } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const HomePage: FC = () => {
-  const navigate = useNavigate();
-
+  const { data } = useQuery({
+    queryKey: ["le"],
+    queryFn: () => {
+      return fetchApi("/api/notifications/", { method: "GET" });
+    },
+  });
   return (
     <div>
       <h1>HomePage</h1>
-      <div>
-        <button type="button" onClick={() => navigate("/login")}>
-          Navigate to Login Page
-        </button>
-      </div>
+      {data && <div>{data}</div>}
     </div>
   );
 };

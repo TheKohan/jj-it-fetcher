@@ -1,13 +1,28 @@
+import type { UserContext } from "@fetcher-api/utils";
 import type { MiddlewareHandler } from "hono";
-import { supabase } from "../supabase-client";
+
+import jwt, { type JwtPayload } from "jsonwebtoken";
+
+const { SUPABASE_JWT_SECRET } = process.env;
 
 export const authMiddleware: MiddlewareHandler = async (ctx, next) => {
-  const { data, error } = await supabase.auth.getUser();
+  const authorization = ctx.req.headers.get("authorization");
 
-  if (error) {
+  if (!authorization) {
     return ctx.text("Unauthorized", 401);
   }
-  ctx.set("user", data.user);
+
+  const clientJwt = authorization.split("Bearer ").pop();
+  try {
+    const user = jwt.verify(
+      clientJwt,
+      process.env.SUPABASE_JWT_SECRET
+    ) as JwtPayload;
+
+    ctx.set("user", { id: user.sub } as UserContext);
+  } catch (e) {
+    return ctx.text("Unauthorized", 401);
+  }
 
   await next();
 };
