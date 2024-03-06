@@ -14,10 +14,7 @@ export const authMiddleware: MiddlewareHandler = async (ctx, next) => {
 
   const clientJwt = authorization.split("Bearer ").pop();
   try {
-    const user = jwt.verify(
-      clientJwt,
-      process.env.SUPABASE_JWT_SECRET
-    ) as JwtPayload;
+    const user = jwt.verify(clientJwt, SUPABASE_JWT_SECRET) as JwtPayload;
 
     ctx.set("user", { id: user.sub } as UserContext);
   } catch (e) {
