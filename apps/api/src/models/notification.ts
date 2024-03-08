@@ -13,7 +13,7 @@ type ISetUserDiscordNotificationProps = {
 };
 
 const getAllUserNotificationsFromDB = (userId: string) => {
-  return prisma.notification.findMany({
+  return prisma.notification.findFirst({
     where: {
       userId,
     },

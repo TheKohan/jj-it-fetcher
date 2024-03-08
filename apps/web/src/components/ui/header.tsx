@@ -9,8 +9,8 @@ interface HeaderProps {
 export const Header: FC<HeaderProps> = ({ name }) => {
   const { mutate: mutateLogout } = useLogout();
   return (
-    <div className="flex items-center justify-between bg-primary p-2">
-      <div className="text-muted text-lg px-2">{name}</div>
+    <div className="container flex items-center justify-between bg-primary-foreground py-4">
+      <div className="text-primary text-lg px-2">{name}</div>
       <Button variant="default" onClick={() => mutateLogout()}>
         Logout
       </Button>

@@ -13,7 +13,6 @@ const {
 } = notificationController;
 
 api
-  .post("/")
   .get(getAllUserNotificationsController)
   .delete(deleteAllNotificationsController);
 api.post("/email", setUserEmailNotificationController);

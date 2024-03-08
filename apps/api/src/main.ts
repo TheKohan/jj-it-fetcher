@@ -111,6 +111,7 @@ app.onError(async (err, c) => {
 });
 
 app.notFound(c => {
+  console.log(c.req.url);
   return c.text("Page not found", 404);
 });
 
