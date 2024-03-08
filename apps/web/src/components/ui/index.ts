@@ -6,3 +6,7 @@ export * from "./label";
 export * from "./header";
 export * from "./badge";
 export * from "./skeleton";
+export * from "./dialog";
+export * from "./toaster";
+export * from "./popover";
+export * from "./command";
