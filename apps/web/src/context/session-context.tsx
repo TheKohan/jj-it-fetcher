@@ -1,21 +1,23 @@
-import { supabase } from "@fetcher-web/lib";
+import { getSession, supabase } from "@fetcher-web/lib";
 import type { Session } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
 
-type SessionContext = { session: Session | null };
+type SessionContext = { session: Session | undefined };
 
-const sessionContext = createContext<SessionContext>({ session: null });
+const sessionContext = createContext<SessionContext>({ session: getSession() });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [session, setSession] = useState<SessionContext>({ session: null });
+  const [session, setSession] = useState<SessionContext>({
+    session: getSession(),
+  });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession({ session });
+      setSession({ session: session ?? undefined });
     });
 
     supabase.auth.onAuthStateChange((_event, session) => {
-      setSession({ session });
+      setSession({ session: session ?? undefined });
     });
   }, []);
 
