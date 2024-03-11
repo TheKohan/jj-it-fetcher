@@ -34,6 +34,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
       // sign up
     }
   };
+  
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>

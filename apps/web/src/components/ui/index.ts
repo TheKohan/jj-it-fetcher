@@ -10,3 +10,5 @@ export * from "./dialog";
 export * from "./toaster";
 export * from "./popover";
 export * from "./command";
+export * from "./tag-input";
+export * from "./select";
