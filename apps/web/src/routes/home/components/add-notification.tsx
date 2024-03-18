@@ -26,11 +26,7 @@ type Inputs = {
 
 export const AddNotification = () => {
   const [tags, setTags] = useState<Tag[]>([]);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit, formState } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async data => {};
 
