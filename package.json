@@ -1,19 +1,19 @@
 {
-  "name": "jj-it-fetcher",
-  "version": "0.0.0",
-  "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
-  "scripts": {
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.5.3"
-  },
-  "peerDependencies": {
-    "typescript": "^5.3.3"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  }
+	"name": "jj-it-fetcher",
+	"version": "0.0.0",
+	"private": true,
+	"workspaces": ["apps/*"],
+	"scripts": {
+		"run-dev:api": "cd apps/api && bun dev",
+		"run-dev:web": "cd apps/web && bun dev"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.5.3"
+	},
+	"peerDependencies": {
+		"typescript": "^5.3.3"
+	},
+	"engines": {
+		"node": ">=14.0.0"
+	}
 }
