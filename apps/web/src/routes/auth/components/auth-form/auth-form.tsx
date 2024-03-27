@@ -1,5 +1,5 @@
 import { Button, Icons, Input, Label } from "@fetcher-web/components";
-import { useLogin } from "@fetcher-web/hooks";
+import { useLogin, useRegister } from "@fetcher-web/hooks";
 import { cn } from "@fetcher-web/lib/utils";
 import type * as React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
@@ -18,7 +18,21 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   formType,
   ...props
 }) => {
-  const { mutate: loginMutation, error, isPending } = useLogin();
+  const {
+    mutate: loginMutation,
+    data: loginData,
+    isPending: loginPending,
+  } = useLogin();
+  const {
+    mutate: registerMutation,
+    isPending: registerPending,
+    data: registerData,
+  } = useRegister();
+
+  const isPending = formType === "login" ? loginPending : registerPending;
+
+  const error = formType === "login" ? loginData?.error : registerData?.error;
+
   const submitText = formType === "login" ? "Login" : "Sign Up";
 
   const {
@@ -31,10 +45,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({
     if (formType === "login") {
       await loginMutation(data);
     } else {
-      // sign up
+      await registerMutation(data);
     }
   };
-  
+
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -84,7 +98,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             <p className="text-destructive text-xs">
               {errors.password?.message}
             </p>
-            <p className="text-destructive text-xs">{error?.error}</p>
+            {error && (
+              <p className="text-destructive text-xs">{error.message}</p>
+            )}
           </div>
           <Button disabled={isPending}>
             {isPending && (

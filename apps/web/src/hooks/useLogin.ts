@@ -1,6 +1,8 @@
-import type { ErrorResponse } from "@fetcher-web/lib";
 import { supabase } from "@fetcher-web/lib";
-import type { AuthTokenResponsePassword } from "@supabase/supabase-js";
+import type {
+  AuthError,
+  AuthTokenResponsePassword,
+} from "@supabase/supabase-js";
 import { useMutation } from "@tanstack/react-query";
 
 type UseLoginProps = {
@@ -9,7 +11,7 @@ type UseLoginProps = {
 };
 
 export const useLogin = () =>
-  useMutation<AuthTokenResponsePassword, ErrorResponse, UseLoginProps>({
+  useMutation<AuthTokenResponsePassword, { error: AuthError }, UseLoginProps>({
     mutationKey: ["login"],
     mutationFn: async ({ email, password }) => {
       return await supabase.auth.signInWithPassword({
