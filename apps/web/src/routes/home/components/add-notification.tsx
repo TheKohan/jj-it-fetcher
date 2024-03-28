@@ -32,6 +32,8 @@ export const AddNotification = () => {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
+    watch,
   } = useForm<Inputs>({
     defaultValues: {
       tags: [],
@@ -43,10 +45,14 @@ export const AddNotification = () => {
     console.log("SUBMITTED");
     console.log(data);
   };
+  const resetForm = () => {
+    reset();
+    setTags([]);
+  };
 
   return (
     <form noValidate>
-      <Dialog>
+      <Dialog onOpenChange={resetForm}>
         <DialogTrigger asChild>
           <Button type="button" variant="default">
             Add Notification Factor
