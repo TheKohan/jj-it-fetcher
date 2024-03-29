@@ -33,7 +33,6 @@ export const AddNotification = () => {
     formState: { errors },
     control,
     reset,
-    watch,
   } = useForm<Inputs>({
     defaultValues: {
       tags: [],
