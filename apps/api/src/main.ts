@@ -90,7 +90,7 @@ app.onError(async (err, c) => {
   }
 
   if (err instanceof z.ZodError) {
-    return c.json({ error: err.message }, 400);
+    return c.json({ error: err.message, status: 400 }, 400);
   }
 
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -100,7 +100,7 @@ app.onError(async (err, c) => {
     // Could be handled by checking for each prisma code and adjust
     // the response https://www.prisma.io/docs/orm/reference/error-reference
 
-    return c.json({ error: err.meta.cause }, status);
+    return c.json({ error: err.meta.cause, status }, status);
   }
 
   if (process.env.NODE_ENV === "production") {
@@ -118,7 +118,7 @@ app.onError(async (err, c) => {
 
   console.log(err.message);
 
-  return c.json(err.message, 500);
+  return c.json({ error: err.message, status: 500 }, 500);
 });
 
 app.notFound(c => {

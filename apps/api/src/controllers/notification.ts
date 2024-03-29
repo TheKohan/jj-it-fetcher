@@ -22,7 +22,7 @@ const sendUserDiscordNotificationController: Handler = async c => {
 
   await sendUserDiscordNotification({ userId: user.id });
 
-  return c.json({ message: "Notification sent to discord!" });
+  return c.json({ data: { message: "Notification sent to discord!" } });
 };
 
 const sendUserEmailNotificationController: Handler = async c => {
@@ -30,7 +30,7 @@ const sendUserEmailNotificationController: Handler = async c => {
 
   await sendUserEmailNotification({ userId: user.id });
 
-  return c.json({ message: "Notification sent to email!" });
+  return c.json({ data: { message: "Notification sent to email!" } });
 };
 
 const setUserDiscordNotificationController: Handler = async c => {
@@ -45,7 +45,7 @@ const setUserDiscordNotificationController: Handler = async c => {
     tags: body.tags,
   });
 
-  return c.json({ message: "Discord notification set!" });
+  return c.json({ data: { message: "Discord Notification set!" } });
 };
 
 const setUserEmailNotificationController: Handler = async c => {
@@ -59,7 +59,8 @@ const setUserEmailNotificationController: Handler = async c => {
     email: body.email,
     tags: body.tags,
   });
-  return c.json({ message: "Email notification set!" });
+
+  return c.json({ data: { message: "Email Notification set!" } });
 };
 
 const getAllUserNotificationsController: Handler = async c => {
@@ -73,7 +74,7 @@ const deleteAllNotificationsController: Handler = async c => {
   const user = getUserCtx(c);
   await deleteAllNotifications(user.id);
 
-  return c.json({ message: "All notifications deleted!" });
+  return c.json({ data: { message: "All Notifications deleted!" } });
 };
 
 const deleteDiscordNotificationController: Handler = async c => {
@@ -83,7 +84,10 @@ const deleteDiscordNotificationController: Handler = async c => {
 
   await deleteDiscordNotification(+id);
 
-  return await c.text("Discord notification deleted!", 200);
+  return await c.json(
+    { data: { message: "Discord Notification deleted!" } },
+    200
+  );
 };
 
 const deleteEmailNotificationController: Handler = async c => {
@@ -93,7 +97,10 @@ const deleteEmailNotificationController: Handler = async c => {
 
   await deleteEmailNotification(+id);
 
-  return await c.text("Email notification deleted!", 200);
+  return await c.json(
+    { data: { message: "Email notification deleted!" } },
+    200
+  );
 };
 
 export const notificationController = {

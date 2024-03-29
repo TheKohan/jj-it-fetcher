@@ -5,16 +5,16 @@ const { scrapeAll, scrapeJJit, scrapeNoFluffJobs } = scrapingService;
 
 const scrapeJustJoinItController: Handler = async c => {
   await scrapeJJit();
-  return c.text("Scraped JJIT Successfully");
+  return c.json({ data: { message: "Scraped JJIT Successfully" } });
 };
 
 const scrapeNoFluffJobsController: Handler = async c => {
   await scrapeNoFluffJobs();
-  return c.text("Scraped No fluff Jobs Successfully");
+  return c.json({ data: { message: "Scraped No fluff Jobs Successfully" } });
 };
 const scrapeAllController: Handler = async c => {
   await scrapeAll();
-  return c.text("Scraped all modules successfully");
+  return c.json({ data: { message: "Scraped all modules successfully" } });
 };
 
 export const scrapingController = {
