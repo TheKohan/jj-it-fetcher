@@ -16,6 +16,7 @@ import {
   SelectValue,
   type Tag,
 } from "@fetcher-web/components";
+import { useToast } from "@fetcher-web/components/ui/use-toast";
 import { useState } from "react";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 
@@ -28,6 +29,9 @@ type Inputs = {
 
 export const AddNotification = () => {
   const [tags, setTags] = useState<Tag[]>([]);
+  const [open, setOpen] = useState<boolean>(true);
+  const { toast } = useToast();
+
   const {
     handleSubmit,
     formState: { errors },
@@ -41,17 +45,31 @@ export const AddNotification = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = data => {
+    //TODO: Add the notification factor
     console.log("SUBMITTED");
+    toast({
+      title: "Notification Factor Added",
+      description: "You will now receive notifications for the tags you added",
+      type: "foreground",
+    });
     console.log(data);
   };
+
   const resetForm = () => {
     reset();
     setTags([]);
   };
 
+  const handleOpen = (open: boolean) => {
+    setOpen(open);
+    if (!open) {
+      resetForm();
+    }
+  };
+
   return (
     <form noValidate>
-      <Dialog onOpenChange={resetForm}>
+      <Dialog open={open} onOpenChange={handleOpen}>
         <DialogTrigger asChild>
           <Button type="button" variant="default">
             Add Notification Factor
