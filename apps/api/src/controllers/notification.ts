@@ -13,6 +13,8 @@ const {
   setUserDiscordNotification,
   setUserEmailNotification,
   deleteAllNotifications,
+  deleteDiscordNotification,
+  deleteEmailNotification,
 } = notificationService;
 
 const sendUserDiscordNotificationController: Handler = async c => {
@@ -74,6 +76,26 @@ const deleteAllNotificationsController: Handler = async c => {
   return c.json({ message: "All notifications deleted!" });
 };
 
+const deleteDiscordNotificationController: Handler = async c => {
+  /** @TODO handle case of using postman to delete other user's notifications */
+  const user = getUserCtx(c);
+  const { id } = c.req.param();
+
+  await deleteDiscordNotification(+id);
+
+  return await c.text("Discord notification deleted!", 200);
+};
+
+const deleteEmailNotificationController: Handler = async c => {
+  /** @TODO handle case of using postman to delete other user's notifications */
+  const user = getUserCtx(c);
+  const { id } = c.req.param();
+
+  await deleteEmailNotification(+id);
+
+  return await c.text("Email notification deleted!", 200);
+};
+
 export const notificationController = {
   sendUserDiscordNotificationController,
   sendUserEmailNotificationController,
@@ -81,4 +103,6 @@ export const notificationController = {
   setUserEmailNotificationController,
   getAllUserNotificationsController,
   deleteAllNotificationsController,
+  deleteDiscordNotificationController,
+  deleteEmailNotificationController,
 };

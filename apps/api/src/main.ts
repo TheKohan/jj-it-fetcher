@@ -13,6 +13,7 @@ import {
   offersService,
   scrapingService,
 } from "./services";
+import { Prisma } from "@prisma-client";
 
 const { PORT } = process.env;
 
@@ -90,6 +91,16 @@ app.onError(async (err, c) => {
 
   if (err instanceof z.ZodError) {
     return c.json({ error: err.message }, 400);
+  }
+
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    let status = 400;
+    if (c.req.method === "GET") status = 404;
+
+    // Could be handled by checking for each prisma code and adjust
+    // the response https://www.prisma.io/docs/orm/reference/error-reference
+
+    return c.json({ error: err.meta.cause }, status);
   }
 
   if (process.env.NODE_ENV === "production") {

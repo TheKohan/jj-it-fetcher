@@ -29,7 +29,7 @@ type Inputs = {
 
 export const AddNotification = () => {
   const [tags, setTags] = useState<Tag[]>([]);
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
 
   const {

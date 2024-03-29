@@ -10,13 +10,17 @@ const {
   sendUserEmailNotificationController,
   setUserDiscordNotificationController,
   setUserEmailNotificationController,
+  deleteDiscordNotificationController,
+  deleteEmailNotificationController,
 } = notificationController;
 
 api
   .get(getAllUserNotificationsController)
   .delete(deleteAllNotificationsController);
 api.post("/email", setUserEmailNotificationController);
+api.delete("/email/:id", deleteEmailNotificationController);
 api.get("/email/send", sendUserEmailNotificationController);
+api.delete("/discord/:id", deleteDiscordNotificationController);
 api.post("/discord", setUserDiscordNotificationController);
 api.get("/discord/send", sendUserDiscordNotificationController);
 

@@ -30,6 +30,8 @@ const {
   deleteAllNotificationsFromDB,
   getAllDiscordNotificationsFromDB,
   getAllEmailNotificationsFromDB,
+  deleteDiscordNotificationFromDB,
+  deleteEmailNotificationFromDB,
 } = notificationModel;
 
 const { getTodayNewOffersFromDB } = offersModel;
@@ -39,6 +41,8 @@ const getAllDiscordNotifications = getAllDiscordNotificationsFromDB;
 const getAllEmailNotifications = getAllEmailNotificationsFromDB;
 const setUserDiscordNotification = setUserDiscordNotificationToDB;
 const setUserEmailNotification = setUserEmailNotificationToDB;
+const deleteDiscordNotification = deleteDiscordNotificationFromDB;
+const deleteEmailNotification = deleteEmailNotificationFromDB;
 
 const sendAllDiscordNotifications = async () => {
   const notifications = await getAllDiscordNotificationsFromDB();
@@ -74,6 +78,8 @@ export const notificationService = {
   deleteAllNotifications,
   sendUserEmailNotification,
   sendAllDiscordNotifications,
+  deleteDiscordNotification,
+  deleteEmailNotification,
 };
 
 const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {

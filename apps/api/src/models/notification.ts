@@ -150,13 +150,15 @@ const deleteAllNotificationsFromDB = async (userId: string) => {
   });
 };
 
-const deleteNotificationFromDB = async (notificationId: number) => {
+const deleteDiscordNotificationFromDB = async (notificationId: number) => {
   await prisma.discordNotification.delete({
     where: {
       id: notificationId,
     },
   });
+};
 
+const deleteEmailNotificationFromDB = async (notificationId: number) => {
   await prisma.emailNotification.delete({
     where: {
       id: notificationId,
@@ -173,4 +175,6 @@ export const notificationModel = {
   deleteAllNotificationsFromDB,
   getAllDiscordNotificationsFromDB,
   getAllEmailNotificationsFromDB,
+  deleteDiscordNotificationFromDB,
+  deleteEmailNotificationFromDB,
 };
