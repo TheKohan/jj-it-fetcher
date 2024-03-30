@@ -16,9 +16,11 @@ type NotificationResponse = {
   emailNotification: Notification[];
 };
 
+export const GET_NOTIFICATIONS_QUERY_KEY = "get-notifications";
+
 export const useFetchNotifications = () =>
   useQuery<NotificationResponse, ErrorResponse>({
-    queryKey: ["get-notifications"],
+    queryKey: [GET_NOTIFICATIONS_QUERY_KEY],
     queryFn: async () => {
       return (await fetchApi("/api/notifications", {
         method: "GET",
