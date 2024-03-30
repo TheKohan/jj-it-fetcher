@@ -24,7 +24,7 @@ app.use(
   "*",
   cors({
     origin: "*", //todo change to production url
-    allowMethods: ["POST", "GET"],
+    allowMethods: ["POST", "GET", "DELETE"],
     credentials: true,
   })
 );
