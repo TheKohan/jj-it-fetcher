@@ -6,11 +6,16 @@ import {
   Icons,
   Badge,
   Skeleton,
+  Button,
 } from "@fetcher-web/components";
-import { useFetchNotifications } from "@fetcher-web/hooks";
+import {
+  useDeleteNotification,
+  useFetchNotifications,
+} from "@fetcher-web/hooks";
 
 export const NotificationList = () => {
   const { data: notificationData, isLoading } = useFetchNotifications();
+  const { mutate: deleteNotification } = useDeleteNotification();
 
   return (
     <Card>
@@ -32,11 +37,25 @@ export const NotificationList = () => {
                 <>
                   {[...notificationData.discordNotification].map(
                     notification => (
-                      <div className="rounded-lg border bg-secondary text-card-foreground shadow-sm px-4 py-2">
-                        <Icons.discord className="h-6 w-6 inline mr-4 text-purple-400" />
-                        {notification.tags.map(tag => (
-                          <Badge className="mr-2">{tag.name}</Badge>
-                        ))}
+                      <div className="rounded-l items-center  flex border bg-secondary text-card-foreground shadow-sm px-4 py-2">
+                        <Icons.discord className="h-6 w-6 mr-4 flex-shrink-0 text-purple-400" />
+                        <div>
+                          {notification.tags.map(tag => (
+                            <Badge className="mr-2">{tag.name}</Badge>
+                          ))}
+                        </div>
+                        <Button
+                          onClick={() =>
+                            deleteNotification({
+                              id: notification.id,
+                              type: "discord",
+                            })
+                          }
+                          variant="ghost"
+                          className="ml-auto"
+                        >
+                          <Icons.delete className="h-6 w-6 inline text-red-400" />
+                        </Button>
                       </div>
                     )
                   )}

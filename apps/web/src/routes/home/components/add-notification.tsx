@@ -15,6 +15,7 @@ import {
   SelectItem,
   SelectValue,
   type Tag,
+  Input,
 } from "@fetcher-web/components";
 import { useToast } from "@fetcher-web/components/ui/use-toast";
 import { useState } from "react";
@@ -24,6 +25,7 @@ type NotificationType = "discord" | "email";
 
 type Inputs = {
   notificationType: NotificationType;
+  uri: string;
   tags: string[];
 };
 
@@ -34,8 +36,10 @@ export const AddNotification = () => {
 
   const {
     handleSubmit,
+    register,
     formState: { errors },
     control,
+    watch,
     reset,
   } = useForm<Inputs>({
     defaultValues: {
@@ -44,9 +48,9 @@ export const AddNotification = () => {
     },
   });
 
+  const notificationTypeWatch = watch("notificationType");
+
   const onSubmit: SubmitHandler<Inputs> = data => {
-    //TODO: Add the notification factor
-    console.log("SUBMITTED");
     toast({
       title: "Notification Factor Added",
       description: "You will now receive notifications for the tags you added",
@@ -67,6 +71,10 @@ export const AddNotification = () => {
     }
   };
 
+  const errorMessages = Array.from(Object.values(errors)).map(
+    ({ message }) => message
+  );
+
   return (
     <form noValidate>
       <Dialog open={open} onOpenChange={handleOpen}>
@@ -82,6 +90,12 @@ export const AddNotification = () => {
               Add a new notification factor to your account. Pick the keywords
               you want the job offer to contain, they are additive, the more you
               add, the more offers you will receive.
+              <li>After each tag, click enter to confirm selection.</li>
+              <li>
+                For Discord Notification, you need to provide a webhook URI. Go
+                to the Integrations page on your Discord server settings and
+                click Create Webhook
+              </li>
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
@@ -147,9 +161,38 @@ export const AddNotification = () => {
               </div>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
-              <p className="col-span-3 col-start-2 text-destructive mt-2 text-xs">
-                {errors.tags?.message}
-              </p>
+              <Label htmlFor="username" className="text-right">
+                {notificationTypeWatch === "discord" ? "Webhook URI" : "Email"}
+              </Label>
+              <Input
+                className="col-span-3"
+                {...register("uri", {
+                  required: {
+                    value: true,
+                    message: "Please provide webhook URI",
+                  },
+                  pattern:
+                    notificationTypeWatch === "discord"
+                      ? {
+                          value: /https:\/\/discord\.com\/api\/webhooks\/[^/]+/,
+                          message: "Please enter a valid Discord Webhook URI",
+                        }
+                      : {
+                          value: /\S+@\S+\.\S+/,
+                          message: "Please enter a valid email address",
+                        },
+                })}
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              {errorMessages.map(message => (
+                <p
+                  key={message}
+                  className="col-span-3 col-start-2 text-destructive text-xs"
+                >
+                  * {message}
+                </p>
+              ))}
             </div>
           </div>
           <DialogFooter>
