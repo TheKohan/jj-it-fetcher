@@ -1,12 +1,37 @@
 import { RouterProvider } from "react-router-dom";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  MutationCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
 import "./globals.css";
 import { AuthProvider } from "./context";
 import { router } from "./router";
+import { isApiErrorResponse } from "./lib";
 
 const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onError: (error: any) => {
+      if (isApiErrorResponse(error)) {
+        const status = error.status;
+        if (status === 401 || status === 403) {
+          window.location.href = "/login";
+          return;
+        }
+        if (status === 404) {
+          window.location.href = "/404";
+          return;
+        }
+        if (status.toString().startsWith("5")) {
+          /**  @TODO Implement some kind of global error page  */
+          window.location.href = "/500";
+          return;
+        }
+      }
+    },
+  }),
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,

@@ -4,3 +4,4 @@ export * from "./useLogout";
 export * from "./useFetchTodaysNewOffers";
 export * from "./useRegister";
 export * from "./useDeleteNotification";
+export * from "./useAddNotification";

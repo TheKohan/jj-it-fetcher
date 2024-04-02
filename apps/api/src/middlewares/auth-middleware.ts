@@ -9,7 +9,7 @@ export const authMiddleware: MiddlewareHandler = async (ctx, next) => {
   const authorization = ctx.req.headers.get("authorization");
 
   if (!authorization) {
-    return ctx.text("Unauthorized", 401);
+    return ctx.json({ error: "Unauthorized", status: 401 }, 401);
   }
 
   const clientJwt = authorization.split("Bearer ").pop();
@@ -18,7 +18,7 @@ export const authMiddleware: MiddlewareHandler = async (ctx, next) => {
 
     ctx.set("user", { id: user.sub } as UserContext);
   } catch (e) {
-    return ctx.text("Unauthorized", 401);
+    return ctx.json({ error: "Unauthorized", status: 401 }, 401);
   }
 
   await next();

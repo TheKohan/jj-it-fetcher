@@ -123,7 +123,7 @@ app.onError(async (err, c) => {
 
 app.notFound(c => {
   console.log(c.req.url);
-  return c.text("Page not found", 404);
+  return c.json({ error: "Page not found", status: 404 }, 404);
 });
 
 /**

@@ -13,6 +13,12 @@ export type ErrorResponse = {
 
 export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
 
+export const isApiErrorResponse = (
+  response: ApiResponse<unknown>
+): response is ErrorResponse => {
+  return (response as ErrorResponse).error !== undefined;
+};
+
 export const fetchApi: <T>(
   url: string,
   options: RequestInit
@@ -34,9 +40,18 @@ export const fetchApi: <T>(
     ...baseBody,
     ...options,
   });
-  const data = await response.json();
-  if (!response.ok) {
+
+  let data = undefined;
+
+  if (response.ok) {
+    try {
+      data = await response.json();
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
     return Promise.reject(data);
   }
+
   return data;
 };

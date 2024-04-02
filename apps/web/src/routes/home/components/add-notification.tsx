@@ -18,6 +18,7 @@ import {
   Input,
 } from "@fetcher-web/components";
 import { useToast } from "@fetcher-web/components/ui/use-toast";
+import { useAddNotification } from "@fetcher-web/hooks";
 import { useState } from "react";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 
@@ -26,13 +27,30 @@ type NotificationType = "discord" | "email";
 type Inputs = {
   notificationType: NotificationType;
   uri: string;
-  tags: string[];
+  tags: Tag[];
 };
 
 export const AddNotification = () => {
   const [tags, setTags] = useState<Tag[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
+  const { mutate: addNotification } = useAddNotification({
+    onSuccess: () => {
+      toast({
+        title: "Notification Factor Added",
+        description:
+          "You will now receive notifications for the tags you added",
+        type: "foreground",
+      });
+    },
+    onError: error => {
+      toast({
+        title: "Failed to add notification factor",
+        description: error.error,
+        variant: "destructive",
+      });
+    }
+  });
 
   const {
     handleSubmit,
@@ -51,12 +69,11 @@ export const AddNotification = () => {
   const notificationTypeWatch = watch("notificationType");
 
   const onSubmit: SubmitHandler<Inputs> = data => {
-    toast({
-      title: "Notification Factor Added",
-      description: "You will now receive notifications for the tags you added",
-      type: "foreground",
+    addNotification({
+      type: data.notificationType,
+      tags: data.tags.map(t => t.text),
+      uri: data.uri,
     });
-    console.log(data);
   };
 
   const resetForm = () => {
