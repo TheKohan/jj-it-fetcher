@@ -100,7 +100,9 @@ app.onError(async (err, c) => {
     // Could be handled by checking for each prisma code and adjust
     // the response https://www.prisma.io/docs/orm/reference/error-reference
 
-    return c.json({ error: err.meta.cause, status }, status);
+    const error = err.meta.cause || err.message;
+
+    return c.json({ error, status }, status);
   }
 
   if (process.env.NODE_ENV === "production") {

@@ -6,7 +6,7 @@ export const HomePage: FC = () => {
   const { data: offersData, mutate } = useFetchTodaysNewOffers();
 
   return (
-    <div className="bg-primary-foreground space-y-4">
+    <div className="space-y-4">
       <AddNotification />
       <NotificationList />
       {offersData && (

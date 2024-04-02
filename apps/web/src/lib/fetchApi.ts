@@ -7,16 +7,25 @@ export type SuccessResponse<T> = {
 };
 
 export type ErrorResponse = {
-  error: string;
+  message: string;
   status: number;
 };
 
 export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
 
+export class ResponseError extends Error {
+  status: string;
+
+  constructor(message: string, status: string) {
+    super(message);
+    this.status = status;
+  }
+}
+
 export const isApiErrorResponse = (
   response: ApiResponse<unknown>
 ): response is ErrorResponse => {
-  return (response as ErrorResponse).error !== undefined;
+  return (response as ErrorResponse).message !== undefined;
 };
 
 export const fetchApi: <T>(
@@ -43,14 +52,14 @@ export const fetchApi: <T>(
 
   let data = undefined;
 
-  if (response.ok) {
-    try {
-      data = await response.json();
-    } catch (e) {
-      console.log(e);
-    }
-  } else {
-    return Promise.reject(data);
+  try {
+    data = await response.json();
+  } catch (e) {
+    console.log(e);
+  }
+
+  if (!response.ok) {
+    throw new ResponseError(data.error, data.status);
   }
 
   return data;

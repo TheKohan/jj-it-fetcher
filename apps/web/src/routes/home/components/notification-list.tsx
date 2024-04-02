@@ -24,7 +24,7 @@ export const NotificationList = () => {
         <CardDescription>
           The list of currently quequed notifications
         </CardDescription>
-        <div className="grid gap-4">
+        <div className="grid gap-4 divide-x-4">
           {isLoading ? (
             <>
               <Skeleton className="w-full h-[30px] rounded-full" />
@@ -37,11 +37,16 @@ export const NotificationList = () => {
                 <>
                   {[...notificationData.discordNotification].map(
                     notification => (
-                      <div className="rounded-l items-center  flex border bg-secondary text-card-foreground shadow-sm px-4 py-2">
+                      <div
+                        key={notification.id}
+                        className="rounded-l items-center flex text-card-foreground shadow-sm px-4 py-2"
+                      >
                         <Icons.discord className="h-6 w-6 mr-4 flex-shrink-0 text-purple-400" />
                         <div>
                           {notification.tags.map(tag => (
-                            <Badge className="mr-2">{tag.name}</Badge>
+                            <Badge key={tag.name} className="mr-2">
+                              {tag.name}
+                            </Badge>
                           ))}
                         </div>
                         <Button

@@ -46,10 +46,10 @@ export const AddNotification = () => {
     onError: error => {
       toast({
         title: "Failed to add notification factor",
-        description: error.error,
+        description: error.message,
         variant: "destructive",
       });
-    }
+    },
   });
 
   const {
