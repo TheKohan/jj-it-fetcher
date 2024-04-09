@@ -8,7 +8,7 @@ import {
   type UseMutationOptions,
   useQueryClient,
 } from "@tanstack/react-query";
-import { GET_NOTIFICATIONS_QUERY_KEY } from "./useFetchNotifications";
+import { GET_NOTIFICATIONS_QUERY_KEY } from "./use-fetch-notification";
 
 type UseAddNotificationProps = {
   type: "email" | "discord";
