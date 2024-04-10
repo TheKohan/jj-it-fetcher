@@ -37,7 +37,7 @@ export const AddNotification = () => {
   const { mutate: addNotification } = useAddNotification({
     onSuccess: () => {
       toast({
-        title: "Notification Factor Added",
+        title: "Notification Factor Added!",
         description:
           "You will now receive notifications for the tags you added",
         type: "foreground",
@@ -45,7 +45,7 @@ export const AddNotification = () => {
     },
     onError: error => {
       toast({
-        title: "Failed to add notification factor",
+        title: "Failed to add notification factor!",
         description: error.message,
         variant: "destructive",
       });
