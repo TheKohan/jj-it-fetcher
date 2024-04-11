@@ -43,11 +43,12 @@ export const useAddNotification = (
         body: JSON.stringify({ tags, ...uriPropertyObj }),
       });
     },
-    onSuccess() {
+    ...props,
+    onSuccess(data, variables, context) {
       queryClient.invalidateQueries({
         queryKey: [GET_NOTIFICATIONS_QUERY_KEY],
       });
+      props.onSuccess?.(data, variables, context);
     },
-    ...props,
   });
 };

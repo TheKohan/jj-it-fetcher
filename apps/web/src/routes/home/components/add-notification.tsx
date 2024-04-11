@@ -16,6 +16,7 @@ import {
   SelectValue,
   type Tag,
   Input,
+  Icons,
 } from "@fetcher-web/components";
 import { useToast } from "@fetcher-web/components/ui/use-toast";
 import { useAddNotification } from "@fetcher-web/hooks";
@@ -42,6 +43,7 @@ export const AddNotification = () => {
           "You will now receive notifications for the tags you added",
         type: "foreground",
       });
+      setOpen(false);
     },
     onError: error => {
       toast({
@@ -96,8 +98,9 @@ export const AddNotification = () => {
     <form noValidate>
       <Dialog open={open} onOpenChange={handleOpen}>
         <DialogTrigger asChild>
-          <Button type="button" variant="default">
-            Add Notification Factor
+          <Button type="button" variant="ghost">
+            Add Notification
+            <Icons.plus className="ml-4 h-4 w-4" />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
