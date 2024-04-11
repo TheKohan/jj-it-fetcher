@@ -1,85 +1,82 @@
 import {
-  Card,
   CardHeader,
   CardTitle,
   CardDescription,
   Icons,
   Badge,
   Skeleton,
-  Button,
 } from "@fetcher-web/components";
 import {
   useDeleteNotification,
   useFetchNotifications,
 } from "@fetcher-web/hooks";
+import { AddNotification } from "./add-notification";
+import { NotificationListDropdownMenu } from "./notification-list-dropdown-menu";
 
 export const NotificationList = () => {
   const { data: notificationData, isLoading } = useFetchNotifications();
   const { mutate: deleteNotification } = useDeleteNotification();
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle> Notifications</CardTitle>
-        <CardDescription>
-          The list of currently quequed notifications
-        </CardDescription>
-        <div className="grid gap-4 divide-x-4">
-          {isLoading ? (
-            <>
-              <Skeleton className="w-full h-[30px] rounded-full" />
-              <Skeleton className="w-full h-[30px] rounded-full" />
-              <Skeleton className="w-full h-[30px] rounded-full" />
-            </>
-          ) : (
-            <>
-              {notificationData ? (
-                <>
-                  {[...notificationData.discordNotification].map(
-                    notification => (
-                      <div
-                        key={notification.id}
-                        className="rounded-l items-center flex text-card-foreground shadow-sm px-4 py-2"
-                      >
-                        <Icons.discord className="h-6 w-6 mr-4 flex-shrink-0 text-purple-400" />
-                        <div>
-                          {notification.tags.map(tag => (
-                            <Badge key={tag.name} className="mr-2">
-                              {tag.name}
-                            </Badge>
-                          ))}
-                        </div>
-                        <Button
-                          onClick={() =>
-                            deleteNotification({
-                              id: notification.id,
-                              type: "discord",
-                            })
-                          }
-                          variant="ghost"
-                          className="ml-auto"
-                        >
-                          <Icons.delete className="h-6 w-6 inline text-red-400" />
-                        </Button>
-                      </div>
-                    )
-                  )}
-                  {[...notificationData.emailNotification].map(notification => (
-                    <div className="rounded-lg border bg-secondary text-card-foreground shadow-sm px-4 py-2">
-                      <Icons.email className="h-6 w-6 inline mr-4" />
+    <CardHeader>
+      <CardTitle>
+        <div className="flex justify-between">
+          <div>Notifications</div>
+          <div>
+            <AddNotification />
+          </div>
+        </div>
+      </CardTitle>
+      <CardDescription>
+        The list of currently quequed notifications (all will be fired at 9.00
+        AM UTC)
+      </CardDescription>
+      <div className="grid gap-4 divide-x-4 pt-2">
+        {isLoading ? (
+          <>
+            <Skeleton className="w-full h-[50px]" />
+            <Skeleton className="w-full h-[50px]" />
+            <Skeleton className="w-full h-[50px]" />
+          </>
+        ) : (
+          <>
+            {notificationData ? (
+              <>
+                {[...notificationData.discordNotification].map(notification => (
+                  <div
+                    key={notification.id}
+                    className="rounded-l items-center flex text-card-foreground shadow-sm px-4 py-2 border"
+                  >
+                    <Icons.discord className="h-6 w-6 mr-4 flex-shrink-0 text-purple-400" />
+                    <div>
                       {notification.tags.map(tag => (
-                        <Badge className="mr-2">{tag.name}</Badge>
+                        <Badge key={tag.name} className="mr-2">
+                          {tag.name}
+                        </Badge>
                       ))}
                     </div>
-                  ))}
-                </>
-              ) : (
-                <></>
-              )}
-            </>
-          )}
-        </div>
-      </CardHeader>
-    </Card>
+                    <div className="ml-auto">
+                      <NotificationListDropdownMenu
+                        onDelete={() =>
+                          deleteNotification({
+                            id: notification.id,
+                            type: "discord",
+                          })
+                        }
+                        onInspect={() => {
+                          console.log("implement inspect");
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <></>
+            )}
+          </>
+        )}
+      </div>
+    </CardHeader>
   );
 };

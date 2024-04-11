@@ -12,3 +12,4 @@ export * from "./popover";
 export * from "./command";
 export * from "./tag-input";
 export * from "./select";
+export * from "./dropdown-menu";
