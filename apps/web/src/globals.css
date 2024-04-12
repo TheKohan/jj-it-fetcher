@@ -71,6 +71,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Enabling dark mode globally atm */
+    @apply bg-background text-foreground dark;
   }
 }
