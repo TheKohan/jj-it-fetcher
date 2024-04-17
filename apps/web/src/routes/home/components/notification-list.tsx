@@ -63,9 +63,6 @@ export const NotificationList = () => {
                             type: "discord",
                           })
                         }
-                        onInspect={() => {
-                          console.log("implement inspect");
-                        }}
                       />
                     </div>
                   </div>
