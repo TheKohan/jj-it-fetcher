@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { NotificationList } from "./components";
 
 export const HomePage: FC = () => {
-  const { data: offersData, mutate } = useFetchTodaysNewOffers();
+  const { data: offersData } = useFetchTodaysNewOffers();
 
   return (
     <div className="space-y-4">
