@@ -2,7 +2,7 @@ import type { ErrorResponse } from "@fetcher-web/lib";
 import { fetchApi } from "@fetcher-web/lib";
 import { useQuery } from "@tanstack/react-query";
 
-type Notification = {
+export type JobNotification = {
   id: number;
   tags: {
     name: string;
@@ -12,8 +12,8 @@ type Notification = {
 type NotificationResponse = {
   createdAt: string;
   userId: string;
-  discordNotification: Notification[];
-  emailNotification: Notification[];
+  discordNotification: JobNotification[];
+  emailNotification: JobNotification[];
 };
 
 export const GET_NOTIFICATIONS_QUERY_KEY = "get-notifications";

@@ -57,6 +57,7 @@ export const NotificationList = () => {
                     </div>
                     <div className="ml-auto">
                       <NotificationListDropdownMenu
+                        notification={notification}
                         onDelete={() =>
                           deleteNotification({
                             id: notification.id,

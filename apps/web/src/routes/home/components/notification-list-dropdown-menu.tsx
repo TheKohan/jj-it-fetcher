@@ -13,15 +13,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@fetcher-web/components";
+import type { JobNotification } from "@fetcher-web/hooks";
 import type { FC } from "react";
 
 type NotificationListDropdownMenuProps = {
   onDelete: () => void;
+  notification: JobNotification;
 };
 
 export const NotificationListDropdownMenu: FC<
   NotificationListDropdownMenuProps
-> = ({ onDelete }) => {
+> = ({ onDelete, notification }) => {
   return (
     <Dialog>
       <DropdownMenu>
@@ -39,7 +41,9 @@ export const NotificationListDropdownMenu: FC<
       </DropdownMenu>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
-          <DialogTitle>Add Notification Factor</DialogTitle>
+          <DialogTitle>
+            {notification.tags.map(tag => tag.name).join(", ")}
+          </DialogTitle>
           <DialogDescription>
             Add a new notification factor to your account. Pick the keywords you
             want the job offer to contain, they are additive, the more you add,
