@@ -59,11 +59,19 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
         title: o.title,
         toPln: Number(o.salary.to) ?? 0,
         url: `https://nofluffjobs.com/pl/job/${o.url}`,
-        publishedAt: String(new Date(o.posted)),
+        publishedAt: new Date(o.posted),
       })) ?? [],
   };
 
-  await client.b2BOffer.createMany(offers);
+  await client.$transaction(
+    offers.data.map(offer =>
+      client.b2BOffer.upsert({
+        where: { url: offer.url },
+        update: offer,
+        create: offer,
+      })
+    )
+  )
 
   return offers.data;
 };

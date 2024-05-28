@@ -18,7 +18,7 @@ model B2BOffer {
   createdAt      DateTime @default(now())
   slug           String
   title          String
-  url            String
+  url            String   @unique
   city           String
   fromPln        Float
   toPln          Float

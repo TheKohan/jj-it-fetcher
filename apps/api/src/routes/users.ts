@@ -4,6 +4,8 @@ import { getUserCtx } from "@fetcher-api/utils";
 
 const api = new Hono();
 
+//@TODO: Need to delete users from Prisma when they are deleted from Supabase Auth
+
 api.get("/sync-user", async ctx => {
 
   const {id, email} = getUserCtx(ctx);
