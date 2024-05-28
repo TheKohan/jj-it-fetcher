@@ -15,8 +15,8 @@ export const useSyncUser = () =>
   useQuery<SuccessResponse<UseSyncUserResponse>, { error: AuthError }>({
     queryKey: [GET_SYNC_USER_QUERY_KEY],
     queryFn: async () => {
-      return await fetchApi<UseSyncUserResponse>('/users/sync-user', {
-        method: "DELETE",
+      return await fetchApi<UseSyncUserResponse>('/api/users/sync-user', {
+        method: "GET",
       });
     },
     staleTime: Number.POSITIVE_INFINITY,
