@@ -1,6 +1,6 @@
+import { useLogout } from "@fetcher-web/hooks";
 import type { FC } from "react";
 import { Button } from "./button";
-import { useLogout } from "@fetcher-web/hooks";
 
 export const Header: FC = () => {
   const { mutate: mutateLogout } = useLogout();

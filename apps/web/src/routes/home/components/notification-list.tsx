@@ -1,9 +1,9 @@
 import {
+  Badge,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
   Icons,
-  Badge,
   Skeleton,
 } from "@fetcher-web/components";
 import {

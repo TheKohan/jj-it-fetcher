@@ -1,8 +1,8 @@
 import { buttonVariants } from "@fetcher-web/components";
 import { cn } from "@fetcher-web/lib/utils";
+import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { AuthForm } from "../components";
-import type { FC } from "react";
 
 export const LoginPage: FC = () => {
   return (

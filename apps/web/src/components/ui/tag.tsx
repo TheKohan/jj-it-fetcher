@@ -1,8 +1,8 @@
+import { cn } from "@fetcher-web/lib";
+import { cva } from "class-variance-authority";
 import { X } from "lucide-react";
 import { Button } from "../ui/button";
 import type { TagInputProps, Tag as TagType } from "./tag-input";
-import { cva } from "class-variance-authority";
-import { cn } from "@fetcher-web/lib";
 
 export const tagVariants = cva(
   "transition-all border inline-flex items-center text-sm pl-2 rounded-md",

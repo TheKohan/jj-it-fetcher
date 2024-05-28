@@ -1,27 +1,27 @@
 import {
   Button,
-  DialogHeader,
-  DialogFooter,
-  DialogTrigger,
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
+  DialogHeader,
   DialogTitle,
-  TagInput,
+  DialogTrigger,
+  Icons,
+  Input,
   Label,
   Select,
-  SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
   type Tag,
-  Input,
-  Icons,
+  TagInput,
 } from "@fetcher-web/components";
 import { useToast } from "@fetcher-web/components/ui/use-toast";
 import { useAddNotification } from "@fetcher-web/hooks";
 import { useState } from "react";
-import { Controller, useForm, type SubmitHandler } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
 type NotificationType = "discord" | "email";
 

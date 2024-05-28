@@ -16,7 +16,7 @@ export const authMiddleware: MiddlewareHandler = async (ctx, next) => {
   try {
     const user = jwt.verify(clientJwt, SUPABASE_JWT_SECRET) as JwtPayload;
 
-    ctx.set("user", { id: user.sub } as UserContext);
+    ctx.set("user", { id: user.sub, email: user.email } as UserContext);
   } catch (e) {
     return ctx.json({ error: "Unauthorized", status: 401 }, 401);
   }

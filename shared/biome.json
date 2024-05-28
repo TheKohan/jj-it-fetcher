@@ -5,7 +5,7 @@
 		"rules": {
 			"recommended": true,
 			"suspicious": { "noExplicitAny": "off" },
-			"nursery": { "recommended": true, "noUnusedImports": "warn" }
+			"nursery": { "recommended": true }
 		}
 	},
 	"javascript": {

@@ -1,12 +1,12 @@
 import type React from "react";
 
-import type { Tag as TagType } from "./tag-input";
-import { TagList, type TagListProps } from "./tag-list";
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverTrigger,
 } from "@fetcher-web/components";
+import type { Tag as TagType } from "./tag-input";
+import { TagList, type TagListProps } from "./tag-list";
 
 type TagPopoverProps = {
   children: React.ReactNode;

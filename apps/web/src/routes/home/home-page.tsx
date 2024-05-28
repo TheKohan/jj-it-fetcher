@@ -11,7 +11,7 @@ export const HomePage: FC = () => {
       {offersData && (
         <div>
           {offersData.data.map(offer => (
-            <div>{JSON.stringify(offer)}</div>
+            <div key={offer.url}>{JSON.stringify(offer)}</div>
           ))}
         </div>
       )}

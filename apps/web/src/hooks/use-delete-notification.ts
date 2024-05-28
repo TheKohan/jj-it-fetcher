@@ -1,6 +1,6 @@
 import {
-  type SuccessResponse,
   type ErrorResponse,
+  type SuccessResponse,
   fetchApi,
 } from "@fetcher-web/lib";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

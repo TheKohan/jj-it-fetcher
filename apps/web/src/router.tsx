@@ -1,9 +1,9 @@
+import { useSession } from "@fetcher-web/context";
+import type { FC, PropsWithChildren } from "react";
 import { Navigate, createBrowserRouter } from "react-router-dom";
+import { Layout } from "./layouts";
 import { LoginPage, SignUpPage } from "./routes/auth";
 import { HomePage } from "./routes/home";
-import type { FC, PropsWithChildren } from "react";
-import { useSession } from "@fetcher-web/context";
-import { Layout } from "./layouts";
 
 export type ProtectedRouteProps = {
   /**

@@ -1,8 +1,8 @@
-import React from "react";
-import type { Tag as TagType } from "./tag-input";
-import { Tag, type TagProps } from "./tag";
-import SortableList, { SortableItem } from "react-easy-sort";
 import { cn } from "@fetcher-web/lib";
+import React from "react";
+import SortableList, { SortableItem } from "react-easy-sort";
+import { Tag, type TagProps } from "./tag";
+import type { Tag as TagType } from "./tag-input";
 
 export type TagListProps = {
   tags: TagType[];

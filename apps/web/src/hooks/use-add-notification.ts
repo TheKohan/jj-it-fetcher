@@ -1,11 +1,11 @@
 import {
-  type SuccessResponse,
   type ErrorResponse,
+  type SuccessResponse,
   fetchApi,
 } from "@fetcher-web/lib";
 import {
-  useMutation,
   type UseMutationOptions,
+  useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
 import { GET_NOTIFICATIONS_QUERY_KEY } from "./use-fetch-notification";

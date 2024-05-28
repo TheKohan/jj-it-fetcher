@@ -9,7 +9,7 @@ type UseRegisterProps = {
 
 export const useRegister = () =>
   useMutation<AuthResponse, { error: AuthError }, UseRegisterProps>({
-    mutationKey: ["login"],
+    mutationKey: ["register"],
     mutationFn: async ({ email, password }) => {
       return await supabase.auth.signUp({
         email,

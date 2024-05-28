@@ -1,11 +1,11 @@
-import type React from "react";
 import {
   Command,
-  CommandList,
-  CommandItem,
-  CommandGroup,
   CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandList,
 } from "@fetcher-web/components/ui/command";
+import type React from "react";
 import type { Tag as TagType } from "./tag-input";
 
 type AutocompleteProps = {

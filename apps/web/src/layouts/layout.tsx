@@ -1,5 +1,5 @@
-import type { FC, PropsWithChildren } from "react";
 import { Header, Toaster } from "@fetcher-web/components";
+import type { FC, PropsWithChildren } from "react";
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (

@@ -8,8 +8,8 @@ import {
 
 import "./globals.css";
 import { AuthProvider } from "./context";
-import { router } from "./router";
 import { isApiErrorResponse } from "./lib";
+import { router } from "./router";
 
 const queryClient = new QueryClient({
   mutationCache: new MutationCache({
