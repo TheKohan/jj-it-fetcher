@@ -46,6 +46,7 @@ export const scrapeJJIt = async (client: PrismaClient) => {
         title: o.title,
         toPln: Number(o.employmentTypes[0]?.to_pln) ?? 0,
         url: `https://justjoin.it/offers/${o.slug}`,
+        publishedAt: new Date(o.publishedAt),
       })) ?? [],
   };
 

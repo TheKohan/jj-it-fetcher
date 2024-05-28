@@ -24,6 +24,7 @@ model B2BOffer {
   toPln          Float
   requiredSkills String
   companyName    String
+  publishedAt    DateTime
 }
 
 model User {

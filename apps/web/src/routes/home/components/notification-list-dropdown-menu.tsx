@@ -41,19 +41,12 @@ export const NotificationListDropdownMenu: FC<
       </DropdownMenu>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
-          <DialogTitle>
-            {notification.tags.map(tag => tag.name).join(", ")}
-          </DialogTitle>
+          <DialogTitle>Job Result Inspection</DialogTitle>
           <DialogDescription>
-            Add a new notification factor to your account. Pick the keywords you
-            want the job offer to contain, they are additive, the more you add,
-            the more offers you will receive.
-            <li>After each tag, click enter to confirm selection.</li>
-            <li>
-              For Discord Notification, you need to provide a webhook URI. Go to
-              the Integrations page on your Discord server settings and click
-              Create Webhook
-            </li>
+            <div>
+              Job results for tags:{" "}
+              {notification.tags.map(tag => tag.name).join(", ")}
+            </div>
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">sda</div>

@@ -18,24 +18,9 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
     toPln: true,
   };
 
-  const past7DaysOffers = await prisma.b2BOffer.findMany({
-    where: {
-      createdAt: {
-        gte: today.minus({ days: 7 }).toJSDate(),
-        lt: today.toJSDate(),
-      },
-      AND: {
-        OR: tags.map(tech => ({
-          requiredSkills: { contains: tech, mode: "insensitive" },
-        })),
-      },
-    },
-    select: fieldsToSelect,
-  });
-
   const todayOffers = await prisma.b2BOffer.findMany({
     where: {
-      createdAt: {
+      publishedAt: {
         gte: today.toJSDate(),
         lt: today.plus({ day: 1 }).toJSDate(),
       },
@@ -48,11 +33,7 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
     select: fieldsToSelect,
   });
 
-  const newOffers = todayOffers.filter(
-    offer => !past7DaysOffers.find(yOffer => yOffer.url === offer.url)
-  );
-
-  return newOffers;
+  return todayOffers;
 };
 
 const clearMoreThan7DaysOldOffersFromDB = async () => {
