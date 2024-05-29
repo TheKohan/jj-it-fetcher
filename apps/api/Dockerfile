@@ -4,7 +4,6 @@ FROM oven/bun:1 as build
 
 WORKDIR /app
 
-COPY bun.lockb .
 COPY package.json .
 COPY tsconfig.json .
 COPY prisma ./prisma

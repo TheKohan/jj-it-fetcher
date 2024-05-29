@@ -16,6 +16,7 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
     url: true,
     fromPln: true,
     toPln: true,
+    publishedAt: true,
   };
 
   const todayOffers = await prisma.b2BOffer.findMany({
@@ -32,6 +33,8 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
     },
     select: fieldsToSelect,
   });
+
+  console.log(todayOffers);
 
   return todayOffers;
 };

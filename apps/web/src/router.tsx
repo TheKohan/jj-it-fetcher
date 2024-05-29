@@ -4,6 +4,7 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import { Layout } from "./layouts";
 import { LoginPage, SignUpPage } from "./routes/auth";
 import { HomePage } from "./routes/home";
+import { DetailsPage } from "./routes";
 
 export type ProtectedRouteProps = {
   /**
@@ -55,5 +56,15 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     path: "/",
+  },
+  {
+    element: (
+      <ProtectedRoute>
+        <Layout backButtonUrl="/">
+          <DetailsPage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+    path: "/details",
   },
 ]);

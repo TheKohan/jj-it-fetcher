@@ -6,9 +6,9 @@ import type { Handler } from "hono";
 const { getTodayNewOffers } = offersService;
 
 const getTodayNewOffersController: Handler = async c => {
-  const tags = (await c.req.json()) as string[];
+  const { tags } = c.req.query();
 
-  const response = await getTodayNewOffers(tags);
+  const response = await getTodayNewOffers(JSON.parse(tags) as string[]);
 
   return c.json({ data: response });
 };

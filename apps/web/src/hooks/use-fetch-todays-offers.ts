@@ -1,25 +1,31 @@
 import type { ErrorResponse, SuccessResponse } from "@fetcher-web/lib";
 import { fetchApi } from "@fetcher-web/lib";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
-type JobOffer = {
+export type JobOffer = {
   title: string;
   requiredSkills: string;
   createdAt: string;
   url: string;
   fromPln: number;
   toPln: number;
+  publishedAt: string;
 };
 
 type JobOffers = JobOffer[];
 
-export const useFetchTodaysNewOffers = () =>
-  useMutation<SuccessResponse<JobOffers>, ErrorResponse, string[]>({
-    mutationKey: ["get-todays-offers"],
-    mutationFn: async body => {
-      return await fetchApi<JobOffers>("/api/offers/today", {
-        method: "POST",
-        body: JSON.stringify(body),
-      });
+export const useFetchTodaysNewOffers = (tags: string[] | undefined) =>
+  useQuery<SuccessResponse<JobOffers>, ErrorResponse>({
+    queryKey: [`get-todays-new-offers:${tags}`],
+    queryFn: async () => {
+      const encodedTags = encodeURIComponent(JSON.stringify(tags));
+      return await fetchApi<JobOffers>(
+        `/api/offers/today?tags=${encodedTags}`,
+        {
+          method: "GET",
+        }
+      );
     },
+    enabled: !!tags,
+    staleTime: 1000 * 60 * 60 * 24, //24 hours
   });

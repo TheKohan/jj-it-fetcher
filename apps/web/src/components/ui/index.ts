@@ -13,3 +13,4 @@ export * from "./command";
 export * from "./tag-input";
 export * from "./select";
 export * from "./dropdown-menu";
+export * from "./table";

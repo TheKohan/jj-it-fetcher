@@ -5,6 +5,6 @@ const api = new Hono();
 
 const { getTodayNewOffersController } = offersController;
 
-api.post("/today", getTodayNewOffersController);
+api.get("/today", getTodayNewOffersController);
 
 export const offersRouter = api;
