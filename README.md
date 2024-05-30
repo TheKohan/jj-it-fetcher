@@ -1,10 +1,12 @@
+![image](https://github.com/TheKohan/jj-it-fetcher/assets/63232710/101e853b-f9a6-4c31-92bc-02b84aadff6d)
+
 # jj-it-fetcher
 
 Job board scraper with minimalistic web ui.
 
 ## Description
 
-This project is an api scraper written with `Bun`, `Hono` and `Supabase`. It let's you aggregate Job offers and save them to DB of your liking. Feel free to fork and adjust it to scrape offers fledged to your profile.
+This project is an api scraper written with `Bun`, `Hono`,`Supabase` `Vite` and `React`. It Aggregates job offers from multiple services like `justjoinit` or `nofluffjobs`, lets you preview new offers or set up `Discord` webhook based notification to get notified whenever there are job opportunities you cannot miss ! Feel free to fork and adjust it to scrape offers fledged to your profile. You can also drop `feature-request` or `issue` that will be worth looking at.
 
 ## Getting Started
 
@@ -40,12 +42,12 @@ bun db-push
 
 > Check the Modding section on how to adjust the scraper
 
-### Running Scraper
+### Start Api
 
 - Start server locally
 
 ```sh
-bun start
+bun run-dev:api
 ```
 
 - With docker
@@ -54,6 +56,14 @@ bun start
 bun docker-build
 
 docker run -it -p 8000:8000 jj-it-fetcher
+```
+
+### Start Dashboard
+
+- Start dashboard locally
+
+```sh
+bun run-dev:web
 ```
 
 ## Tuning the scraper
