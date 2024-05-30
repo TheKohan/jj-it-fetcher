@@ -26,5 +26,5 @@ export const useFetchNotifications = () =>
         method: "GET",
       })) as unknown as NotificationResponse;
     },
-    staleTime: 1000 * 60 * 30, // 30 minutes,
+    staleTime: 1000 * 60 * 60 * 1, //1 hour
   });

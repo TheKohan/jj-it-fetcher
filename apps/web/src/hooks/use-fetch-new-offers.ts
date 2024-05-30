@@ -14,17 +14,14 @@ export type JobOffer = {
 
 type JobOffers = JobOffer[];
 
-export const useFetchTodaysNewOffers = (tags: string[] | undefined) =>
+export const useFetchNewNewOffers = (tags: string[] | undefined) =>
   useQuery<SuccessResponse<JobOffers>, ErrorResponse>({
-    queryKey: [`get-todays-new-offers:${tags}`],
+    queryKey: [`get-new-new-offers:${tags}`],
     queryFn: async () => {
       const encodedTags = encodeURIComponent(JSON.stringify(tags));
-      return await fetchApi<JobOffers>(
-        `/api/offers/today?tags=${encodedTags}`,
-        {
-          method: "GET",
-        }
-      );
+      return await fetchApi<JobOffers>(`/api/offers/new?tags=${encodedTags}`, {
+        method: "GET",
+      });
     },
     enabled: !!tags,
     staleTime: 1000 * 60 * 60 * 24, //24 hours

@@ -13,8 +13,8 @@ export const Header: FC<HeaderProps> = ({ backButtonUrl }) => {
   const navigate = useNavigate();
   return (
     <div className="container flex items-center justify-between py-4">
-      <div className="text-primary text-lg px-2">
-        {backButtonUrl && (
+      {backButtonUrl && (
+        <div className="text-primary text-lg px-2">
           <Button
             type="button"
             variant="ghost"
@@ -23,7 +23,10 @@ export const Header: FC<HeaderProps> = ({ backButtonUrl }) => {
             <Icons.backArrow className="mr-4 h-8 w-8" />
             Go Back
           </Button>
-        )}
+        </div>
+      )}
+      <div className="font-extrabold text-2xl tracking-tighter">
+        <span className=" text-blue-500">jj-it-</span>Fetcher
       </div>
       <Button variant="ghost" onClick={() => mutateLogout()}>
         Logout

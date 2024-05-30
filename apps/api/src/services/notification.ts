@@ -35,7 +35,7 @@ const {
   getDiscordNotificationFromDB,
 } = notificationModel;
 
-const { getTodayNewOffersFromDB } = offersModel;
+const { getNewOffersFromDB } = offersModel;
 
 const getAllUserNotifications = getAllUserNotificationsFromDB;
 const getAllDiscordNotifications = getAllDiscordNotificationsFromDB;
@@ -127,7 +127,7 @@ const _sendDiscordNotification = async (
   }
 ) => {
   const tags = notification.tags.map(({ name }) => name);
-  const offers = await getTodayNewOffersFromDB(tags);
+  const offers = await getNewOffersFromDB(tags);
   const offerEmbeds = getEmbeds(offers);
 
   if (offerEmbeds.length > 0) {

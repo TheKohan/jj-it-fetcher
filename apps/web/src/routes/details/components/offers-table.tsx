@@ -186,6 +186,7 @@ export const OffersTable: React.FC<{ offers: JobOffer[] }> = ({
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
+        <div className="text-muted-foreground">Offer Count: {data.length}</div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

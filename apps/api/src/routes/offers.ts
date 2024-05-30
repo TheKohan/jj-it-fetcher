@@ -3,8 +3,8 @@ import { offersController } from "../controllers/offers";
 
 const api = new Hono();
 
-const { getTodayNewOffersController } = offersController;
+const { getNewOffersController } = offersController;
 
-api.get("/today", getTodayNewOffersController);
+api.get("/new", getNewOffersController);
 
 export const offersRouter = api;

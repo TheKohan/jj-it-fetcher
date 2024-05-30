@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import prisma from "../db-client";
 
-const getTodayNewOffersFromDB = async (tags: string[]) => {
+const getNewOffersFromDB = async (tags: string[]) => {
   const today = DateTime.now().minus({ day: 0 }).set({
     hour: 0,
     minute: 0,
@@ -19,10 +19,10 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
     publishedAt: true,
   };
 
-  const todayOffers = await prisma.b2BOffer.findMany({
+  const newOffers = await prisma.b2BOffer.findMany({
     where: {
       publishedAt: {
-        gte: today.toJSDate(),
+        gte: today.minus({ day: 1 }).toJSDate(),
         lt: today.plus({ day: 1 }).toJSDate(),
       },
       AND: {
@@ -34,9 +34,7 @@ const getTodayNewOffersFromDB = async (tags: string[]) => {
     select: fieldsToSelect,
   });
 
-  console.log(todayOffers);
-
-  return todayOffers;
+  return newOffers;
 };
 
 const clearMoreThan7DaysOldOffersFromDB = async () => {
@@ -57,6 +55,6 @@ const clearMoreThan7DaysOldOffersFromDB = async () => {
 };
 
 export const offersModel = {
-  getTodayNewOffersFromDB,
+  getNewOffersFromDB,
   clearMoreThan7DaysOldOffersFromDB,
 };

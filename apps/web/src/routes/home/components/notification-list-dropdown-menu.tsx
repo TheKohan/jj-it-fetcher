@@ -1,23 +1,13 @@
 import {
   Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   Icons,
 } from "@fetcher-web/components";
-import { toast, useToast } from "@fetcher-web/components/ui/use-toast";
-import {
-  useFetchTodaysNewOffers,
-  type JobNotification,
-} from "@fetcher-web/hooks";
+import { useToast } from "@fetcher-web/components/ui/use-toast";
+import type { JobNotification } from "@fetcher-web/hooks";
 import { useSendDiscordNotification } from "@fetcher-web/hooks/use-send-discord-notification";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";

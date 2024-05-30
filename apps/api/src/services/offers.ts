@@ -1,12 +1,11 @@
 import { offersModel } from "@fetcher-api/models";
 
-const { getTodayNewOffersFromDB, clearMoreThan7DaysOldOffersFromDB } =
-  offersModel;
+const { getNewOffersFromDB, clearMoreThan7DaysOldOffersFromDB } = offersModel;
 
-const getTodayNewOffers = getTodayNewOffersFromDB;
+const getNewOffers = getNewOffersFromDB;
 const clearMoreThan7DaysOldOffers = clearMoreThan7DaysOldOffersFromDB;
 
 export const offersService = {
-  getTodayNewOffers,
+  getNewOffers,
   clearMoreThan7DaysOldOffers,
 };

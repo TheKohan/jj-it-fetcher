@@ -48,9 +48,9 @@ export const NotificationList = () => {
                     className="rounded-l items-center flex text-card-foreground shadow-sm px-4 py-2 border"
                   >
                     <Icons.discord className="h-6 w-6 mr-4 flex-shrink-0 text-purple-400" />
-                    <div>
+                    <div className="m-1">
                       {notification.tags.map(tag => (
-                        <Badge key={tag.name} className="mr-2">
+                        <Badge className="m-1" key={tag.name}>
                           {tag.name}
                         </Badge>
                       ))}
