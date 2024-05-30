@@ -12,6 +12,7 @@ const {
   setUserEmailNotificationController,
   deleteDiscordNotificationController,
   deleteEmailNotificationController,
+  sendSingleDiscordNotificationController,
 } = notificationController;
 
 api
@@ -23,5 +24,6 @@ api.get("/email/send", sendUserEmailNotificationController);
 api.delete("/discord/:id", deleteDiscordNotificationController);
 api.post("/discord", setUserDiscordNotificationController);
 api.get("/discord/send", sendUserDiscordNotificationController);
+api.post("/discord/send/:id", sendSingleDiscordNotificationController);
 
 export const notificationsRouter = api;

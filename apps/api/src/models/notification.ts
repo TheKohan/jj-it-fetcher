@@ -166,6 +166,18 @@ const deleteEmailNotificationFromDB = async (notificationId: number) => {
   });
 };
 
+const getDiscordNotificationFromDB = async (notificationId: number) => {
+  return await prisma.discordNotification.findFirst({
+    where: {
+      id: notificationId,
+    },
+    select: {
+      webhookId: true,
+      tags: true,
+    },
+  });
+};
+
 export const notificationModel = {
   getAllUserNotificationsFromDB,
   setUserDiscordNotificationToDB,
@@ -177,4 +189,5 @@ export const notificationModel = {
   getAllEmailNotificationsFromDB,
   deleteDiscordNotificationFromDB,
   deleteEmailNotificationFromDB,
+  getDiscordNotificationFromDB,
 };

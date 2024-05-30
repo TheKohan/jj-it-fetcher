@@ -1,6 +1,6 @@
 # jj-it-fetcher
 
-Job board scraper.
+Job board scraper with minimalistic web ui.
 
 ## Description
 

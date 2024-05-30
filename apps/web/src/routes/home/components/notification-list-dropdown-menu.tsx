@@ -13,10 +13,12 @@ import {
   DropdownMenuTrigger,
   Icons,
 } from "@fetcher-web/components";
+import { toast, useToast } from "@fetcher-web/components/ui/use-toast";
 import {
   useFetchTodaysNewOffers,
   type JobNotification,
 } from "@fetcher-web/hooks";
+import { useSendDiscordNotification } from "@fetcher-web/hooks/use-send-discord-notification";
 import type { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -29,6 +31,24 @@ export const NotificationListDropdownMenu: FC<
   NotificationListDropdownMenuProps
 > = ({ onDelete, notification }) => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const { mutate: sendDiscordNotification } = useSendDiscordNotification({
+    onSuccess: () => {
+      toast({
+        title: "Notification Sent sucessfully!",
+        description:
+          "You will now receive notifications for the tags you added",
+        type: "foreground",
+      });
+    },
+    onError: error => {
+      toast({
+        title: "Failed to send notification!",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -37,6 +57,11 @@ export const NotificationListDropdownMenu: FC<
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <DropdownMenuItem
+          onClick={() => sendDiscordNotification({ id: notification.id })}
+        >
+          Send Notification
+        </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() =>
             navigate({

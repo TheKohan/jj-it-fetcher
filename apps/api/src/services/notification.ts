@@ -32,6 +32,7 @@ const {
   getAllEmailNotificationsFromDB,
   deleteDiscordNotificationFromDB,
   deleteEmailNotificationFromDB,
+  getDiscordNotificationFromDB,
 } = notificationModel;
 
 const { getTodayNewOffersFromDB } = offersModel;
@@ -68,6 +69,14 @@ const sendUserEmailNotification = async ({ userId }: { userId: string }) => {
 
 const deleteAllNotifications = deleteAllNotificationsFromDB;
 
+const sendSingleDiscordNotification = async ({ id }: { id: number }) => {
+  const notification = await getDiscordNotificationFromDB(id);
+
+  console.log(notification);
+
+  await _sendDiscordNotification(notification);
+};
+
 export const notificationService = {
   getAllDiscordNotifications,
   getAllEmailNotifications,
@@ -80,6 +89,7 @@ export const notificationService = {
   sendAllDiscordNotifications,
   deleteDiscordNotification,
   deleteEmailNotification,
+  sendSingleDiscordNotification,
 };
 
 const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {
@@ -113,10 +123,7 @@ const _sendDiscordNotification = async (
       name: string;
     }[];
   } & {
-    id: number;
-    createdAt: Date;
     webhookId: string;
-    userId: string;
   }
 ) => {
   const tags = notification.tags.map(({ name }) => name);
