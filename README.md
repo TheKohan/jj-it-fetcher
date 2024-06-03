@@ -2,7 +2,7 @@
 
 # jj-it-fetcher
 
-Job board scraper with minimalistic web ui. You can check the live version [here](https://jj-it-fetcher.kohan.dev/app).
+Job board scraper with integrated discord notifications to keep you posted daily. Features a minimalistic ui with offers preview. You can check the live version [here](https://jj-it-fetcher.kohan.dev/app).
 
 ## Description
 
