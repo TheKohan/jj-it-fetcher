@@ -61,6 +61,7 @@ if (!platforms.includes(platform as Platforms)) {
     )}`
   );
 }
+await $`mv ../web/dist/ ./`;
 
 await $`docker build \
         --tag "jj-it-fetcher" \

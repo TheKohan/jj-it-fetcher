@@ -7,6 +7,7 @@ WORKDIR /app
 COPY package.json .
 COPY tsconfig.json .
 COPY prisma ./prisma
+COPY dist ./dist
 
 RUN bun install --frozen-lockfile
 

@@ -30,41 +30,46 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({
   return <>{children}</>;
 };
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      element: (
+        <ProtectedRoute inverted>
+          <LoginPage />
+        </ProtectedRoute>
+      ),
+      path: "/login",
+    },
+    {
+      element: (
+        <ProtectedRoute inverted>
+          <SignUpPage />
+        </ProtectedRoute>
+      ),
+      path: "/register",
+    },
+    {
+      element: (
+        <ProtectedRoute>
+          <Layout>
+            <HomePage />
+          </Layout>
+        </ProtectedRoute>
+      ),
+      path: "/",
+    },
+    {
+      element: (
+        <ProtectedRoute>
+          <Layout backButtonUrl="/">
+            <DetailsPage />
+          </Layout>
+        </ProtectedRoute>
+      ),
+      path: "/details",
+    },
+  ],
   {
-    element: (
-      <ProtectedRoute inverted>
-        <LoginPage />
-      </ProtectedRoute>
-    ),
-    path: "/login",
-  },
-  {
-    element: (
-      <ProtectedRoute inverted>
-        <SignUpPage />
-      </ProtectedRoute>
-    ),
-    path: "/register",
-  },
-  {
-    element: (
-      <ProtectedRoute>
-        <Layout>
-          <HomePage />
-        </Layout>
-      </ProtectedRoute>
-    ),
-    path: "/",
-  },
-  {
-    element: (
-      <ProtectedRoute>
-        <Layout backButtonUrl="/">
-          <DetailsPage />
-        </Layout>
-      </ProtectedRoute>
-    ),
-    path: "/details",
-  },
-]);
+    basename: "/app",
+  }
+);

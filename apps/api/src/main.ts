@@ -8,18 +8,23 @@ import { z } from "zod";
 import { serviceLogger } from "./logger";
 import { authMiddleware } from "./middlewares";
 import { authRouter } from "./routes/auth";
+import { serveStatic } from "hono/bun";
+
 import {
   notificationService,
   offersService,
   scrapingService,
 } from "./services";
 import { Prisma } from "@prisma-client";
+import { readFileSync } from "fs";
+import path from "path";
 
 const { PORT } = process.env;
 
 const app = new Hono();
 
 app.use("*", logger());
+
 app.use(
   "*",
   cors({
@@ -29,6 +34,19 @@ app.use(
   })
 );
 app.route("/auth", authRouter);
+
+const html = readFileSync(path.join(__dirname, "../dist/index.html"), "utf-8");
+
+app.use(
+  "/assets/*",
+  serveStatic({
+    root: "dist/", // this must be relative to bun execution directory
+    onNotFound: (path, c) => {
+      console.log(`${path} is not found, you access ${c.req.path}`);
+    },
+  })
+); // path must end with '/'
+app.get("/app/*", c => c.html(html)); // path must end with '/'
 
 app.use("/api/*", authMiddleware);
 app.route("/api", apiRouter);
