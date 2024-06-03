@@ -2,7 +2,7 @@
 
 # jj-it-fetcher
 
-Job board scraper with minimalistic web ui.
+Job board scraper with minimalistic web ui. You can check the live version [here](https://jj-it-fetcher.kohan.dev/app).
 
 ## Description
 
