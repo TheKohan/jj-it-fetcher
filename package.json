@@ -6,8 +6,8 @@
 	"scripts": {
 		"run-dev:api": "cd apps/api && bun dev",
 		"run-dev:web": "cd apps/web && bun dev",
-		"build:fe": "cd apps/web && bun run build",
-		"docker-build:arm": "bun run build:fe && cd apps/api && bun run ./src/scripts/build-docker.ts --platform arm",
+		"build:fe": "NODE_ENV=production apps/web && bun run build",
+		"docker-build:arm": "bun run build:fe && cd apps/api && NODE_ENV=production bun run ./src/scripts/build-docker.ts --platform arm",
 		"docker-build:amd": "bun run build:fe && cd apps/api && NODE_ENV=production bun run ./src/scripts/build-docker.ts --platform amd"
 	},
 	"devDependencies": {

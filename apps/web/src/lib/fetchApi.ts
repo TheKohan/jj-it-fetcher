@@ -1,6 +1,9 @@
 import { getSession } from "./utils";
 
-const apiUrl = "http://localhost:8000";
+const apiUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://jj-it-fetcher.kohan.dev"
+    : "http://localhost:8000";
 
 export type SuccessResponse<T> = {
   data: T;
