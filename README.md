@@ -12,8 +12,8 @@ This project is an api scraper written with `Bun`, `Hono`,`Supabase` `Vite` and 
 
 ### Dependencies
 
-- bun cli
-- supabase project set-up
+- `bun cli`
+- `supabase` project set-up
 
 ### Installing
 
