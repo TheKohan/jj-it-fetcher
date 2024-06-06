@@ -60,7 +60,6 @@ cron.schedule(
   async () => {
     try {
       await scrapingService.scrapeAll();
-      await offersService.clearMoreThan7DaysOldOffers();
     } catch (e) {
       if (e instanceof Error) {
         await serviceLogger.sendErrorMessage({

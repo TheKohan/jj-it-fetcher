@@ -27,7 +27,7 @@ const getNewOffersFromDB = async (tags: string[]) => {
       },
       AND: {
         OR: tags.map(tech => ({
-          requiredSkills: { contains: tech, mode: "insensitive" },
+          requiredSkills: { contains: `${tech},`, mode: "insensitive" },
         })),
       },
     },

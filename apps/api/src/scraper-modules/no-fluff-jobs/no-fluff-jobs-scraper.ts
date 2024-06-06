@@ -54,7 +54,7 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
         city: o.location.places[0].city ?? "null",
         fromPln: Number(o.salary.from) ?? 0,
         companyName: o.name,
-        requiredSkills: o.tiles.values.map(t => t.value).join(","),
+        requiredSkills: `${o.tiles.values.map(t => t.value).join(",")},`,
         slug: o.url,
         title: o.title,
         toPln: Number(o.salary.to) ?? 0,
@@ -71,7 +71,7 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
         create: offer,
       })
     )
-  )
+  );
 
   return offers.data;
 };

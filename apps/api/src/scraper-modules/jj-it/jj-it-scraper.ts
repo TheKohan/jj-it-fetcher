@@ -41,7 +41,7 @@ export const scrapeJJIt = async (client: PrismaClient) => {
         city: o.city,
         companyName: o.companyName,
         fromPln: Number(o.employmentTypes[0]?.from_pln) ?? 0,
-        requiredSkills: o.requiredSkills.join(","),
+        requiredSkills: `${o.requiredSkills.join(",")},`,
         slug: o.slug,
         title: o.title,
         toPln: Number(o.employmentTypes[0]?.to_pln) ?? 0,
@@ -58,7 +58,7 @@ export const scrapeJJIt = async (client: PrismaClient) => {
         create: offer,
       })
     )
-  )
+  );
 
   return offers.data;
 };

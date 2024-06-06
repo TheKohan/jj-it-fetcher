@@ -72,8 +72,6 @@ const deleteAllNotifications = deleteAllNotificationsFromDB;
 const sendSingleDiscordNotification = async ({ id }: { id: number }) => {
   const notification = await getDiscordNotificationFromDB(id);
 
-  console.log(notification);
-
   await _sendDiscordNotification(notification);
 };
 
@@ -105,10 +103,6 @@ const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {
     return acc;
   }, [] as EmbedBuilder[]);
 
-  for (const embed of embeds) {
-    console.log(embed.data.fields.length);
-  }
-
   return embeds;
 };
 
@@ -130,33 +124,36 @@ const _sendDiscordNotification = async (
   const offers = await getNewOffersFromDB(tags);
   const offerEmbeds = getEmbeds(offers);
 
-  if (offerEmbeds.length > 0) {
-    await sendDiscordWebhookMessage({
-      message: {
-        ...notificationMessageBase,
-        content: `New offers today! (${DateTime.now().toISODate()})`,
-      },
-      webhookUrl: notification.webhookId,
-    });
-    let i = 0;
-    for (const embed of offerEmbeds) {
-      await sendDiscordWebhookMessage({
-        message: {
-          ...notificationMessageBase,
-          content: `(Part ${i + 1} of ${offerEmbeds.length})`,
-          embeds: [embed],
-        },
-        webhookUrl: notification.webhookId,
-      });
-      i++;
-    }
-  } else {
-    sendDiscordWebhookMessage({
-      message: {
-        ...notificationMessageBase,
-        content: `There's no new offers today :( !`,
-      },
-      webhookUrl: notification.webhookId,
-    });
-  }
+  console.log(notification);
+  console.log(offers.length);
+
+  // if (offerEmbeds.length > 0) {
+  //   await sendDiscordWebhookMessage({
+  //     message: {
+  //       ...notificationMessageBase,
+  //       content: `New offers today! (${DateTime.now().toISODate()})`,
+  //     },
+  //     webhookUrl: notification.webhookId,
+  //   });
+  //   let i = 0;
+  //   for (const embed of offerEmbeds) {
+  //     await sendDiscordWebhookMessage({
+  //       message: {
+  //         ...notificationMessageBase,
+  //         content: `(Part ${i + 1} of ${offerEmbeds.length})`,
+  //         embeds: [embed],
+  //       },
+  //       webhookUrl: notification.webhookId,
+  //     });
+  //     i++;
+  //   }
+  // } else {
+  //   sendDiscordWebhookMessage({
+  //     message: {
+  //       ...notificationMessageBase,
+  //       content: `There's no new offers today :( !`,
+  //     },
+  //     webhookUrl: notification.webhookId,
+  //   });
+  // }
 };
