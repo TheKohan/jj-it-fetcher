@@ -50,15 +50,7 @@ export const scrapeJJIt = async (client: PrismaClient) => {
       })) ?? [],
   };
 
-  await client.$transaction(
-    offers.data.map(offer =>
-      client.b2BOffer.upsert({
-        where: { url: offer.url },
-        update: offer,
-        create: offer,
-      })
-    )
-  );
+  await client.b2BOffer.createMany(offers);
 
   return offers.data;
 };
