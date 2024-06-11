@@ -2,7 +2,7 @@ import { sendDiscordWebhookMessage } from "@fetcher-api/utils";
 import { EmbedBuilder } from "discord.js";
 import { DateTime } from "luxon";
 import { notificationModel } from "../models/notification";
-import { offersModel } from "../models/offers";
+import { offersModel, type OffersWithTags } from "../models/offers";
 
 const OFFERS_PER_MESSAGE = 10;
 
@@ -10,15 +10,6 @@ const notificationMessageBase = {
   username: "Daily Offers",
   avatarURL:
     "https://upload.wikimedia.org/wikipedia/commons/4/48/Robert_Maklowicz_2014_%28cropped%29.jpg",
-};
-
-type Offer = {
-  createdAt: Date;
-  title: string;
-  url: string;
-  fromPln: number;
-  toPln: number;
-  requiredSkills: string;
 };
 
 const {
@@ -90,7 +81,7 @@ export const notificationService = {
   sendSingleDiscordNotification,
 };
 
-const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {
+const getEmbeds: (offers: OffersWithTags) => EmbedBuilder[] = offers => {
   //make each segment max 25 to satisfy embed max field rule
   const embeds = offers.reduce((acc, next, index) => {
     if (!acc.length || index % OFFERS_PER_MESSAGE === 0) {
@@ -106,9 +97,11 @@ const getEmbeds: (offer: Offer[]) => EmbedBuilder[] = offers => {
   return embeds;
 };
 
-const getEmbedContent = (offer: Offer) => ({
+const getEmbedContent = (offer: OffersWithTags[0]) => ({
   name: offer.title,
-  value: `Skills: ${offer.requiredSkills}\nFrom: ${offer.fromPln} PLN, To: ${offer.toPln} PLN\n[Link](${offer.url})`,
+  value: `Skills: ${offer.requiredSkills.map(i => i.name).join(",")}\nFrom: ${
+    offer.fromPln
+  } PLN, To: ${offer.toPln} PLN\n[Link](${offer.url})`,
 });
 
 const _sendDiscordNotification = async (

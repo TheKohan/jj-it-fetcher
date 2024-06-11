@@ -35,30 +35,41 @@ export const scrapeJJIt = async (client: PrismaClient) => {
     headers,
   });
 
-  const offers = {
-    data:
-      data?.map(o => ({
-        city: o.city,
-        companyName: o.companyName,
-        fromPln: Number(o.employmentTypes[0]?.from_pln) ?? 0,
-        requiredSkills: `${o.requiredSkills.join(",")},`,
-        slug: o.slug,
-        title: o.title,
-        toPln: Number(o.employmentTypes[0]?.to_pln) ?? 0,
-        url: `https://justjoin.it/offers/${o.slug}`,
-        publishedAt: new Date(o.publishedAt),
-      })) ?? [],
-  };
+  const offers = data?.map(o => ({
+    city: o.city,
+    companyName: o.companyName,
+    fromPln: Number(o.employmentTypes[0]?.from_pln) ?? 0,
+    requiredSkills: o.requiredSkills,
+    slug: o.slug,
+    title: o.title,
+    toPln: Number(o.employmentTypes[0]?.to_pln) ?? 0,
+    url: `https://justjoin.it/offers/${o.slug}`,
+    publishedAt: new Date(o.publishedAt),
+  }));
+
+  /** @TODO revisit that because its not very efficient, theres a feature request in prisma repo for workaround */
 
   await client.$transaction(
-    offers.data.map(offer =>
-      client.b2BOffer.upsert({
-        where: { url: offer.url },
-        update: offer,
-        create: offer,
+    offers.map(offer =>
+      client.b2BOffer.create({
+        data: {
+          ...offer,
+          requiredSkills: {
+            connectOrCreate: [
+              ...offer.requiredSkills.map(tag => ({
+                where: {
+                  name: tag,
+                },
+                create: {
+                  name: tag,
+                },
+              })),
+            ],
+          },
+        },
       })
     )
   );
 
-  return offers.data;
+  return offers;
 };

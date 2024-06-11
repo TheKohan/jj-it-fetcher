@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import prisma from "../db-client";
+import type { Prisma } from "@prisma-client";
 
 const getNewOffersFromDB = async (tags: string[]) => {
   const today = DateTime.now().minus({ day: 0 }).set({
@@ -16,23 +17,37 @@ const getNewOffersFromDB = async (tags: string[]) => {
     url: true,
     fromPln: true,
     toPln: true,
-    publishedAt: true,
   };
 
-  const newOffers = await prisma.b2BOffer.findMany({
+  const todayOffers = await prisma.b2BOffer.findMany({
     where: {
-      publishedAt: {
-        gte: today.minus({ day: 1 }).toJSDate(),
+      createdAt: {
+        gte: today.toJSDate(),
         lt: today.plus({ day: 1 }).toJSDate(),
       },
       AND: {
-        OR: tags.map(tech => ({
-          requiredSkills: { contains: `${tech},`, mode: "insensitive" },
-        })),
+        OR: [{ requiredSkills: { some: { name: { in: tags } } } }],
       },
     },
     select: fieldsToSelect,
   });
+
+  const past7DaysOffers = await prisma.b2BOffer.findMany({
+    where: {
+      createdAt: {
+        gte: today.minus({ days: 7 }).toJSDate(),
+        lt: today.toJSDate(),
+      },
+      AND: {
+        OR: [{ requiredSkills: { some: { name: { in: tags } } } }],
+      },
+    },
+    select: fieldsToSelect,
+  });
+
+  const newOffers = todayOffers.filter(
+    offer => !past7DaysOffers.find(yOffer => yOffer.url === offer.url)
+  );
 
   return newOffers;
 };
@@ -54,7 +69,22 @@ const clearMoreThan7DaysOldOffersFromDB = async () => {
   });
 };
 
+const getAllSearchTagsFromDB = async () => {
+  const tags = await prisma.searchTag.findMany({
+    select: {
+      name: true,
+    },
+  });
+
+  return tags;
+};
+
+export type OffersWithTags = Prisma.PromiseReturnType<
+  typeof getNewOffersFromDB
+>;
+
 export const offersModel = {
   getNewOffersFromDB,
   clearMoreThan7DaysOldOffersFromDB,
+  getAllSearchTagsFromDB,
 };
