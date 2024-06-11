@@ -48,22 +48,40 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
     headers,
   });
 
-  const offers = {
-    data:
-      data?.map(o => ({
-        city: o.location.places[0].city ?? "null",
-        fromPln: Number(o.salary.from) ?? 0,
-        companyName: o.name,
-        requiredSkills: `${o.tiles.values.map(t => t.value).join(",")},`,
-        slug: o.url,
-        title: o.title,
-        toPln: Number(o.salary.to) ?? 0,
-        url: `https://nofluffjobs.com/pl/job/${o.url}`,
-        publishedAt: new Date(o.posted),
-      })) ?? [],
-  };
+  const offers = data?.map(o => ({
+    city: o.location.places[0].city ?? "null",
+    fromPln: Number(o.salary.from) ?? 0,
+    companyName: o.name,
+    requiredSkills: o.tiles.values.map(t => t.value),
+    slug: o.url,
+    title: o.title,
+    toPln: Number(o.salary.to) ?? 0,
+    url: `https://nofluffjobs.com/pl/job/${o.url}`,
+    publishedAt: new Date(o.posted),
+  }));
 
-  await client.b2BOffer.createMany(offers);
+  /** @TODO revisit that because its not very efficient, theres a feature request in prisma repo for workaround */
+  await client.$transaction(
+    offers.map(offer =>
+      client.b2BOffer.create({
+        data: {
+          ...offer,
+          requiredSkills: {
+            connectOrCreate: [
+              ...offer.requiredSkills.map(tag => ({
+                where: {
+                  name: tag,
+                },
+                create: {
+                  name: tag,
+                },
+              })),
+            ],
+          },
+        },
+      })
+    )
+  );
 
-  return offers.data;
+  return offers;
 };
