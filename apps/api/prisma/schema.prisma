@@ -14,15 +14,15 @@ datasource db {
 }
 
 model B2BOffer {
-  id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
+  id             Int         @id @default(autoincrement())
+  createdAt      DateTime    @default(now())
   slug           String
   title          String
   url            String
   city           String
   fromPln        Float
   toPln          Float
-  requiredSkills String
+  requiredSkills SearchTag[]
   companyName    String
   publishedAt    DateTime
 }
@@ -64,4 +64,5 @@ model SearchTag {
   name                 String                @id @unique
   emailNotifications   EmailNotification[]
   discordNotifications DiscordNotification[]
+  b2bOffers            B2BOffer[]
 }
