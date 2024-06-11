@@ -3,7 +3,7 @@ export * from "./notification";
 import { offersService } from "@fetcher-api/services";
 import type { Handler } from "hono";
 
-const { getNewOffers } = offersService;
+const { getNewOffers, getAllSearchTags } = offersService;
 
 const getNewOffersController: Handler = async c => {
   const { tags } = c.req.query();
@@ -13,4 +13,13 @@ const getNewOffersController: Handler = async c => {
   return c.json({ data: response });
 };
 
-export const offersController = { getNewOffersController };
+const getAllSearchTagsController: Handler = async c => {
+  const response = await getAllSearchTags();
+
+  return c.json({ data: response.map(tag => tag.name) });
+};
+
+export const offersController = {
+  getNewOffersController,
+  getAllSearchTagsController,
+};
