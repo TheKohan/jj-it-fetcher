@@ -90,10 +90,10 @@ const setUserDiscordNotificationToDB = async ({
       tags: {
         connectOrCreate: tags.map(tag => ({
           where: {
-            name: tag,
+            name: tag.toLowerCase(),
           },
           create: {
-            name: tag,
+            name: tag.toLowerCase(),
           },
         })),
       },

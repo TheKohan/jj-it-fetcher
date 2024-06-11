@@ -58,10 +58,10 @@ export const scrapeJJIt = async (client: PrismaClient) => {
             connectOrCreate: [
               ...offer.requiredSkills.map(tag => ({
                 where: {
-                  name: tag,
+                  name: tag.toLowerCase(),
                 },
                 create: {
-                  name: tag,
+                  name: tag.toLowerCase(),
                 },
               })),
             ],

@@ -70,10 +70,10 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
             connectOrCreate: [
               ...offer.requiredSkills.map(tag => ({
                 where: {
-                  name: tag,
+                  name: tag.toLowerCase(),
                 },
                 create: {
-                  name: tag,
+                  name: tag.toLowerCase(),
                 },
               })),
             ],
