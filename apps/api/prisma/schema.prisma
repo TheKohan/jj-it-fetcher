@@ -54,7 +54,7 @@ model EmailNotification {
 model DiscordNotification {
   id           Int          @id @default(autoincrement())
   createdAt    DateTime     @default(now())
-  webhookId    String       @unique
+  webhookId    String
   Notification Notification @relation(fields: [userId], references: [userId], onDelete: Cascade)
   userId       String
   tags         SearchTag[]

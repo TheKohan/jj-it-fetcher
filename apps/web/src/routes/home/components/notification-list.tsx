@@ -31,7 +31,7 @@ export const NotificationList = () => {
         The list of currently quequed notifications (all will be fired at 9.00
         AM UTC)
       </CardDescription>
-      <div className="grid gap-4 divide-x-4 pt-2">
+      <div className="grid gap-4 pt-2">
         {isLoading ? (
           <>
             <Skeleton className="w-full h-[50px]" />

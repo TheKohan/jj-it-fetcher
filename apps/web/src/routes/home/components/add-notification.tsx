@@ -116,8 +116,7 @@ export const AddNotification = () => {
             <DialogDescription>
               Add a new notification factor to your account. Pick the keywords
               you want the job offer to contain, they are additive, the more you
-              add, the more offers you will receive.
-              <li>After each tag, click enter to confirm selection.</li>
+              add, the more precise (less offers) you gonna get.
               <li>
                 For Discord Notification, you need to provide a webhook URI. Go
                 to the Integrations page on your Discord server settings and

@@ -3,7 +3,7 @@ import prisma from "../db-client";
 import type { Prisma } from "@prisma-client";
 
 const getNewOffersFromDB = async (tags: string[]) => {
-  const today = DateTime.now().minus({ day: 0 }).set({
+  const today = DateTime.now().set({
     hour: 0,
     minute: 0,
     second: 0,
@@ -25,22 +25,19 @@ const getNewOffersFromDB = async (tags: string[]) => {
         gte: today.toJSDate(),
         lt: today.plus({ day: 1 }).toJSDate(),
       },
-      AND: {
-        OR: [{ requiredSkills: { some: { name: { in: tags } } } }],
-      },
+      AND: tags.map(tag => ({ requiredSkills: { some: { name: tag } } })),
     },
     select: fieldsToSelect,
   });
 
   const past7DaysOffers = await prisma.b2BOffer.findMany({
+    distinct: ["slug"],
     where: {
       createdAt: {
         gte: today.minus({ days: 7 }).toJSDate(),
         lt: today.toJSDate(),
       },
-      AND: {
-        OR: [{ requiredSkills: { some: { name: { in: tags } } } }],
-      },
+      AND: tags.map(tag => ({ requiredSkills: { some: { name: tag } } })),
     },
     select: fieldsToSelect,
   });

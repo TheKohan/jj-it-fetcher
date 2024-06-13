@@ -99,7 +99,7 @@ const getEmbeds: (offers: OffersWithTags) => EmbedBuilder[] = offers => {
 
 const getEmbedContent = (offer: OffersWithTags[0]) => ({
   name: offer.title,
-  value: `Skills: ${offer.requiredSkills.map(i => i.name).join(",")}\nFrom: ${
+  value: `Skills: ${offer.requiredSkills.map(i => i.name).join(", ")}\nFrom: ${
     offer.fromPln
   } PLN, To: ${offer.toPln} PLN\n[Link](${offer.url})`,
 });
@@ -121,7 +121,9 @@ const _sendDiscordNotification = async (
     await sendDiscordWebhookMessage({
       message: {
         ...notificationMessageBase,
-        content: `New offers today! (${DateTime.now().toISODate()})`,
+        content: `New offers today for tags: ${tags.join(
+          ", "
+        )}! (${DateTime.now().toISODate()})`,
       },
       webhookUrl: notification.webhookId,
     });

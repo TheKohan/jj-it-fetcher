@@ -112,7 +112,9 @@ export const columns: ColumnDef<JobOffer>[] = [
     },
     cell: ({ row }) => (
       <div className="titlecase">
-        {(row.getValue("requiredSkills") as string).split(",").join(", ")}
+        {(row.getValue("requiredSkills") as { name: string }[])
+          .map(v => v.name)
+          .join(", ")}
       </div>
     ),
   },
