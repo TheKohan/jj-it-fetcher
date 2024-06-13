@@ -16,10 +16,10 @@ import {
   SelectTrigger,
   SelectValue,
   type Tag,
-  TagInput,
 } from "@fetcher-web/components";
+import { MultiSelect } from "@fetcher-web/components/ui/multi-select";
 import { useToast } from "@fetcher-web/components/ui/use-toast";
-import { useAddNotification } from "@fetcher-web/hooks";
+import { useAddNotification, useFetchSearchTags } from "@fetcher-web/hooks";
 import { useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
@@ -32,8 +32,11 @@ type Inputs = {
 };
 
 export const AddNotification = () => {
-  const [tags, setTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [open, setOpen] = useState<boolean>(false);
+
+  const { data: searchTags, isLoading: isTagsLoading } = useFetchSearchTags();
+
   const { toast } = useToast();
   const { mutate: addNotification } = useAddNotification({
     onSuccess: () => {
@@ -80,7 +83,7 @@ export const AddNotification = () => {
 
   const resetForm = () => {
     reset();
-    setTags([]);
+    setSelectedTags([]);
   };
 
   const handleOpen = (open: boolean) => {
@@ -89,6 +92,8 @@ export const AddNotification = () => {
       resetForm();
     }
   };
+
+  const [selected, setSelected] = useState<string[]>([]);
 
   const errorMessages = Array.from(Object.values(errors)).map(
     ({ message }) => message
@@ -103,7 +108,12 @@ export const AddNotification = () => {
             <Icons.plus className="ml-4 h-4 w-4" />
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent
+          onInteractOutside={e => {
+            e.preventDefault();
+          }}
+          className="sm:max-w-[425px]"
+        >
           <DialogHeader>
             <DialogTitle>Add Notification Factor</DialogTitle>
             <DialogDescription>
@@ -167,13 +177,19 @@ export const AddNotification = () => {
                     const { ref, onChange, ...restFields } = field;
 
                     return (
-                      <TagInput
-                        tags={tags}
-                        setTags={tags => {
+                      <MultiSelect
+                        options={
+                          searchTags?.data.map(tag => ({
+                            value: tag,
+                            label: tag,
+                          })) ?? []
+                        }
+                        selected={selectedTags}
+                        onChange={tags => {
+                          setSelectedTags(tags);
                           onChange(tags);
-                          setTags(tags);
                         }}
-                        {...restFields}
+                        className="w-[560px]"
                       />
                     );
                   }}

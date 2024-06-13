@@ -61,27 +61,31 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
   }));
 
   /** @TODO revisit that because its not very efficient, theres a feature request in prisma repo for workaround */
-  await client.$transaction(
-    offers.map(offer =>
-      client.b2BOffer.create({
-        data: {
-          ...offer,
-          requiredSkills: {
-            connectOrCreate: [
-              ...offer.requiredSkills.map(tag => ({
-                where: {
-                  name: tag.toLowerCase(),
-                },
-                create: {
-                  name: tag.toLowerCase(),
-                },
-              })),
-            ],
-          },
+  let count = 0;
+
+  for (const offer of offers) {
+    count++;
+    console.log("Creating offer", offer.title);
+    console.log("Creating offer", offer.title, `(${count}/${offers.length})`);
+
+    await client.b2BOffer.create({
+      data: {
+        ...offer,
+        requiredSkills: {
+          connectOrCreate: [
+            ...offer.requiredSkills.map(tag => ({
+              where: {
+                name: tag.toLowerCase(),
+              },
+              create: {
+                name: tag.toLowerCase(),
+              },
+            })),
+          ],
         },
-      })
-    )
-  );
+      },
+    });
+  }
 
   return offers;
 };

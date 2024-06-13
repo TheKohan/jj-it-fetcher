@@ -14,3 +14,5 @@ export * from "./tag-input";
 export * from "./select";
 export * from "./dropdown-menu";
 export * from "./table";
+export * from "./separator";
+export * from "./multi-select";
