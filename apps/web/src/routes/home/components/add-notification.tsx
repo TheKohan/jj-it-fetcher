@@ -15,7 +15,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  type Tag,
 } from "@fetcher-web/components";
 import { MultiSelect } from "@fetcher-web/components/ui/multi-select";
 import { useToast } from "@fetcher-web/components/ui/use-toast";
@@ -28,14 +27,14 @@ type NotificationType = "discord" | "email";
 type Inputs = {
   notificationType: NotificationType;
   uri: string;
-  tags: Tag[];
+  tags: string[];
 };
 
 export const AddNotification = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [open, setOpen] = useState<boolean>(false);
 
-  const { data: searchTags, isLoading: isTagsLoading } = useFetchSearchTags();
+  const { data: searchTags } = useFetchSearchTags();
 
   const { toast } = useToast();
   const { mutate: addNotification } = useAddNotification({
@@ -76,7 +75,7 @@ export const AddNotification = () => {
   const onSubmit: SubmitHandler<Inputs> = data => {
     addNotification({
       type: data.notificationType,
-      tags: data.tags.map(t => t.text),
+      tags: data.tags,
       uri: data.uri,
     });
   };
@@ -92,8 +91,6 @@ export const AddNotification = () => {
       resetForm();
     }
   };
-
-  const [selected, setSelected] = useState<string[]>([]);
 
   const errorMessages = Array.from(Object.values(errors)).map(
     ({ message }) => message
@@ -189,7 +186,7 @@ export const AddNotification = () => {
                           setSelectedTags(tags);
                           onChange(tags);
                         }}
-                        className="w-[560px]"
+                        {...restFields}
                       />
                     );
                   }}
