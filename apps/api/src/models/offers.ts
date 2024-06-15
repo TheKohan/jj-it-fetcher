@@ -72,6 +72,9 @@ const getAllSearchTagsFromDB = async () => {
     select: {
       name: true,
     },
+    orderBy: {
+      name: "asc",
+    },
   });
 
   return tags;

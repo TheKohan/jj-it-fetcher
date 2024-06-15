@@ -16,7 +16,8 @@ import {
   PopoverTrigger,
 } from "@fetcher-web/components";
 import { Badge } from "@fetcher-web/components";
-
+import { useVirtualizer } from "@tanstack/react-virtual";
+import type { FC } from "react";
 export type OptionType = {
   label: string;
   value: string;
@@ -37,6 +38,7 @@ function MultiSelect({
   ...props
 }: MultiSelectProps) {
   const [open, setOpen] = React.useState(false);
+  const [filteredOptions, setFilteredOptions] = React.useState(options);
 
   const handleUnselect = (item: string) => {
     onChange(selected.filter(i => i !== item));
@@ -52,7 +54,9 @@ function MultiSelect({
           className={`w-full justify-between ${
             selected.length > 1 ? "h-full" : "h-10"
           }`}
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            setOpen(!open);
+          }}
         >
           <div className="flex gap-1 flex-wrap">
             {selected.map(item => (
@@ -86,33 +90,20 @@ function MultiSelect({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0 scroll-auto">
-        <Command className={className}>
-          <CommandInput placeholder="Search ..." />
+        <Command shouldFilter={false} className={className}>
+          <CommandInput
+            onValueChange={v =>
+              setFilteredOptions(options.filter(i => i.value.includes(v)))
+            }
+          />
           <CommandEmpty>No item found.</CommandEmpty>
-          <CommandGroup className="max-h-64 overflow-auto">
-            {options.map(option => (
-              <CommandItem
-                key={option.value}
-                onSelect={() => {
-                  onChange(
-                    selected.includes(option.value)
-                      ? selected.filter(item => item !== option.value)
-                      : [...selected, option.value]
-                  );
-                  setOpen(true);
-                }}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    selected.includes(option.value)
-                      ? "opacity-100"
-                      : "opacity-0"
-                  )}
-                />
-                {option.label}
-              </CommandItem>
-            ))}
+          <CommandGroup className="h-64 overflow-auto">
+            <VirtualItems
+              options={filteredOptions}
+              selected={selected}
+              onChange={onChange}
+              onSelect={setOpen}
+            />
           </CommandGroup>
         </Command>
       </PopoverContent>
@@ -120,4 +111,66 @@ function MultiSelect({
   );
 }
 
+const VirtualItems: FC<{
+  options: OptionType[];
+  selected: string[];
+  onChange: (items: string[]) => void;
+  onSelect: (open: boolean) => void;
+}> = ({ options, selected, onChange, onSelect }) => {
+  const parentRef = React.useRef<HTMLDivElement>(null);
+  const rowVirtualizer = useVirtualizer({
+    count: options.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 40,
+    overscan: 10,
+  });
+
+  return (
+    <div ref={parentRef} className="h-64 scroll-auto overflow-auto">
+      <div
+        className="w-full relative"
+        style={{ height: `${rowVirtualizer.getTotalSize()}px` }}
+      >
+        {rowVirtualizer.getVirtualItems().map(virtualItem => (
+          <CommandItem
+            key={options[virtualItem.index].value}
+            ref={rowVirtualizer.measureElement}
+            data-index={virtualItem.index}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: `${virtualItem.size}px`,
+              transform: `translateY(${virtualItem.start}px)`,
+            }}
+            onSelect={() => {
+              onChange(
+                selected.includes(options[virtualItem.index].value)
+                  ? selected.filter(
+                      item => item !== options[virtualItem.index].value
+                    )
+                  : ([
+                      ...selected,
+                      options[virtualItem.index].value,
+                    ] as string[])
+              );
+              onSelect(true);
+            }}
+          >
+            <Check
+              className={cn(
+                "mr-2 h-4 w-4",
+                selected.includes(options[virtualItem.index].value)
+                  ? "opacity-100"
+                  : "opacity-0"
+              )}
+            />
+            {options[virtualItem.index].label}
+          </CommandItem>
+        ))}
+      </div>
+    </div>
+  );
+};
 export { MultiSelect };
