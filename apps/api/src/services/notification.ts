@@ -128,11 +128,13 @@ const _sendDiscordNotification = async (
       webhookUrl: notification.webhookId,
     });
     let i = 0;
+    const totalEmbeds = offerEmbeds.length;
     for (const embed of offerEmbeds) {
       await sendDiscordWebhookMessage({
         message: {
           ...notificationMessageBase,
-          content: `(Part ${i + 1} of ${offerEmbeds.length})`,
+          content:
+            totalEmbeds === 1 ? "" : `(Part ${i + 1} of ${offerEmbeds.length})`,
           embeds: [embed],
         },
         webhookUrl: notification.webhookId,
