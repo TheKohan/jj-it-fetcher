@@ -145,7 +145,9 @@ const _sendDiscordNotification = async (
     sendDiscordWebhookMessage({
       message: {
         ...notificationMessageBase,
-        content: `There's no new offers today :( !`,
+        content: `No new offer found for tags: ${tags.join(
+          ", "
+        )}! (${DateTime.now().toISODate()})`,
       },
       webhookUrl: notification.webhookId,
     });
