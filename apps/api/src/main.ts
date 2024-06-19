@@ -14,6 +14,7 @@ import {
   notificationService,
   offersService,
   scrapingService,
+  userService,
 } from "./services";
 import { Prisma } from "@prisma-client";
 import { readFileSync } from "fs";
@@ -48,7 +49,7 @@ app.use(
 ); // path must end with '/'
 app.get("/app/*", c => c.html(html)); // path must end with '/'
 
-app.use("/api/*", authMiddleware);
+// app.use("/api/*", authMiddleware);
 app.route("/api", apiRouter);
 
 /**
@@ -59,8 +60,12 @@ cron.schedule(
   "0 1 * * *",
   async () => {
     try {
+      /**
+       * Recurring Jobs, like scraping, clearing old offers and aligning users between supabase auth and database.
+       */
       await scrapingService.scrapeAll();
       await offersService.clearMoreThan7DaysOldOffers();
+      await userService.alignUsersWithSupabase();
     } catch (e) {
       if (e instanceof Error) {
         await serviceLogger.sendErrorMessage({
