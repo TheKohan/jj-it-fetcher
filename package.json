@@ -7,8 +7,8 @@
 		"run-dev:api": "cd apps/api && bun dev",
 		"run-dev:web": "cd apps/web && bun dev",
 		"build:fe": "NODE_ENV=production cd apps/web && bun run build",
-		"docker-build:arm": "bun run build:fe && cd apps/api && NODE_ENV=production bun run ./src/scripts/build-docker.ts --platform arm",
-		"docker-build:amd": "bun run build:fe && cd apps/api && NODE_ENV=production bun run ./src/scripts/build-docker.ts --platform amd"
+		"docker-build:arm": "bun run build:fe && cd apps/api && rm -rf ./dist && NODE_ENV=production bun run ./src/scripts/build-docker.ts --platform arm",
+		"docker-build:amd": "bun run build:fe && cd apps/api && rm -rf ./dist && NODE_ENV=production bun run ./src/scripts/build-docker.ts --platform amd"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.5.3"
