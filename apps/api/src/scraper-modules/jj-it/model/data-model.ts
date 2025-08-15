@@ -4,6 +4,7 @@ export interface JustJoinItDataModel {
 }
 
 export interface Offers {
+  guid: string;
   slug: string;
   title: string;
   requiredSkills: string[];
@@ -12,56 +13,59 @@ export interface Offers {
   workingTime: WorkingTime;
   experienceLevel: ExperienceLevel;
   employmentTypes: EmploymentType[];
-  categoryId: number;
-  multilocation: Multilocation[];
+  categoryId?: number;
+  locations: Location[];
   city: string;
   street: string;
   latitude: string;
   longitude: string;
-  remoteInterview: boolean;
+  remoteInterview?: boolean;
   companyName: string;
   companyLogoThumbUrl: string;
-  publishedAt: string;
+  publishedAt?: string;
   openToHireUkrainians: boolean;
+  languages: string[];
+  employmentTypesSummary: EmploymentTypesSummary;
 }
 
 export interface EmploymentType {
   to: number | null;
   from: number | null;
   type: Type;
-  to_chf: number | null;
-  to_eur: number | null;
-  to_gbp: number | null;
-  to_pln: null | number;
-  to_usd: number | null;
+  unit: string;
   currency: Currency;
-  from_chf: number | null;
-  from_eur: number | null;
-  from_gbp: number | null;
-  from_pln: null | number;
-  from_usd: number | null;
   gross?: boolean;
+  fromChf: number | null;
+  fromEur: number | null;
+  fromGbp: number | null;
+  fromPln: number | null;
+  fromUsd: number | null;
+  toChf: number | null;
+  toEur: number | null;
+  toGbp: number | null;
+  toPln: number | null;
+  toUsd: number | null;
 }
 
 export enum Currency {
-  Pln = "pln",
+  Pln = 'pln',
 }
 
 export enum Type {
-  Any = "any",
-  B2B = "b2b",
-  MandateContract = "mandate_contract",
-  Permanent = "permanent",
+  Any = 'any',
+  B2B = 'b2b',
+  MandateContract = 'mandate_contract',
+  Permanent = 'permanent',
 }
 
 export enum ExperienceLevel {
-  CLevel = "c_level",
-  Junior = "junior",
-  Mid = "mid",
-  Senior = "senior",
+  CLevel = 'c_level',
+  Junior = 'junior',
+  Mid = 'mid',
+  Senior = 'senior',
 }
 
-export interface Multilocation {
+export interface Location {
   city: string;
   slug: string;
   street: string;
@@ -69,14 +73,21 @@ export interface Multilocation {
   longitude: number;
 }
 
+export interface EmploymentTypesSummary {
+  min: number;
+  max: number;
+  currency: Currency;
+  hasManyTypes: boolean;
+}
+
 export enum WorkingTime {
-  FullTime = "full_time",
+  FullTime = 'full_time',
 }
 
 export enum WorkplaceType {
-  Hybrid = "hybrid",
-  Office = "office",
-  Remote = "remote",
+  Hybrid = 'hybrid',
+  Office = 'office',
+  Remote = 'remote',
 }
 
 export interface Meta {

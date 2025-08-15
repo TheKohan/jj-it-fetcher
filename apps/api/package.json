@@ -1,5 +1,5 @@
 {
-  "name": "jj-it-fetcher",
+  "name": "jj-it-fetcher-api",
   "version": "1.0.0",
   "module": "src/main.ts",
   "type": "module",
