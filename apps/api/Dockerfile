@@ -36,6 +36,9 @@ RUN date
 
 EXPOSE 8000
 
+# The bun image doesn't have openssl, so we need to add it
+RUN apt-get update && apt-get install -y openssl
+
 # execute the binary
 CMD bun start
 
