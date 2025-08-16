@@ -1,8 +1,8 @@
 import { useLogout } from "@fetcher-web/hooks";
 import type { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./button";
 import { Icons } from "./icons";
-import { useNavigate } from "react-router-dom";
 
 type HeaderProps = {
   backButtonUrl?: string;

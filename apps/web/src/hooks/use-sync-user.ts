@@ -15,7 +15,7 @@ export const useSyncUser = () =>
   useQuery<SuccessResponse<UseSyncUserResponse>, { error: AuthError }>({
     queryKey: [GET_SYNC_USER_QUERY_KEY],
     queryFn: async () => {
-      return await fetchApi<UseSyncUserResponse>('/api/users/sync-user', {
+      return await fetchApi<UseSyncUserResponse>("/api/users/sync-user", {
         method: "GET",
       });
     },

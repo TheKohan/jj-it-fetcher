@@ -1,9 +1,8 @@
-import * as React from "react";
 import {
   CaretSortIcon,
   ChevronDownIcon,
   Link1Icon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons';
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -15,15 +14,16 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import { DateTime } from "luxon";
+} from '@tanstack/react-table';
+import { DateTime } from 'luxon';
+import * as React from 'react';
 
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@fetcher-web/components";
+} from '@fetcher-web/components';
 import {
   Table,
   TableBody,
@@ -31,123 +31,123 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@fetcher-web/components";
-import { Button } from "@fetcher-web/components";
-import type { JobOffer } from "@fetcher-web/hooks";
+} from '@fetcher-web/components';
+import { Button } from '@fetcher-web/components';
+import type { JobOffer } from '@fetcher-web/hooks';
 
 export const columns: ColumnDef<JobOffer>[] = [
   {
-    accessorKey: "title",
+    accessorKey: 'title',
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Title
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className='ml-2 h-4 w-4' />
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("title")}</div>,
+    cell: ({ row }) => <div>{row.getValue('title')}</div>,
   },
   {
-    accessorKey: "toPln",
+    accessorKey: 'toPln',
     header: ({ column }) => (
       <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        variant='ghost'
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         To [PLN/B2B]
-        <CaretSortIcon className="ml-2 h-4 w-4" />
+        <CaretSortIcon className='ml-2 h-4 w-4' />
       </Button>
     ),
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue("toPln"));
+      const amount = Number.parseFloat(row.getValue('toPln'));
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("pl-PL", {
-        style: "currency",
-        currency: "PLN",
+      const formatted = new Intl.NumberFormat('pl-PL', {
+        style: 'currency',
+        currency: 'PLN',
       }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className='text-right font-medium'>{formatted}</div>;
     },
   },
   {
-    accessorKey: "fromPln",
+    accessorKey: 'fromPln',
     header: ({ column }) => (
       <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        variant='ghost'
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         From [PLN/B2B]
-        <CaretSortIcon className="ml-2 h-4 w-4" />
+        <CaretSortIcon className='ml-2 h-4 w-4' />
       </Button>
     ),
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue("fromPln"));
+      const amount = Number.parseFloat(row.getValue('fromPln'));
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("pl-PL", {
-        style: "currency",
-        currency: "PLN",
+      const formatted = new Intl.NumberFormat('pl-PL', {
+        style: 'currency',
+        currency: 'PLN',
       }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className='text-right font-medium'>{formatted}</div>;
     },
   },
   {
-    accessorKey: "requiredSkills",
+    accessorKey: 'requiredSkills',
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           RequiredSkills
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className='ml-2 h-4 w-4' />
         </Button>
       );
     },
     cell: ({ row }) => (
-      <div className="titlecase">
-        {(row.getValue("requiredSkills") as { name: string }[])
+      <div className='titlecase'>
+        {(row.getValue('requiredSkills') as { name: string }[])
           .map(v => v.name)
-          .join(", ")}
+          .join(', ')}
       </div>
     ),
   },
   {
-    accessorKey: "publishedAt",
+    accessorKey: 'publishedAt',
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Published At
-          <CaretSortIcon className="ml-2 h-4 w-4" />
+          <CaretSortIcon className='ml-2 h-4 w-4' />
         </Button>
       );
     },
     cell: ({ row }) => (
-      <div className="titlecase">
-        {DateTime.fromISO(row.getValue("publishedAt") as string).toFormat(
-          "yyyy-MM-dd HH:mm"
+      <div className='titlecase'>
+        {DateTime.fromISO(row.getValue('publishedAt') as string).toFormat(
+          'yyyy-MM-dd HH:mm'
         )}
       </div>
     ),
   },
   {
-    accessorKey: "url",
+    accessorKey: 'url',
     header: () => {
       return <div>Url</div>;
     },
     cell: ({ row }) => (
       <Button
-        variant="ghost"
-        onClick={() => window.open(row.getValue("url"), "_blank")}
+        variant='ghost'
+        onClick={() => window.open(row.getValue('url'), '_blank')}
       >
         <Link1Icon />
       </Button>
@@ -186,16 +186,16 @@ export const OffersTable: React.FC<{ offers: JobOffer[] }> = ({
   });
 
   return (
-    <div className="w-full">
-      <div className="flex items-center py-4">
-        <div className="text-muted-foreground">Offer Count: {data.length}</div>
+    <div className='w-full'>
+      <div className='flex items-center py-4'>
+        <div className='text-muted-foreground'>Offer Count: {data.length}</div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+            <Button variant='outline' className='ml-auto'>
+              Columns <ChevronDownIcon className='ml-2 h-4 w-4' />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align='end'>
             {table
               .getAllColumns()
               .filter(column => column.getCanHide())
@@ -203,7 +203,7 @@ export const OffersTable: React.FC<{ offers: JobOffer[] }> = ({
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
-                    className="capitalize"
+                    className='capitalize'
                     checked={column.getIsVisible()}
                     onCheckedChange={value => column.toggleVisibility(!!value)}
                   >
@@ -214,7 +214,7 @@ export const OffersTable: React.FC<{ offers: JobOffer[] }> = ({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className='rounded-md border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
@@ -239,7 +239,7 @@ export const OffersTable: React.FC<{ offers: JobOffer[] }> = ({
               table.getRowModel().rows.map(row => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
@@ -255,7 +255,7 @@ export const OffersTable: React.FC<{ offers: JobOffer[] }> = ({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className='h-24 text-center'
                 >
                   No results.
                 </TableCell>
@@ -264,19 +264,19 @@ export const OffersTable: React.FC<{ offers: JobOffer[] }> = ({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="space-x-2">
+      <div className='flex items-center justify-end space-x-2 py-4'>
+        <div className='space-x-2'>
           <Button
-            variant="outline"
-            size="sm"
+            variant='outline'
+            size='sm'
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
+            variant='outline'
+            size='sm'
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >

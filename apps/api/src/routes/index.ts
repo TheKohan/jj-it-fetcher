@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { notificationsRouter } from "./notifications";
-import { scrapeRouter } from "./scrape";
 import { offersRouter } from "./offers";
+import { scrapeRouter } from "./scrape";
 import { userApi } from "./user";
 
 const api = new Hono();

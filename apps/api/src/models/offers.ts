@@ -1,6 +1,6 @@
+import type { Prisma } from "@prisma-client";
 import { DateTime } from "luxon";
 import prisma from "../db-client";
-import type { Prisma } from "@prisma-client";
 
 const getNewOffersFromDB = async (tags: string[]) => {
   const today = DateTime.now().set({

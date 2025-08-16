@@ -5,6 +5,5 @@ export const noFluffJobsModule: ScraperModuleModule = {
   name: "No Fluff Job",
   slug: "no-fluff-job",
   scrape: async prisma => await scrapeNoFluffJobs(prisma),
-
   withLogging: true,
 };

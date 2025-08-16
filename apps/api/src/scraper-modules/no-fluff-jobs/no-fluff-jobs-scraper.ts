@@ -5,7 +5,7 @@ import {
 } from "./config/index.ts";
 
 import { scrapePaginatedRange } from "../utils/scrape-paginated-range.ts";
-import type { NoFluffJobs, Posting } from "./model/data-model.ts";
+import type { NoFluffJobs, Posting, Salary } from "./model/data-model.ts";
 
 const headers = {
   Accept: "application/json, text/plain, */*",
@@ -36,6 +36,13 @@ const headers = {
   "X-Datadog-Trace-Id": "1966225189010830863",
 };
 
+const getToSalary = (salary: Salary) => {
+  if (salary.to) {
+    return Number(salary.to ?? 0);
+  }
+  return Number(salary.from ?? 0);
+};
+
 export const scrapeNoFluffJobs = async (client: PrismaClient) => {
   const data = await scrapePaginatedRange<NoFluffJobs, Posting>({
     scrapeFirstUrl: getNoFluffJobPage(1) as string,
@@ -50,12 +57,12 @@ export const scrapeNoFluffJobs = async (client: PrismaClient) => {
 
   const offers = data?.map(o => ({
     city: o.location.places[0].city ?? "null",
-    fromPln: Number(o.salary.from) ?? 0,
+    fromPln: Number(o.salary?.from ?? 0),
     companyName: o.name,
     requiredSkills: o.tiles.values.map(t => t.value),
     slug: o.url,
     title: o.title,
-    toPln: Number(o.salary.to) ?? 0,
+    toPln: getToSalary(o.salary),
     url: `https://nofluffjobs.com/pl/job/${o.url}`,
     publishedAt: new Date(o.posted),
   }));

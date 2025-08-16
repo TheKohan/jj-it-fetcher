@@ -6,8 +6,8 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 
-import "./globals.css";
 import { AuthProvider } from "./context";
+import "./globals.css";
 import { isApiErrorResponse } from "./lib";
 import { router } from "./router";
 

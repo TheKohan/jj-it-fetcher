@@ -125,7 +125,7 @@ export enum Province {
 
 export interface Salary {
   from: number;
-  to: number;
+  to?: number;
   type: CriteriaSearch;
   currency: Currency;
 }

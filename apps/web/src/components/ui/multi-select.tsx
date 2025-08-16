@@ -1,7 +1,6 @@
-import * as React from "react";
 import { cn } from "@fetcher-web/lib";
+import * as React from "react";
 
-import { Check, X, ChevronsUpDown } from "lucide-react";
 import { Button } from "@fetcher-web/components";
 import {
   Command,
@@ -17,6 +16,7 @@ import {
 } from "@fetcher-web/components";
 import { Badge } from "@fetcher-web/components";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import { Check, ChevronsUpDown, X } from "lucide-react";
 import type { FC } from "react";
 export type OptionType = {
   label: string;

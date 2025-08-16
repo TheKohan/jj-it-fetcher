@@ -1,7 +1,7 @@
-import type { Handler } from "hono";
-import { scrapingService } from "../services/scraping";
 import { userService } from "@fetcher-api/services";
 import { getUserCtx } from "@fetcher-api/utils";
+import type { Handler } from "hono";
+import { scrapingService } from "../services/scraping";
 
 const { alignUsersWithSupabase, syncUserWithDB } = userService;
 

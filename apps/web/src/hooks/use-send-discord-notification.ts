@@ -1,6 +1,6 @@
 import type { ErrorResponse, SuccessResponse } from "@fetcher-web/lib";
 import { fetchApi } from "@fetcher-web/lib";
-import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
+import { type UseMutationOptions, useMutation } from "@tanstack/react-query";
 
 type UseSendDiscordNotificationProps = {
   id: number;

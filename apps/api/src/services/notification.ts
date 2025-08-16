@@ -2,7 +2,7 @@ import { sendDiscordWebhookMessage } from "@fetcher-api/utils";
 import { EmbedBuilder } from "discord.js";
 import { DateTime } from "luxon";
 import { notificationModel } from "../models/notification";
-import { offersModel, type OffersWithTags } from "../models/offers";
+import { type OffersWithTags, offersModel } from "../models/offers";
 
 const OFFERS_PER_MESSAGE = 10;
 
